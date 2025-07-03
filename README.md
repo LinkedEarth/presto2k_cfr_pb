@@ -4,11 +4,13 @@
 
 By [Tanaya Gondhalekar](https://orcid.org/0009-0004-2440-3266), [Deborah Khider](https://orcid.org/0000-0001-7501-8430) & [Julien Emile-Geay](https://orcid.org/0000-0001-5920-4751)
 
-## Structure
+## Motivation
 
 Climate field reconstruction is the task of estimating variations in one or more climate fields (e.g. surface temperature or precipitation) from a collection of paleoclimate observations (aka "proxies"). Many statistical methods are available for doing so ; a relatively new and impactful one has been offline data assimilation, as implemented in the Last Millennium Reanalysis [Hakim et al. (2016)](http://dx.doi.org/10.1002/2016JD024751). Part of [PReSto](https://paleopresto.com)'s mission is to democratize these tools and enable a wider variety of actors, from seasoned researchers to students or citizen scientists, to generate their own reconstructions based on available code and data.  
 
 The purpose of this repository is to showcase how to use tools from the [LinkedEarth](http://linked.earth) Python research ecosystem (and broader scientific Python stack) to emulate and expand on the Last Millennium Reanalysis, version 2.1 [(Tardif et al, 2019)](https://doi.org/10.5194/cp-15-1251-2019), which used the offline data assimilation method of [Hakim et al. (2016)](http://dx.doi.org/10.1002/2016JD024751) together with the [PAGES 2k](http://dx.doi.org/10.1038/sdata.2017.88) database, version 2.0.0. 
+
+## Structure
 
 The reconstruction workflow is broken down into 3 major steps, some of which have variants:
 1. Data assembly: gathering, selection and cleaning
