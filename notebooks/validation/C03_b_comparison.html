@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -168,7 +168,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../README.html">
-                    PaleoBook Template
+                    Assimilating PAGES 2k records with LinkedEarth tools
                 </a>
             </li>
         </ul>
@@ -405,7 +405,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="proxy-database-forensics">
 <h1>Proxy Database Forensics<a class="headerlink" href="#proxy-database-forensics" title="Link to this heading">#</a></h1>
 <p>An important aspect of comparing reconstructions is to trace the origins of their differences. This is not a straightforward process, but progress can be made by comparing the proxy data inputs.</p>
-<p>Using <code class="docutils literal notranslate"><span class="pre">cfr.ProxyDatabase</span></code> class, we want to take two different proxy databases and identify their similarities and differences. Notably to see how the contents of these respective proxy records can affect the quality of a paleoclimate reconstruction (such as the ones validated in C03_a).</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">cfr.ProxyDatabase</span></code> class, we want to take two different proxy databases and identify their similarities and differences. Notably to see how the contents of these respective proxy records can affect the quality of a paleoclimate reconstruction (such as the ones validated in ‘Validating a Reconstruction).</p>
 <p>In previous reproduction attempts, where all other input data were held constant and the only change was the subset of the PAGES2k network used as proxy data, the quality of the reconstructions varied drastically. The purpose of this notebook is to dig into the details and pinpoint the exact records that could be problematic, which can make the difference between a successful and unsuccessful emulation of LMRv2.1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

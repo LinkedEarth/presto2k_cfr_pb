@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -169,7 +169,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../README.html">
-                    PaleoBook Template
+                    Assimilating PAGES 2k records with LinkedEarth tools
                 </a>
             </li>
         </ul>
@@ -388,7 +388,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-using-pens">Validate Using PENS</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-gmst-against-instrumental-datasets">Validating GMST Against Instrumental Datasets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-against-giss-surface-temperature-analysis-gistemp">Validate against GISS Surface Temperature Analysis (GISTEMP)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-against-hadcrut4">Validate against HadCRUT4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-against-hadcrut5">Validate against HadCRUT5</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-against-berkeley-earth-surface-temperature-best">Validate against Berkeley Earth Surface Temperature (BEST)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-consensus">Plot Consensus</a></li>
 </ul>
@@ -1547,8 +1547,8 @@ Attributes:
 <p>This comparison evaluates my LMRv2.1 reproduction against GISTEMP, using GISTEMP as the reference. Since the Coefficient of Efficiency (CE) is not symmetric, this direction matters. The result reflects how well the reconstruction explains variance compared to the instrumental record.</p>
 <p>The reconstruction shows a strong match with GISTEMPv4, with r = 0.91 and CE = 0.80. Since GISTEMPv4 was the actual temperature calibration set used in LMRv2.1, this agreement between the two is expected. This shows that the reconstruction captures both the trend and variability present in the instrumental temperature recordand it stays well within the ensemble spread for most of the period, which suggests that the emulation is sucessful.</p>
 </section>
-<section id="validate-against-hadcrut4">
-<h3>Validate against HadCRUT4<a class="headerlink" href="#validate-against-hadcrut4" title="Link to this heading">#</a></h3>
+<section id="validate-against-hadcrut5">
+<h3>Validate against HadCRUT5<a class="headerlink" href="#validate-against-hadcrut5" title="Link to this heading">#</a></h3>
 <p>Same process as before, but this time we use <a class="reference external" href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">HadCRUT5</a>. This time we load the dataset from the cloud, then convert the dataframe to a <em>cfr</em> <code class="docutils literal notranslate"><span class="pre">EnsTS</span></code> (Ensemble Time Series) object</p>
 <blockquote>
 <div><p>Note: Tardif et al. (2019) used HadCRUT4 to validate, but since we are running this experiment six years later, it is best to use more up-to-date data.</p>
@@ -1643,7 +1643,7 @@ Attributes:
 <img alt="../../_images/a6a0982ce83aa47bf54024f9f762f92bed217dea60c051976a6b52179a852b84.png" src="../../_images/a6a0982ce83aa47bf54024f9f762f92bed217dea60c051976a6b52179a852b84.png" />
 </div>
 </div>
-<p>The reconstruction shows a strong match with HadCRUT4, with a correlation of r=0.91 and CE = 0.64. This is a strong match, especially considering that HadCRUT4 was not used in the calibration (GISTEMPv4 was used for temperature). The reconstruction still aligns well with an independent dataset and shows that the reproduction closely emulates LMRv2.1 as well as the instrumental record.</p>
+<p>The reconstruction shows a strong match with HadCRUT5, with a correlation of r=0.91 and CE = 0.64. This is a strong match, especially considering that HadCRUT5 was not used in the calibration (GISTEMPv4 was used for temperature). The reconstruction still aligns well with an independent dataset and shows that the reproduction closely emulates LMRv2.1 as well as the instrumental record.</p>
 </section>
 <section id="validate-against-berkeley-earth-surface-temperature-best">
 <h3>Validate against Berkeley Earth Surface Temperature (BEST)<a class="headerlink" href="#validate-against-berkeley-earth-surface-temperature-best" title="Link to this heading">#</a></h3>
@@ -2276,7 +2276,7 @@ Attributes:
 <img alt="../../_images/e59d7bb6b79922d6a6afde02ecd05f82567d8f11bc336f0aa6ec4719a80f529b.png" src="../../_images/e59d7bb6b79922d6a6afde02ecd05f82567d8f11bc336f0aa6ec4719a80f529b.png" />
 </div>
 </div>
-<p>The reconstruction aligns closely with the instrumental consensus series, with r=0.91 and CE=0.74. This consensus represents an average across multiple observational datasets, so strong agreement here reinforces that the reconstruction captures the core features of the instrumental record. The fact that all targets (HadCRUT4, GISTEMPv4, BEST, and the consensus) fall within the ensemble spread shows the robustness of the reproduced reconstruction.</p>
+<p>The reconstruction aligns closely with the instrumental consensus series, with r=0.92 and CE=0.73. This consensus represents an average across multiple observational datasets, so strong agreement here reinforces that the reconstruction captures the core features of the instrumental record. The fact that all targets (HadCRUT5, GISTEMPv4, BEST, and the consensus) fall within the ensemble spread shows the robustness of the reproduced reconstruction.</p>
 </section>
 </section>
 <section id="validate-climate-field">
@@ -3578,7 +3578,7 @@ High CE values across most regions show that the reconstruction captures both va
 <ul class="simple">
 <li><p>Global mean temperature time series align well with instrumental data sets and with the orignal LMRv2.1</p></li>
 <li><p>Spatial correlation and CE maps show nearly identical patterns against instrumental data and the orignal LMRv2.1</p></li>
-<li><p>There is strong agreement with independent observational targets (HadCRUT4, GISTEMPv4, BEST)</p></li>
+<li><p>There is strong agreement with independent observational targets (HadCRUT5, GISTEMPv4, BEST)</p></li>
 </ul>
 <p>In future work:</p>
 <ul class="simple">
@@ -3660,7 +3660,7 @@ High CE values across most regions show that the reconstruction captures both va
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-using-pens">Validate Using PENS</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-gmst-against-instrumental-datasets">Validating GMST Against Instrumental Datasets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-against-giss-surface-temperature-analysis-gistemp">Validate against GISS Surface Temperature Analysis (GISTEMP)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-against-hadcrut4">Validate against HadCRUT4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-against-hadcrut5">Validate against HadCRUT5</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-against-berkeley-earth-surface-temperature-best">Validate against Berkeley Earth Surface Temperature (BEST)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-consensus">Plot Consensus</a></li>
 </ul>
