@@ -1,37 +1,58 @@
-shortname: Template Paleobook
+shortname: PAGES2k CFR Paleobook
 type: Paleobook
-thumbnail: logo.png
+thumbnail: consensus.png
 parts:
-  - caption: Loading Data
-    chapters:
-      - shortname: Pulling data from the LiPDverse
-        filename: loading_from_verse
-        thumbnail: lipdverse.png
+  - caption: Data Assembly
+    chapters: 
+      - shortname: ProxyDatabase from Pickle
+        filename: C01_a_db_assembly_Tardif2019_pickle
+        thumbnail: PAGES2k_logo.png
         tags:
           domains:
             - data wrangling
           packages:
-            - pyLiPD
-  - caption: Exploring the Data
+            - cfr
+    chapters: 
+      - shortname: ProxyDatabase from cfr
+        filename: C01_b_db_assembly_cfr_PAGES2k
+        thumbnail: PAGES2k_logo.png
+        tags:
+          domains:
+            - data wrangling
+          packages:
+            - cfr
+  - caption: Data Assimilation
     chapters:
-      - shortname: Visualizing as a dashboard
-        filename: plotting_gs_dashboard
-        thumbnail: dashboard.png
+      - shortname: Data Assimilation
+        filename: C02_data_assimilation
+        thumbnail: gmst_quick.png
+        tags:
+          domains:
+            - data assimilation
+            - data analysis
+          packages:
+            - cfr
+  - caption: Validation and Comparison
+    chapters:
+      - shortname: Reconstruction Validation
+        filename: C03_a_validation
+        thumbnail: pens.png
         tags:
           domains:
             - data viz
             - data analysis
           packages:
-            - pyleoclim
-  - caption: Main Analysis
+            - cfr
+            - xarray
+            - matplotlib
     chapters:
-      - shortname: Correlating Geoseries
-        filename: correlating_geoseries
-        thumbnail: corr.png
+      - shortname: Proxy Database Comparison
+        filename: C03_b_comparison
+        thumbnail: proxydb_compare.png
         tags:
           domains:
             - data viz
             - data analysis
           packages:
-            - pyleoclim
+            - cfr
             - matplotlib

@@ -1,12 +1,14 @@
 format: jb-book
-root: readme
+root: README.md
 parts:
-  - caption: Loading Data
+  - caption: Data Assembly
     chapters:
-      - file: notebooks/loading_data/loading_from_verse
-  - caption: Exploring the Data
+      - file: notebooks/data_assembly/C01_a_db_assembly_Tardif2019_pickle
+      - file: notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k
+  - caption: Data Assimilation
     chapters:
-      - file: notebooks/exploring/plotting_gs_dashboard
-  - caption: Main Analysis
+      - file: notebooks/data_assimilation/C02_data_assimilation
+  - caption: Validation and Comparison
     chapters:
-      - file: notebooks/analysis/correlating_geoseries
+      - file: notebooks/validation/C03_a_validation
+      - file: notebooks/validation/C03_b_comparison
