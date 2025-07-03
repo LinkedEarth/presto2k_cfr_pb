@@ -1,0 +1,37 @@
+shortname: Template Paleobook
+type: Paleobook
+thumbnail: logo.png
+parts:
+  - caption: Loading Data
+    chapters:
+      - shortname: Pulling data from the LiPDverse
+        filename: loading_from_verse
+        thumbnail: lipdverse.png
+        tags:
+          domains:
+            - data wrangling
+          packages:
+            - pyLiPD
+  - caption: Exploring the Data
+    chapters:
+      - shortname: Visualizing as a dashboard
+        filename: plotting_gs_dashboard
+        thumbnail: dashboard.png
+        tags:
+          domains:
+            - data viz
+            - data analysis
+          packages:
+            - pyleoclim
+  - caption: Main Analysis
+    chapters:
+      - shortname: Correlating Geoseries
+        filename: correlating_geoseries
+        thumbnail: corr.png
+        tags:
+          domains:
+            - data viz
+            - data analysis
+          packages:
+            - pyleoclim
+            - matplotlib

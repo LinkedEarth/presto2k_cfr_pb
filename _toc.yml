@@ -1,0 +1,12 @@
+format: jb-book
+root: readme
+parts:
+  - caption: Loading Data
+    chapters:
+      - file: notebooks/loading_data/loading_from_verse
+  - caption: Exploring the Data
+    chapters:
+      - file: notebooks/exploring/plotting_gs_dashboard
+  - caption: Main Analysis
+    chapters:
+      - file: notebooks/analysis/correlating_geoseries
