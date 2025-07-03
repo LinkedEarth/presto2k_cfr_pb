@@ -1,0 +1,1656 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Assembling ProxyDatabase using Tardif et al. 2019 pickle files &#8212; PAGES2k CFR Paleobook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/data_assembly/C01_a_db_assembly_Tardif2019_pickle';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Assembling Proxy Database using cfr’s built in PAGES2k database" href="C01_b_db_assembly_cfr_PAGES2k.html" />
+    <link rel="prev" title="PaleoBook Template" href="../../README.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PAGES2k CFR Paleobook</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    PaleoBook Template
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Assembly</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assembling ProxyDatabase using Tardif et al. 2019 pickle files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C01_b_db_assembly_cfr_PAGES2k.html">Assembling Proxy Database using cfr’s built in PAGES2k database</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Assimilation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data_assimilation/C02_data_assimilation.html">Run Data Assimilation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Validation and Comparison</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../validation/C03_a_validation.html">Validating a Reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation/C03_b_comparison.html">Proxy Database Forensics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tanaya-g/pages2k_cfr_pb" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tanaya-g/pages2k_cfr_pb/issues/new?title=Issue%20on%20page%20%2Fnotebooks/data_assembly/C01_a_db_assembly_Tardif2019_pickle.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/data_assembly/C01_a_db_assembly_Tardif2019_pickle.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Assembling ProxyDatabase using Tardif et al. 2019 pickle files</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-metadata-and-data-pickle-files">Combining metadata and data pickle files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-metadata-and-data-csv-file-and-filtering-only-pages2kv2-data">Loading metadata and data csv file and filtering only PAGES2kv2 data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizing-proxy-ids-pid">Standardizing Proxy IDs (pid)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-proxy-type-labels-ptype">Assigning Proxy Type Labels (ptype)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-resolution-as-done-in-lmr">Filtering by resolution (as done in LMR)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-check-for-sparse-records-that-don-t-meet-the-0-5-threshold">(Optional) Check for sparse records that don’t meet the 0.5 threshold.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-proxydatabase-object">Final ProxyDatabase Object</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-proxydatabase-as-netcdf-file">Save Proxydatabase as netCDF file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-output">Summary and Output</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="assembling-proxydatabase-using-tardif-et-al-2019-pickle-files">
+<h1>Assembling ProxyDatabase using Tardif et al. 2019 pickle files<a class="headerlink" href="#assembling-proxydatabase-using-tardif-et-al-2019-pickle-files" title="Link to this heading">#</a></h1>
+<p>This notebook walks through the process of building a proxy database containing only the PAGES2k Phase 2 (PAGES2kv2) proxy records. Starting from CSV versions of metadata and data extracted from an older pickle format, we clean and reformat the records to be compatible with the <em>cfr</em> data assimilation workflow.</p>
+<p>Key steps include:</p>
+<ul class="simple">
+<li><p>Filtering only PAGES2kv2 records</p></li>
+<li><p>Standardizing proxy record identifiers (short <code class="docutils literal notranslate"><span class="pre">pid</span></code>)</p></li>
+<li><p>Merging proxy time and values with metadata</p></li>
+<li><p>Assigning standardized <code class="docutils literal notranslate"><span class="pre">ptype</span></code> labels used by <em>cfr</em></p></li>
+<li><p>Filtering for annual and subannual records with sufficient temporal coverage</p></li>
+</ul>
+<p>The final result is saved as a NetCDF file that can be used in subsequent data assimilation notebooks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cfr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyleoclim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pyleo</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>octave not found, please see README
+</pre></div>
+</div>
+</div>
+</div>
+<section id="combining-metadata-and-data-pickle-files">
+<h2>Combining metadata and data pickle files<a class="headerlink" href="#combining-metadata-and-data-pickle-files" title="Link to this heading">#</a></h2>
+<section id="loading-metadata-and-data-csv-file-and-filtering-only-pages2kv2-data">
+<h3>Loading metadata and data csv file and filtering only PAGES2kv2 data<a class="headerlink" href="#loading-metadata-and-data-csv-file-and-filtering-only-pages2kv2-data" title="Link to this heading">#</a></h3>
+<p>When the raw pickle file (one for metadata, one for data) for the proxies is downloaded from the <a class="reference external" href="https://www.atmos.uw.edu/~hakim/lmr/LMRv2/index.html">site</a>, they will need to be pre-processed. The pickle file was created using an older version of Python, hence you will need to open the files as <code class="docutils literal notranslate"><span class="pre">pd.sparse_dataframe</span></code> objects before converting them to <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files to be used for the rest of this notebook.</p>
+<p>Firstly load metadata csv and isolate only the columns we need to make a <em>cfr</em> <code class="docutils literal notranslate"><span class="pre">ProxyDatabase</span></code> object</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loading metadata</span>
+
+<span class="n">df_meta</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./proxydb_meta.csv&#39;</span><span class="p">)</span>
+<span class="n">df_p2k_meta</span> <span class="o">=</span> <span class="n">df_meta</span><span class="p">[</span><span class="n">df_meta</span><span class="p">[</span><span class="s1">&#39;Proxy ID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;PAGES2kv2&#39;</span><span class="p">)]</span>
+<span class="n">df_p2k_meta</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Proxy ID&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">archive_data</span> <span class="o">=</span> <span class="n">df_p2k_meta</span><span class="p">[[</span><span class="s1">&#39;Archive type&#39;</span><span class="p">,</span> <span class="s1">&#39;Proxy measurement&#39;</span><span class="p">,</span> <span class="s1">&#39;Lat (N)&#39;</span><span class="p">,</span> <span class="s1">&#39;Lon (E)&#39;</span><span class="p">,</span> <span class="s1">&#39;Elev&#39;</span><span class="p">]]</span>
+<span class="n">archive_data</span><span class="p">[</span><span class="s1">&#39;Proxy ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">archive_data</span><span class="o">.</span><span class="n">index</span>  <span class="c1"># recover it as a column</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Load in the data csv, which contains arrays for time and proxy value. This step takes all the PAGES2k data and resets the index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loading data (time and value)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./proxydb_data.csv&#39;</span><span class="p">)</span>
+<span class="n">col</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="n">clist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">col</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;PAGES2kv2&#39;</span> <span class="ow">in</span> <span class="n">c</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;Year C.E.&#39;</span> <span class="ow">in</span> <span class="n">c</span><span class="p">):</span>
+        <span class="n">clist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="n">p2k</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">clist</span><span class="p">]</span>
+<span class="n">p2k</span> <span class="o">=</span> <span class="n">p2k</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="standardizing-proxy-ids-pid">
+<h3>Standardizing Proxy IDs (pid)<a class="headerlink" href="#standardizing-proxy-ids-pid" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">cfr.ProxyDatabase</span></code> class expects short proxy IDs (e.g., <code class="docutils literal notranslate"><span class="pre">Ocn_148</span></code>) that follow a specific location-based naming convention. We create a function that converts the long-format PAGES2kv2 IDs into these standardized shortened IDs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_col</span> <span class="o">=</span> <span class="n">p2k</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">pids</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">pid</span> <span class="ow">in</span> <span class="n">p2k</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>  <span class="c1"># Skip the time column</span>
+        <span class="c1"># Get the time series for this proxy</span>
+        <span class="n">proxy_data</span> <span class="o">=</span> <span class="n">p2k</span><span class="p">[[</span><span class="n">time_col</span><span class="p">,</span> <span class="n">pid</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">proxy_data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Only process if we have data</span>
+            <span class="n">pids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+            <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">proxy_data</span><span class="p">[</span><span class="n">time_col</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">proxy_data</span><span class="p">[</span><span class="n">pid</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shorten_pid</span><span class="p">(</span><span class="n">pids</span><span class="p">):</span> 
+    <span class="c1"># Split by colon first to handle proxy measurements with underscores</span>
+    <span class="n">parts_by_colon</span> <span class="o">=</span> <span class="n">pids</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Take everything before the colon</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">parts_by_colon</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Find the part that contains the number</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">part</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="s1">&#39;NAm_&#39;</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="s1">&#39;Asi_&#39;</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="s1">&#39;Arc_&#39;</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="s1">&#39;Ant_&#39;</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="s1">&#39;Ocn_&#39;</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="s1">&#39;Aus_&#39;</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">break</span>
+    
+    <span class="c1"># Extract region from the second part</span>
+    <span class="n">region</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Map the region</span>
+    <span class="n">region_mapping</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Asia&#39;</span><span class="p">:</span> <span class="s1">&#39;Asi&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Ocean2kHR&#39;</span><span class="p">:</span> <span class="s1">&#39;Ocn&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Africa&#39;</span><span class="p">:</span> <span class="s1">&#39;Afr&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Afr&#39;</span><span class="p">:</span> <span class="s1">&#39;Afr&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAm&#39;</span><span class="p">:</span> <span class="s1">&#39;NAm&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Arc&#39;</span><span class="p">:</span> <span class="s1">&#39;Arc&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Ant&#39;</span><span class="p">:</span> <span class="s1">&#39;Ant&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Aus&#39;</span><span class="p">:</span> <span class="s1">&#39;Aus&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SAm&#39;</span><span class="p">:</span> <span class="s1">&#39;SAm&#39;</span>
+    <span class="p">}</span>
+    <span class="n">region</span> <span class="o">=</span> <span class="n">region_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">region</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># If we still haven&#39;t found a number, look for it specifically</span>
+        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">char</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">part</span><span class="p">):</span>
+                <span class="n">number</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">char</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">part</span> <span class="k">if</span> <span class="n">char</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span>
+                <span class="k">break</span>
+    
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We apply the naming function to our metadata dataframe so that the new index is the shorted <code class="docutils literal notranslate"><span class="pre">pid</span></code> as is used by <em>cfr</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">short_pids</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pids</span><span class="p">:</span>
+    <span class="n">lil</span> <span class="o">=</span> <span class="n">shorten_pid</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">short_pids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lil</span><span class="p">)</span>
+
+<span class="n">df_p2k_meta_short</span> <span class="o">=</span> <span class="n">df_p2k_meta</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">shorten_pid</span><span class="p">)</span>
+<span class="n">archive_data_new_idx</span> <span class="o">=</span> <span class="n">archive_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">shorten_pid</span><span class="p">)</span>
+
+
+<span class="n">data_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;pid&#39;</span><span class="p">:</span> <span class="n">short_pids</span><span class="p">,</span>
+        <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">times</span><span class="p">,</span>
+        <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">values</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we take the data dataframe with shortened pids and merge it with the metadata dataframe to combine all the columns necessary to make a ProxyDatabase object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">archive_data_new_idx</span> <span class="o">=</span> <span class="n">archive_data_new_idx</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">])</span>
+
+<span class="n">new_pdb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+        <span class="n">archive_data_new_idx</span><span class="p">,</span>
+        <span class="n">data_df</span><span class="p">,</span>
+        <span class="n">on</span><span class="o">=</span><span class="s1">&#39;pid&#39;</span><span class="p">,</span>
+        <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="assigning-proxy-type-labels-ptype">
+<h3>Assigning Proxy Type Labels (ptype)<a class="headerlink" href="#assigning-proxy-type-labels-ptype" title="Link to this heading">#</a></h3>
+<p>Each record in the <code class="docutils literal notranslate"><span class="pre">cfr.ProxyDatabase</span></code> is tagged with a <code class="docutils literal notranslate"><span class="pre">ptype</span></code>, which is a combination of the archive and measured variable (e.g., <code class="docutils literal notranslate"><span class="pre">tree.d18O</span></code>, <code class="docutils literal notranslate"><span class="pre">marine.MgCa</span></code>). We generate these using a mapping based on archive and measurement metadata.
+<br />
+Using this, we want a new column called ‘ptype’. To generate this, we use the function <code class="docutils literal notranslate"><span class="pre">create_ptype</span></code>. The mapping for this function was done by hand, observing records from <em>cfr</em>’s built in ProxyDatabase to get an exact match to the metadata from Tardif’s pickle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_ptype</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+
+    <span class="n">archive_mapping</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Tree Rings&#39;</span><span class="p">:</span> <span class="s1">&#39;tree&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Corals and Sclerosponges&#39;</span><span class="p">:</span> <span class="s1">&#39;coral&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Lake Cores&#39;</span><span class="p">:</span> <span class="s1">&#39;lake&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Ice Cores&#39;</span><span class="p">:</span> <span class="s1">&#39;ice&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Bivalve&#39;</span><span class="p">:</span> <span class="s1">&#39;bivalve&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Speleothems&#39;</span><span class="p">:</span> <span class="s1">&#39;speleothem&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Marine Cores&#39;</span><span class="p">:</span> <span class="s1">&#39;marine&#39;</span>
+    <span class="p">}</span>
+
+    <span class="n">measure_mapping</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Sr_Ca&#39;</span><span class="p">:</span> <span class="s1">&#39;SrCa&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;trsgi&#39;</span><span class="p">:</span> <span class="s1">&#39;TRW&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;calcification&#39;</span><span class="p">:</span> <span class="s1">&#39;calc&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;d18O&#39;</span><span class="p">:</span> <span class="s1">&#39;d18O&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;dD&#39;</span><span class="p">:</span> <span class="s1">&#39;dD&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MXD&#39;</span><span class="p">:</span> <span class="s1">&#39;MXD&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="s1">&#39;MXD&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;composite&#39;</span><span class="p">:</span> <span class="s1">&#39;calc&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;massacum&#39;</span><span class="p">:</span> <span class="s1">&#39;accumulation&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;thickness&#39;</span><span class="p">:</span> <span class="s1">&#39;varve_thickness&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;melt&#39;</span><span class="p">:</span> <span class="s1">&#39;melt&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;RABD660_670&#39;</span><span class="p">:</span> <span class="s1">&#39;reflectance&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;X_radiograph_dark_layer&#39;</span><span class="p">:</span> <span class="s1">&#39;varve_property&#39;</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># Get the shortened archive type</span>
+    <span class="n">archive</span> <span class="o">=</span> <span class="n">archive_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Archive type&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Archive type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="n">proxy</span> <span class="o">=</span> <span class="n">measure_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Proxy measurement&#39;</span><span class="p">])</span>
+    
+    <span class="c1"># Combine with proxy measurement</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">archive</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">proxy</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now apply the function to our full dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_pdb</span><span class="p">[</span><span class="s1">&#39;ptype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_pdb</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">create_ptype</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">new_pdb</span> <span class="o">=</span> <span class="n">new_pdb</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Archive type&#39;</span><span class="p">,</span> <span class="s1">&#39;Proxy measurement&#39;</span><span class="p">,</span> <span class="s1">&#39;Proxy ID&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="filtering-by-resolution-as-done-in-lmr">
+<h2>Filtering by resolution (as done in LMR)<a class="headerlink" href="#filtering-by-resolution-as-done-in-lmr" title="Link to this heading">#</a></h2>
+<p>We know that LMRv2.1 used only annual and subannually resolved records. In order to do this, we will take our new dataframe that has all the right columns, and turn it into a <code class="docutils literal notranslate"><span class="pre">cfr.ProxyDatabase</span></code> object, so we can filter by resolution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#new_pdb = new_pdb[new_pdb[&#39;pid&#39;] != &#39;Afr_012&#39;]</span>
+
+<span class="n">new_pdb</span> <span class="o">=</span> <span class="n">new_pdb</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;Lat (N)&#39;</span><span class="p">:</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Lon (E)&#39;</span><span class="p">:</span> <span class="s1">&#39;lon&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Elev&#39;</span><span class="p">:</span> <span class="s1">&#39;elev&#39;</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># examine the dataframe</span>
+
+<span class="n">new_pdb</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>lat</th>
+      <th>lon</th>
+      <th>elev</th>
+      <th>time</th>
+      <th>value</th>
+      <th>ptype</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ocn_148</td>
+      <td>43.6561</td>
+      <td>290.1983</td>
+      <td>-30.0</td>
+      <td>[1033.0, 1034.0, 1035.0, 1036.0, 1037.0, 1038....</td>
+      <td>[1.14, 1.06, 0.8, 0.69, 1.21, 1.4, 1.26, 0.85,...</td>
+      <td>bivalve.d18O</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ocn_170</td>
+      <td>-21.8333</td>
+      <td>114.1833</td>
+      <td>-6.0</td>
+      <td>[1900.0, 1901.0, 1902.0, 1903.0, 1904.0, 1905....</td>
+      <td>[-29.80451, 10.97039, 28.05434, 21.96584, -2.7...</td>
+      <td>coral.calc</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ocn_174</td>
+      <td>-21.9000</td>
+      <td>113.9667</td>
+      <td>-6.0</td>
+      <td>[1900.0, 1901.0, 1902.0, 1903.0, 1904.0, 1905....</td>
+      <td>[10.976, -4.39066, -3.39162, 16.9882, -9.2862,...</td>
+      <td>coral.calc</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ocn_073</td>
+      <td>20.8300</td>
+      <td>273.2600</td>
+      <td>-3.1</td>
+      <td>[1773.0, 1774.0, 1775.0, 1776.0, 1777.0, 1778....</td>
+      <td>[-0.605009101918667, 0.11922153808142, -0.9671...</td>
+      <td>coral.calc</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Ocn_173</td>
+      <td>-17.5167</td>
+      <td>118.9667</td>
+      <td>-6.0</td>
+      <td>[1900.0, 1901.0, 1902.0, 1903.0, 1904.0, 1905....</td>
+      <td>[-3.65572, 15.4608, 6.62304, -20.1302, 14.6722...</td>
+      <td>coral.calc</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>567</th>
+      <td>NAm_139</td>
+      <td>49.7000</td>
+      <td>241.1000</td>
+      <td>2000.0</td>
+      <td>[1512.0, 1513.0, 1514.0, 1515.0, 1516.0, 1517....</td>
+      <td>[0.87, 0.885, 0.893, 0.893, 0.87, 0.81, 0.826,...</td>
+      <td>tree.MXD</td>
+    </tr>
+    <tr>
+      <th>568</th>
+      <td>NAm_200</td>
+      <td>44.8000</td>
+      <td>252.1000</td>
+      <td>2820.0</td>
+      <td>[1508.0, 1509.0, 1510.0, 1511.0, 1512.0, 1513....</td>
+      <td>[1.03, 0.928, 0.929, 1.052, 1.001, 0.991, 0.94...</td>
+      <td>tree.MXD</td>
+    </tr>
+    <tr>
+      <th>569</th>
+      <td>NAm_130</td>
+      <td>55.3000</td>
+      <td>282.2000</td>
+      <td>50.0</td>
+      <td>[1352.0, 1353.0, 1354.0, 1355.0, 1356.0, 1357....</td>
+      <td>[0.98, 0.988, 0.956, 0.845, 1.053, 1.129, 1.07...</td>
+      <td>tree.MXD</td>
+    </tr>
+    <tr>
+      <th>570</th>
+      <td>NAm_199</td>
+      <td>41.3000</td>
+      <td>252.3000</td>
+      <td>3150.0</td>
+      <td>[1401.0, 1402.0, 1403.0, 1404.0, 1405.0, 1406....</td>
+      <td>[1.042, 0.998, 0.953, 1.079, 1.057, 0.91, 1.03...</td>
+      <td>tree.MXD</td>
+    </tr>
+    <tr>
+      <th>571</th>
+      <td>NAm_185</td>
+      <td>45.3000</td>
+      <td>238.3000</td>
+      <td>1300.0</td>
+      <td>[1504.0, 1505.0, 1506.0, 1507.0, 1508.0, 1509....</td>
+      <td>[1.016, 0.962, 1.009, 0.94, 0.932, 0.847, 0.97...</td>
+      <td>tree.MXD</td>
+    </tr>
+  </tbody>
+</table>
+<p>572 rows × 7 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create the ProxyDatabase object using the correctly labeled column names</span>
+
+<span class="n">blank</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">ProxyDatabase</span><span class="p">()</span>
+
+<span class="n">lmr_pdb</span> <span class="o">=</span> <span class="n">blank</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">new_pdb</span><span class="p">,</span>
+    <span class="n">pid_column</span><span class="o">=</span><span class="s1">&#39;pid&#39;</span><span class="p">,</span> 
+    <span class="n">lat_column</span><span class="o">=</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span>  
+    <span class="n">lon_column</span><span class="o">=</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span>  
+    <span class="n">elev_column</span> <span class="o">=</span> <span class="s1">&#39;elev&#39;</span><span class="p">,</span>
+    <span class="n">time_column</span> <span class="o">=</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span>
+    <span class="n">value_column</span> <span class="o">=</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+    <span class="n">ptype_column</span> <span class="o">=</span> <span class="s1">&#39;ptype&#39;</span>
+
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To filter by resolution, we use <em>cfr</em>’s default <code class="docutils literal notranslate"><span class="pre">cfr.proxydb.filter</span></code> function. We filter by ‘dt’, which is the median timestep between time values. The following cell is to ensure that there are no <code class="docutils literal notranslate"><span class="pre">None</span></code> type values when computing dt.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_dt</span> <span class="o">=</span> <span class="p">[</span><span class="n">pid</span> <span class="k">for</span> <span class="n">pid</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">lmr_pdb</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">dt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">missing_dt</span><span class="p">)</span><span class="si">}</span><span class="s2"> records missing dt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 records missing dt
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="n">lmr_pdb</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;pid&#39;</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">missing_dt</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
+<span class="n">lmr_pdb</span> <span class="o">=</span> <span class="n">lmr_pdb</span> <span class="o">-</span> <span class="n">missing</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We want dt &lt;= 1.0, so we expand the range a little bit in case there are any records with slightly greater than annual resolution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># everything should be annual</span>
+
+<span class="n">filt</span> <span class="o">=</span> <span class="n">lmr_pdb</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;dt&#39;</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.2</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">filt</span><span class="o">.</span><span class="n">records</span><span class="p">:</span>
+    <span class="n">pobj</span> <span class="o">=</span> <span class="n">filt</span><span class="p">[</span><span class="n">record</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pobj</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">pobj</span><span class="o">.</span><span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ocn_148 1.0
+Ocn_170 1.0
+Ocn_174 1.0
+Ocn_073 1.0
+Ocn_173 1.0
+Ocn_171 1.0
+Ocn_065 1.0
+Ocn_158 1.0
+Ocn_172 1.0
+Ocn_167 1.0
+Ocn_121 1.0
+Ocn_131 1.0
+Ocn_163 1.0
+Ocn_069 1.0
+Ocn_112 1.0
+Ocn_061 1.0
+Ocn_182 1.0
+Ocn_129 1.0
+Ocn_067 1.0
+Ocn_160 1.0
+Ocn_070 1.0
+Ocn_155 1.0
+Ocn_153 1.0
+Ocn_084 1.0
+Ocn_093 1.0
+Ocn_141 1.0
+Ocn_159 1.0
+Ocn_109 1.0
+Ocn_161 1.0
+Ocn_101 1.0
+Ocn_143 1.0
+Ocn_096 1.0
+Ocn_176 1.0
+Ocn_072 1.0
+Ocn_106 1.0
+Ocn_125 1.0
+Ocn_060 1.0
+Ocn_157 1.0
+Ocn_110 1.0
+Ocn_077 1.0
+Ocn_166 1.0
+Ocn_120 1.0
+Ocn_099 1.0
+Ocn_083 1.0
+Ocn_179 1.0
+Ocn_123 1.0
+Ocn_130 1.0
+Ocn_079 1.0
+Ocn_087 1.0
+Ocn_115 1.0
+Ocn_162 1.0
+Ocn_068 1.0
+Ocn_075 1.0
+Ocn_178 1.0
+Ocn_088 1.0
+Ocn_074 1.0
+Ocn_097 1.0
+Ocn_111 1.0
+Ocn_139 1.0
+Ocn_062 1.0
+Ocn_138 1.0
+Ocn_119 1.0
+Ocn_076 1.0
+Ocn_086 1.0
+Ocn_181 1.0
+Ocn_066 1.0
+Ocn_128 1.0
+Ocn_080 1.0
+Ocn_098 1.0
+Ocn_095 1.0
+Ocn_116 1.0
+Ocn_154 1.0
+Ocn_169 1.0
+Ocn_107 1.0
+Ocn_114 1.0
+Ocn_104 1.0
+Ocn_127 1.0
+Ocn_091 1.0
+Ocn_140 1.0
+Ocn_108 1.0
+Ocn_078 1.0
+Ocn_082 1.0
+Ocn_081 1.0
+Ocn_147 1.0
+Ocn_142 1.0
+Ocn_168 1.0
+Ocn_175 1.0
+Ocn_071 1.0
+Ocn_122 1.0
+Ocn_146 1.0
+Ocn_180 1.0
+Ocn_118 1.0
+Ocn_090 1.0
+Ocn_156 1.0
+Arc_080 1.0
+Ant_020 1.0
+Ant_003 1.0
+Arc_032 1.0
+Arc_011 1.0
+Ant_011 1.0
+Ant_024 1.0
+Arc_078 1.0
+SAm_026 1.0
+Arc_072 1.0
+Ant_005 1.0
+Arc_035 1.0
+Arc_036 1.0
+Ant_008 1.0
+Arc_029 1.0
+Arc_027 1.0
+Ant_006 1.0
+Arc_033 1.0
+Arc_028 1.0
+Ant_002 1.0
+Ant_004 1.0
+Arc_034 1.0
+Ant_021 1.0
+Ant_012 1.0
+Arc_075 1.0
+Arc_018 1.0
+Ant_007 1.0
+Asi_232 1.0
+Arc_005 1.0
+Arc_064 1.0
+Ant_025 1.0
+Ant_010 1.0
+Ant_026 1.0
+Ant_019 1.0
+Ant_017 1.0
+Ant_028 1.0
+Ant_001 1.0
+Arc_004 1.0
+Arc_026 1.0
+NAm_072 1.0
+Arc_020 1.0
+Arc_014 1.0
+Arc_001 1.0
+Arc_025 1.0
+Arc_022 1.0
+Afr_012 1.0
+Arc_22 1.0
+NAm_049 1.0
+Asi_221 1.0
+Asi_153 1.0
+Asi_044 1.0
+Asi_130 1.0
+NAm_030 1.0
+NAm_046 1.0
+NAm_178 1.0
+Asi_142 1.0
+Asi_146 1.0
+SAm_006 1.0
+Asi_143 1.0
+Aus_030 1.0
+NAm_156 1.0
+Asi_137 1.0
+NAm_011 1.0
+NAm_045 1.0
+Asi_119 1.0
+Asi_216 1.0
+NAm_149 1.0
+NAm_032 1.0
+NAm_109 1.0
+Asi_079 1.0
+Asi_021 1.0
+Asi_100 1.0
+NAm_147 1.0
+Asi_010 1.0
+Asi_047 1.0
+Asi_093 1.0
+NAm_019 1.0
+Asi_054 1.0
+Asi_206 1.0
+Asi_065 1.0
+NAm_096 1.0
+Asi_007 1.0
+Asi_134 1.0
+Asi_172 1.0
+NAm_126 1.0
+Asi_184 1.0
+NAm_180 1.0
+NAm_166 1.0
+Eur_005 1.0
+NAm_160 1.0
+NAm_111 1.0
+NAm_018 1.0
+NAm_110 1.0
+Asi_063 1.0
+Asi_131 1.0
+Asi_048 1.0
+Asi_052 1.0
+Asi_068 1.0
+Eur_009 1.0
+Asi_023 1.0
+Aus_005 1.0
+Asi_087 1.0
+Asi_176 1.0
+NAm_099 1.0
+Asi_162 1.0
+Asi_014 1.0
+NAm_182 1.0
+Asi_071 1.0
+Asi_053 1.0
+Asi_219 1.0
+Asi_189 1.0
+NAm_176 1.0
+Asi_029 1.0
+Asi_036 1.0
+Asi_192 1.0
+NAm_105 1.0
+Asi_086 1.0
+Asi_008 1.0
+Asi_180 1.0
+NAm_188 1.0
+NAm_170 1.0
+Aus_007 1.0
+Asi_011 1.0
+NAm_151 1.0
+Asi_220 1.0
+Arc_002 1.0
+Asi_013 1.0
+NAm_173 1.0
+Asi_156 1.0
+Asi_168 1.0
+NAm_002 1.0
+Asi_015 1.0
+Asi_028 1.0
+Asi_195 1.0
+Asi_201 1.0
+Asi_136 1.0
+Asi_096 1.0
+Eur_008 1.0
+NAm_142 1.0
+NAm_177 1.0
+Asi_118 1.0
+Asi_225 1.0
+NAm_009 1.0
+SAm_024 1.0
+Asi_165 1.0
+Asi_148 1.0
+Asi_190 1.0
+Asi_104 1.0
+NAm_148 1.0
+Asi_140 1.0
+Asi_193 1.0
+Asi_103 1.0
+Asi_215 1.0
+Asi_179 1.0
+Asi_135 1.0
+Asi_127 1.0
+Asi_005 1.0
+NAm_136 1.0
+Asi_202 1.0
+NAm_081 1.0
+Asi_102 1.0
+NAm_158 1.0
+Asi_024 1.0
+Asi_126 1.0
+NAm_125 1.0
+Asi_226 1.0
+SAm_029 1.0
+Asi_183 1.0
+Asi_199 1.0
+Asi_059 1.0
+Asi_074 1.0
+Asi_056 1.0
+NAm_196 1.0
+Asi_207 1.0
+Asi_173 1.0
+Asi_090 1.0
+Asi_121 1.0
+Asi_098 1.0
+NAm_128 1.0
+Asi_163 1.0
+NAm_100 1.0
+Asi_040 1.0
+Asi_203 1.0
+Asi_169 1.0
+Asi_078 1.0
+NAm_097 1.0
+Asi_166 1.0
+NAm_161 1.0
+NAm_087 1.0
+Asi_155 1.0
+Arc_024 1.0
+Asi_159 1.0
+Asi_062 1.0
+NAm_135 1.0
+NAm_189 1.0
+Asi_141 1.0
+Asi_161 1.0
+Asi_045 1.0
+Asi_123 1.0
+Asi_129 1.0
+NAm_013 1.0
+NAm_133 1.0
+Asi_209 1.0
+Asi_150 1.0
+Asi_112 1.0
+Asi_196 1.0
+Asi_060 1.0
+NAm_083 1.0
+Asi_083 1.0
+Asi_124 1.0
+Asi_091 1.0
+NAm_060 1.0
+Asi_223 1.0
+Asi_051 1.0
+Asi_122 1.0
+Asi_018 1.0
+Asi_200 1.0
+Asi_089 1.0
+Asi_138 1.0
+Asi_111 1.0
+Asi_105 1.0
+NAm_070 1.0
+Asi_082 1.0
+Asi_228 1.0
+NAm_190 1.0
+Asi_170 1.0
+Asi_076 1.0
+NAm_085 1.0
+Asi_026 1.0
+NAm_091 1.0
+Asi_077 1.0
+NAm_001 1.0
+Asi_016 1.0
+NAm_071 1.0
+Asi_110 1.0
+NAm_007 1.0
+Arc_008 1.0
+NAm_154 1.0
+Asi_160 1.0
+NAm_193 1.0
+Asi_114 1.0
+NAm_203 1.0
+NAm_146 1.0
+Asi_080 1.0
+Asi_147 1.0
+Asi_145 1.0
+Asi_151 1.0
+Asi_058 1.0
+NAm_127 1.0
+Arc_016 1.0
+NAm_114 1.0
+Asi_218 1.0
+Asi_217 1.0
+Asi_164 1.0
+NAm_008 1.0
+Asi_027 1.0
+NAm_132 1.0
+Asi_197 1.0
+Asi_154 1.0
+Asi_064 1.0
+Asi_020 1.0
+NAm_088 1.0
+Asi_003 1.0
+Asi_085 1.0
+Asi_229 1.0
+Asi_106 1.0
+NAm_145 1.0
+Asi_108 1.0
+Asi_004 1.0
+Asi_158 1.0
+Eur_006 1.0
+Asi_210 1.0
+Asi_009 1.0
+Asi_177 1.0
+Asi_174 1.0
+Asi_025 1.0
+Asi_061 1.0
+Asi_191 1.0
+Asi_139 1.0
+NAm_155 1.0
+Asi_069 1.0
+Asi_186 1.0
+NAm_153 1.0
+NAm_050 1.0
+Asi_057 1.0
+NAm_186 1.0
+Asi_032 1.0
+Asi_037 1.0
+Asi_072 1.0
+NAm_183 1.0
+Asi_101 1.0
+NAm_059 1.0
+NAm_029 1.0
+Aus_031 1.0
+Aus_009 1.0
+Asi_043 1.0
+Asi_113 1.0
+NAm_098 1.0
+NAm_120 1.0
+Asi_149 1.0
+Asi_204 1.0
+Asi_128 1.0
+Asi_213 1.0
+NAm_092 1.0
+Asi_088 1.0
+Asi_214 1.0
+Asi_211 1.0
+Asi_050 1.0
+Asi_175 1.0
+Asi_187 1.0
+Asi_049 1.0
+NAm_090 1.0
+NAm_201 1.0
+Asi_095 1.0
+Asi_035 1.0
+Asi_041 1.0
+Asi_030 1.0
+Asi_198 1.0
+NAm_195 1.0
+Asi_185 1.0
+NAm_140 1.0
+Asi_034 1.0
+Aus_004 1.0
+SAm_025 1.0
+Asi_066 1.0
+Asi_002 1.0
+Asi_132 1.0
+Asi_075 1.0
+Asi_073 1.0
+NAm_163 1.0
+Asi_006 1.0
+Asi_067 1.0
+Asi_081 1.0
+NAm_089 1.0
+Asi_046 1.0
+NAm_162 1.0
+Asi_092 1.0
+Arc_073 1.0
+Asi_017 1.0
+Asi_022 1.0
+Asi_182 1.0
+Asi_097 1.0
+Asi_117 1.0
+Asi_031 1.0
+NAm_117 1.0
+Asi_167 1.0
+Asi_115 1.0
+Asi_019 1.0
+Asi_094 1.0
+Asi_133 1.0
+Eur_004 1.0
+Asi_001 1.0
+Asi_178 1.0
+NAm_168 1.0
+Asi_099 1.0
+NAm_003 1.0
+Asi_157 1.0
+Asi_070 1.0
+NAm_066 1.0
+NAm_094 1.0
+NAm_093 1.0
+Asi_116 1.0
+NAm_191 1.0
+NAm_138 1.0
+NAm_144 1.0
+Asi_038 1.0
+Asi_171 1.0
+Asi_055 1.0
+Asi_152 1.0
+Asi_042 1.0
+NAm_129 1.0
+NAm_198 1.0
+Asi_224 1.0
+Asi_222 1.0
+Asi_205 1.0
+Asi_181 1.0
+Asi_039 1.0
+Asi_033 1.0
+Asi_125 1.0
+Asi_109 1.0
+NAm_171 1.0
+Asi_144 1.0
+Asi_120 1.0
+NAm_159 1.0
+Asi_107 1.0
+Asi_208 1.0
+Asi_084 1.0
+NAm_112 1.0
+Asi_194 1.0
+Asi_212 1.0
+Asi_227 1.0
+Asi_188 1.0
+NAm_157 1.0
+NAm_044 1.0
+NAm_179 1.0
+NAm_192 1.0
+NAm_124 1.0
+NAm_113 1.0
+NAm_108 1.0
+NAm_084 1.0
+NAm_181 1.0
+NAm_167 1.0
+Arc_068 1.0
+NAm_102 1.0
+NAm_119 1.0
+NAm_116 1.0
+NAm_041 1.0
+NAm_152 1.0
+NAm_174 1.0
+Arc_074 1.0
+Arc_066 1.0
+Arc_065 1.0
+NAm_104 1.0
+NAm_137 1.0
+NAm_026 1.0
+NAm_101 1.0
+NAm_143 1.0
+NAm_134 1.0
+Eur_007 1.0
+Eur_003 1.0
+NAm_122 1.0
+NAm_086 1.0
+NAm_194 1.0
+NAm_204 1.0
+NAm_115 1.0
+NAm_107 1.0
+NAm_175 1.0
+NAm_064 1.0
+NAm_103 1.0
+NAm_123 1.0
+NAm_121 1.0
+Arc_071 1.0
+Arc_063 1.0
+Arc_061 1.0
+NAm_150 1.0
+NAm_202 1.0
+NAm_184 1.0
+NAm_141 1.0
+NAm_172 1.0
+NAm_197 1.0
+NAm_187 1.0
+Arc_077 1.0
+NAm_106 1.0
+NAm_165 1.0
+NAm_164 1.0
+NAm_118 1.0
+NAm_169 1.0
+NAm_095 1.0
+NAm_139 1.0
+NAm_200 1.0
+NAm_130 1.0
+NAm_199 1.0
+NAm_185 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<section id="optional-check-for-sparse-records-that-don-t-meet-the-0-5-threshold">
+<h3>(Optional) Check for sparse records that don’t meet the 0.5 threshold.<a class="headerlink" href="#optional-check-for-sparse-records-that-don-t-meet-the-0-5-threshold" title="Link to this heading">#</a></h3>
+<p>LMRv2.1 uses the parameter <code class="docutils literal notranslate"><span class="pre">valid_frac</span></code> to remove records that don’t span more than half of the full length of the record. If the database is cleaned up, chances are this will not be an issue. But it is good to run just in case to see what records get filtered out. Records will get dropped during the calibration step of the data assimilation workflow if they do not meet the overlap requirement as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">valid_frac</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">filtered_records</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">pid</span><span class="p">,</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">filt</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">dt</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">year_range</span> <span class="o">=</span> <span class="n">years</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">years</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">coverage</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">)</span> <span class="o">/</span> <span class="n">year_range</span> <span class="k">if</span> <span class="n">year_range</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="c1"># Keep if:</span>
+    <span class="c1"># - subannual or annual AND coverage ≥ 0.5</span>
+    <span class="c1"># - OR manually specified pid</span>
+    <span class="k">if</span> <span class="n">coverage</span> <span class="o">&gt;=</span> <span class="n">valid_frac</span> <span class="ow">or</span> <span class="n">pid</span> <span class="o">==</span> <span class="s1">&#39;Ocn_148&#39;</span><span class="p">:</span>
+        <span class="n">filtered_records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="final-proxydatabase-object">
+<h3>Final ProxyDatabase Object<a class="headerlink" href="#final-proxydatabase-object" title="Link to this heading">#</a></h3>
+<p>The final <code class="docutils literal notranslate"><span class="pre">ProxyDatabase</span></code> object contains only PAGES2kv2 records that:</p>
+<ul class="simple">
+<li><p>Are annual or subannual in resolution (dt ≤ 1.2 years)</p></li>
+<li><p>Have at least 50% coverage over their date range</p></li>
+<li><p>Include complete time and value arrays</p></li>
+<li><p>Are labeled with a standardized <code class="docutils literal notranslate"><span class="pre">ptype</span></code> format (e.g., <code class="docutils literal notranslate"><span class="pre">tree.d18O</span></code>, <code class="docutils literal notranslate"><span class="pre">marine.MgCa</span></code>)</p></li>
+</ul>
+<p>This cleaned and filtered database is now ready for use in the <em>cfr</em> framework for climate field reconstruction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove dropped records from final database</span>
+
+<span class="n">final_pdb</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">ProxyDatabase</span><span class="p">()</span>
+<span class="n">final_pdb</span> <span class="o">+=</span> <span class="n">filtered_records</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="save-proxydatabase-as-netcdf-file">
+<h2>Save Proxydatabase as netCDF file<a class="headerlink" href="#save-proxydatabase-as-netcdf-file" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final_pdb</span><span class="o">.</span><span class="n">to_nc</span><span class="p">(</span><span class="s1">&#39;./prev_data/lmr_pickle_pages2k.nc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Warning: this is an experimental feature.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Warning: this is an experimental feature.</span>
+
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 544/544 [00:15&lt;00:00, 35.39it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Data before 1 CE is dropped for records: [&#39;Arc_032&#39;, &#39;Arc_033&#39;, &#39;Ant_007&#39;, &#39;Ant_010&#39;, &#39;Ant_028&#39;, &#39;Arc_004&#39;, &#39;Arc_026&#39;, &#39;Arc_020&#39;, &#39;Arc_022&#39;, &#39;NAm_011&#39;, &#39;NAm_019&#39;, &#39;Arc_002&#39;, &#39;Eur_006&#39;, &#39;Eur_003&#39;].</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">ProxyDatabase saved to: ./prev_data/lmr_pickle_pages2k.nc</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary-and-output">
+<h2>Summary and Output<a class="headerlink" href="#summary-and-output" title="Link to this heading">#</a></h2>
+<p>We have constructed a cleaned, standardized proxy database containing PAGES2kv2 records. This database has been filtered by resolution and (optionally) coverage and formatted for direct use in the <em>cfr</em> paleoclimate data assimilation workflows.</p>
+<p>The result has been saved as a NetCDF file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./prev_data/lmr_pickle_pages2k.nc
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/data_assembly"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../README.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PaleoBook Template</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="C01_b_db_assembly_cfr_PAGES2k.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Assembling Proxy Database using cfr’s built in PAGES2k database</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-metadata-and-data-pickle-files">Combining metadata and data pickle files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-metadata-and-data-csv-file-and-filtering-only-pages2kv2-data">Loading metadata and data csv file and filtering only PAGES2kv2 data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizing-proxy-ids-pid">Standardizing Proxy IDs (pid)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-proxy-type-labels-ptype">Assigning Proxy Type Labels (ptype)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-resolution-as-done-in-lmr">Filtering by resolution (as done in LMR)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-check-for-sparse-records-that-don-t-meet-the-0-5-threshold">(Optional) Check for sparse records that don’t meet the 0.5 threshold.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-proxydatabase-object">Final ProxyDatabase Object</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-proxydatabase-as-netcdf-file">Save Proxydatabase as netCDF file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-output">Summary and Output</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tanaya Gondhalekar, Deborah Khider, Julien Emile-Geay
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
