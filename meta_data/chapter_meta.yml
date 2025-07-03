@@ -12,7 +12,6 @@ parts:
             - data wrangling
           packages:
             - cfr
-    chapters: 
       - shortname: ProxyDatabase from cfr
         filename: C01_b_db_assembly_cfr_PAGES2k
         thumbnail: PAGES2k_logo.png
@@ -45,7 +44,6 @@ parts:
             - cfr
             - xarray
             - matplotlib
-    chapters:
       - shortname: Proxy Database Comparison
         filename: C03_b_comparison
         thumbnail: proxydb_compare.png
