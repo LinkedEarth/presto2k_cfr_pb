@@ -44,6 +44,7 @@ parts:
             - cfr
             - xarray
             - matplotlib
+            - pens
       - shortname: Proxy Database Comparison
         filename: C03_b_comparison
         thumbnail: proxydb_compare.png
