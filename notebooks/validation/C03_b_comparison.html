@@ -384,6 +384,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-in-the-two-proxy-databases-as-cfr-proxydatabase-objects">Load in the two proxy databases as cfr.ProxyDatabase objects</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-two-proxydbs">Plot the two ProxyDBs</a></li>
 </ul>
@@ -408,6 +410,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="proxy-database-forensics">
 <h1>Proxy Database Forensics<a class="headerlink" href="#proxy-database-forensics" title="Link to this heading">#</a></h1>
+<section id="author">
+<h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://orcid.org/0009-0004-2440-3266">Tanaya Gondhalekar</a></p>
+</section>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h2>
 <p>An important aspect of comparing reconstructions is to trace the origins of their differences. This is not a straightforward process, but progress can be made by comparing the proxy data inputs.</p>
 <p>Using <code class="docutils literal notranslate"><span class="pre">cfr.ProxyDatabase</span></code> class, we want to take two different proxy databases and identify their similarities and differences. Notably to see how the contents of these respective proxy records can affect the quality of a paleoclimate reconstruction (such as the ones validated in ‘Validating a Reconstruction).</p>
 <p>In previous reproduction attempts, where all other input data were held constant and the only change was the subset of the PAGES2k network used as proxy data, the quality of the reconstructions varied drastically. The purpose of this notebook is to dig into the details and pinpoint the exact records that could be problematic, which can make the difference between a successful and unsuccessful emulation of LMRv2.1.</p>
@@ -425,6 +433,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="load-in-the-two-proxy-databases-as-cfr-proxydatabase-objects">
 <h2>Load in the two proxy databases as cfr.ProxyDatabase objects<a class="headerlink" href="#load-in-the-two-proxy-databases-as-cfr-proxydatabase-objects" title="Link to this heading">#</a></h2>
 <p>The file format can vary, but in this example we will use <code class="docutils literal notranslate"><span class="pre">.nc</span></code> (netCDF) files that were made in notebooks C01. The file names can be replaced, but this is a generic example with <code class="docutils literal notranslate"><span class="pre">pdb_1</span></code> being cfr’s PAGES2k and <code class="docutils literal notranslate"><span class="pre">pdb_2</span></code> being Tardif’s LMR pickle PAGES2k</p>
@@ -792,6 +801,8 @@ Missing from LMR pickle PAGES2k: 16
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-in-the-two-proxy-databases-as-cfr-proxydatabase-objects">Load in the two proxy databases as cfr.ProxyDatabase objects</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-two-proxydbs">Plot the two ProxyDBs</a></li>
 </ul>

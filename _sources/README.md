@@ -24,9 +24,8 @@ Here we offer 4 different ways to carry out Step 1, all of which result in a net
 - [Step 1c](https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_c_db_assembly_cfr_PAGES2k.html) illustrates how to get the proxy database from the [LiPDVerse](https://lipdverse.org). 
 - [Step 1d](https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k.html) illustrates how to get the proxy database from the [LiPD Graph](http://linkedearth.graphdb.mint.isi.edu).
 
-Step 2 can be common to all workflows, depending on the provided metadata. Though in this case, we have split it into two highly similar ways.
+Step 2 can be common to all workflows, depending on the provided metadata. Though in this case, we have split it into two ways.
 - Step 2a runs the DA with class-based seasonality. Only one instance is illustrated here per (results obviously vary as a function of how Step 1 is implemented). 
 - Step 2b runs the DA with metadata-based seasonality. Once again, only one instance is illustrated in this notebook. 
 
-Step 3 focuses here on emulating LMR v2.1, with validating both our results from Step 2, as well as comparing different proxy databases from Step 1 for forensics purposes. Newer reconstructions based on updates to the PAGES 2k database will be the subject of upcoming notebooks/publications.
-Step 4 is specific to PReSto2k, and validates the three reconstructions run with PReSto data, using very similar methodologies to Step 3. 
+Step 3 focuses here on emulating LMR v2.1, with validating both our results from Step 2, as well as comparing different proxy databases from Step 1 for forensics purposes. The last part is specific to PReSto2k, which are the newer reconstructions based on updates to PAGES2k, and validates the three reconstructions run with this proxy data, using very similar methodologies to earlier chapters. 

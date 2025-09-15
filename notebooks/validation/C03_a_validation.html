@@ -384,10 +384,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-recon-job">Load Recon Job</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-gmst-from-our-recon-job">Load GMST from our Recon Job</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-lmr-offline-original-lmrv2-1">Load LMR offline (original LMRv2.1)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-both-versions-of-lmr-to-see-comparison">Plot both versions of LMR to see comparison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#process">Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-recon-job">Load Recon Job</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-gmst-from-our-recon-job">Load GMST from our Recon Job</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-lmr-offline-original-lmrv2-1">Load LMR offline (original LMRv2.1)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-both-versions-of-lmr-to-see-comparison">Plot both versions of LMR to see comparison</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-using-pens">Validate Using PENS</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-gmst-against-instrumental-datasets">Validating GMST Against Instrumental Datasets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-against-giss-surface-temperature-analysis-gistemp">Validate against GISS Surface Temperature Analysis (GISTEMP)</a></li>
@@ -418,6 +422,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="validating-a-reconstruction">
 <h1>Validating a Reconstruction<a class="headerlink" href="#validating-a-reconstruction" title="Link to this heading">#</a></h1>
+<section id="author">
+<h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://orcid.org/0009-0004-2440-3266">Tanaya Gondhalekar</a></p>
+</section>
+<section id="process">
+<h2>Process<a class="headerlink" href="#process" title="Link to this heading">#</a></h2>
 <p>This notebook compares our paleoclimate reconstruction to both:</p>
 <ul class="simple">
 <li><p>The original LMRv2.1 (offline) reconstruction</p></li>
@@ -453,7 +463,7 @@ document.write(`
 </div>
 </div>
 <section id="load-recon-job">
-<h2>Load Recon Job<a class="headerlink" href="#load-recon-job" title="Link to this heading">#</a></h2>
+<h3>Load Recon Job<a class="headerlink" href="#load-recon-job" title="Link to this heading">#</a></h3>
 <p>Load our reconstruction. We only need to see <code class="docutils literal notranslate"><span class="pre">'tas_gm'</span></code> which is the global mean surface temperature (ensemble time series) and <code class="docutils literal notranslate"><span class="pre">'tas'</span></code> which is the surface temperature climate field.</p>
 <blockquote>
 <div><p>Note: Here we are validating the reconstruction using the proxy database derived from Step 2b filtered by archive and resolution. Results will vary slightly by variant of Step 2.</p>
@@ -468,7 +478,7 @@ document.write(`
 </div>
 </section>
 <section id="load-gmst-from-our-recon-job">
-<h2>Load GMST from our Recon Job<a class="headerlink" href="#load-gmst-from-our-recon-job" title="Link to this heading">#</a></h2>
+<h3>Load GMST from our Recon Job<a class="headerlink" href="#load-gmst-from-our-recon-job" title="Link to this heading">#</a></h3>
 <p>Here just loading the <code class="docutils literal notranslate"><span class="pre">'tas_gm'</span></code> component of our reconstruction</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -479,7 +489,7 @@ document.write(`
 </div>
 </section>
 <section id="load-lmr-offline-original-lmrv2-1">
-<h2>Load LMR offline (original LMRv2.1)<a class="headerlink" href="#load-lmr-offline-original-lmrv2-1" title="Link to this heading">#</a></h2>
+<h3>Load LMR offline (original LMRv2.1)<a class="headerlink" href="#load-lmr-offline-original-lmrv2-1" title="Link to this heading">#</a></h3>
 <p>We can do this using Pangeo-Forge, but this one is done by downloading the data directly from the <a class="reference external" href="https://www.atmos.uw.edu/~hakim/lmr/LMRv2/index.html">LMR Data Page</a>. We can then load the GMT  and take the mean across ensembles.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -911,7 +921,7 @@ Attributes:
 </div>
 </section>
 <section id="plot-both-versions-of-lmr-to-see-comparison">
-<h2>Plot both versions of LMR to see comparison<a class="headerlink" href="#plot-both-versions-of-lmr-to-see-comparison" title="Link to this heading">#</a></h2>
+<h3>Plot both versions of LMR to see comparison<a class="headerlink" href="#plot-both-versions-of-lmr-to-see-comparison" title="Link to this heading">#</a></h3>
 <p>We want to see whether the general shape of the two reconstructions match since we are of course, trying to reproduce it as closely as possible. Mainly, we want to see if the varability is similar between reconstructions and see if they both accurately identified the same climate extremes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -933,6 +943,7 @@ Attributes:
 </div>
 </div>
 <p>The ensemble distributions, as plotted here, look very similar, which is encouraging. Let us quantify that using the plume distance framework.</p>
+</section>
 </section>
 <section id="validate-using-pens">
 <h2>Validate Using PENS<a class="headerlink" href="#validate-using-pens" title="Link to this heading">#</a></h2>
@@ -3656,10 +3667,14 @@ High CE values across most regions show that the reconstruction captures both va
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-recon-job">Load Recon Job</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-gmst-from-our-recon-job">Load GMST from our Recon Job</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-lmr-offline-original-lmrv2-1">Load LMR offline (original LMRv2.1)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-both-versions-of-lmr-to-see-comparison">Plot both versions of LMR to see comparison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#process">Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-recon-job">Load Recon Job</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-gmst-from-our-recon-job">Load GMST from our Recon Job</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-lmr-offline-original-lmrv2-1">Load LMR offline (original LMRv2.1)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-both-versions-of-lmr-to-see-comparison">Plot both versions of LMR to see comparison</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-using-pens">Validate Using PENS</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-gmst-against-instrumental-datasets">Validating GMST Against Instrumental Datasets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-against-giss-surface-temperature-analysis-gistemp">Validate against GISS Surface Temperature Analysis (GISTEMP)</a></li>

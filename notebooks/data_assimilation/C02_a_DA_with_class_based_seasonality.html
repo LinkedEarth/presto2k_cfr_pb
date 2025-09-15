@@ -384,6 +384,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#process">Process</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-file-for-carc">shell file for CARC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-proxies">Load proxies</a></li>
@@ -412,8 +414,15 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="run-data-assimilation">
 <h1>Run Data Assimilation<a class="headerlink" href="#run-data-assimilation" title="Link to this heading">#</a></h1>
+<section id="author">
+<h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://orcid.org/0009-0004-2440-3266">Tanaya Gondhalekar</a></p>
+</section>
+<section id="process">
+<h2>Process<a class="headerlink" href="#process" title="Link to this heading">#</a></h2>
 <p>In this notebook, we run the core data assimilation (DA) procedure to reconstruct past climate states, following the Last Millennium Reanalysis (LMR) framework as implemented in <a class="reference external" href="https://cp.copernicus.org/articles/15/1251/2019/">Tardif et al. 2019</a>. We use the <a class="reference external" href="https://fzhu2e.github.io/cfr/ug-api.html"><code class="docutils literal notranslate"><span class="pre">cfr</span></code></a> package with no edits to reproduce LMRv2.1, a benchmark paleoclimate reanalysis product.</p>
 <p><strong>WARNING</strong>: This notebook is designed to run on USC’s Center for Advanced Research Computing (CARC) HPC cluster due to the computational resources required for this data assimilation workflow.</p>
+</section>
 <section id="shell-file-for-carc">
 <h2>shell file for CARC<a class="headerlink" href="#shell-file-for-carc" title="Link to this heading">#</a></h2>
 <p>This shell is used via  <code class="docutils literal notranslate"><span class="pre">sbatch</span></code></p>
@@ -1031,6 +1040,8 @@ We run 51 Monte Carlo (MC) iterations with 100 ensemble members each. This gives
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#process">Process</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-file-for-carc">shell file for CARC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-proxies">Load proxies</a></li>
