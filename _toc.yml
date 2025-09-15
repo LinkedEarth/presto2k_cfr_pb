@@ -5,10 +5,14 @@ parts:
     chapters:
       - file: notebooks/data_assembly/C01_a_db_assembly_Tardif2019_pickle
       - file: notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k
+      - file: notebooks/data_assembly/C01_c_db_assembly_LiPDVerse
+      - file: notebooks/data_assembly/C01_d_db_assembly_LiPDGraph
   - caption: Data Assimilation
     chapters:
-      - file: notebooks/data_assimilation/C02_data_assimilation
+      - file: notebooks/data_assimilation/C02_a_DA_with_class_based_seasonality
+      - file: notebooks/data_assimilation/C02_b_DA_with_individual_seasonality
   - caption: Validation and Comparison
     chapters:
       - file: notebooks/validation/C03_a_validation
       - file: notebooks/validation/C03_b_comparison
+      - file: notebooks/validation/C04_validating_PReSto2k

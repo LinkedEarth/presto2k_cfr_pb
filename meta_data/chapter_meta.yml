@@ -20,10 +20,37 @@ parts:
             - data wrangling
           packages:
             - cfr
+      - shortname: ProxyDatabase from LiPDVerse
+        filename: C01_c_db_assembly_LiPDVerse
+        thumbnail: presto.png
+        tags:
+          domains:
+            - data wrangling
+          packages:
+            - cfr
+            - pylipd
+      - shortname: ProxyDatabase from LiPDGraph
+        filename: C01_d_db_assembly_LiPDGraph
+        thumbnail: presto.png
+        tags:
+          domains:
+            - data wrangling
+          packages:
+            - cfr
+            - pylipd
   - caption: Data Assimilation
     chapters:
-      - shortname: Data Assimilation
-        filename: C02_data_assimilation
+      - shortname: Data Assimilation Class
+        filename: C02_a_DA_with_class_based_seasonality
+        thumbnail: gmst_quick.png
+        tags:
+          domains:
+            - data assimilation
+            - data analysis
+          packages:
+            - cfr
+      - shortname: Data Assimilation Meta
+        filename: C02_b_DA_with_individual_seasonality
         thumbnail: gmst_quick.png
         tags:
           domains:
@@ -55,3 +82,15 @@ parts:
           packages:
             - cfr
             - matplotlib
+      - shortname: PReSto2k Validation
+        filename: C04_validating_PReSto2k
+        thumbnail: histograms.png
+        tags:
+          domains:
+            - data viz
+            - data analysis
+          packages:
+            - cfr
+            - matplotlib
+            - cartopy
+            - pens
