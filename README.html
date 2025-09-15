@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'README';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -178,15 +180,18 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notebooks/data_assembly/C01_a_db_assembly_Tardif2019_pickle.html">Database Assembly using the LMRv2.1 pickle file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k.html">Database Assembly using cfr’s built in PAGES 2k database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/data_assembly/C01_d_db_assembly_LiPDGraph.html">Assembling the proxy database from the LiPDGraph</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Assimilation</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/data_assimilation/C02_data_assimilation.html">Run Data Assimilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/data_assimilation/C02_a_DA_with_class_based_seasonality.html">Run Data Assimilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/data_assimilation/C02_b_DA_with_individual_seasonality.html">Run Data Assimilation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Validation and Comparison</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notebooks/validation/C03_a_validation.html">Validating a Reconstruction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/validation/C03_b_comparison.html">Proxy Database Forensics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/validation/C04_validating_PReSto2k.html">Validating PReSto2k</a></li>
 </ul>
 
     </div>
@@ -419,10 +424,16 @@ document.write(`
 <ul class="simple">
 <li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_a_db_assembly_Tardif2019_pickle.html">Step 1a</a> illustrates how to get a proxy database derived from the two pickle files (metadata and data) provided by <a class="reference external" href="https://doi.org/10.5194/cp-15-1251-2019">(Tardif et al, 2019)</a>.</p></li>
 <li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k.html">Step 1b</a> illustrates how to get the proxy database directly from what is built into the <code class="docutils literal notranslate"><span class="pre">cfr</span></code> codebase.</p></li>
-<li><p>Step 1c (Coming Soon) illustrates how to get the proxy database from the <a class="reference external" href="https://lipdverse.org">LiPDVerse</a>.</p></li>
-<li><p>Step 1d (Coming Soon) illustrates how to get the proxy database from the <a class="reference external" href="http://linkedearth.graphdb.mint.isi.edu">LiPD Graph</a>.</p></li>
+<li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_c_db_assembly_cfr_PAGES2k.html">Step 1c</a> illustrates how to get the proxy database from the <a class="reference external" href="https://lipdverse.org">LiPDVerse</a>.</p></li>
+<li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k.html">Step 1d</a> illustrates how to get the proxy database from the <a class="reference external" href="http://linkedearth.graphdb.mint.isi.edu">LiPD Graph</a>.</p></li>
 </ul>
-<p>Step 2 is common to all workflows, and only one instance is illustrated here (results obviously vary as a function of how Step 1 is implemented). Step 3 focuses here on emulating LMR v2.1, with validating both our results from Step 2, as well as comparing different proxy databases from Step 1 for forensics purposes. Newer reconstructions based on updates to the PAGES 2k database will be the subject of upcoming notebooks/publications.</p>
+<p>Step 2 can be common to all workflows, depending on the provided metadata. Though in this case, we have split it into two highly similar ways.</p>
+<ul class="simple">
+<li><p>Step 2a runs the DA with class-based seasonality. Only one instance is illustrated here per (results obviously vary as a function of how Step 1 is implemented).</p></li>
+<li><p>Step 2b runs the DA with metadata-based seasonality. Once again, only one instance is illustrated in this notebook.</p></li>
+</ul>
+<p>Step 3 focuses here on emulating LMR v2.1, with validating both our results from Step 2, as well as comparing different proxy databases from Step 1 for forensics purposes. Newer reconstructions based on updates to the PAGES 2k database will be the subject of upcoming notebooks/publications.
+Step 4 is specific to PReSto2k, and validates the three reconstructions run with PReSto data, using very similar methodologies to Step 3.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>

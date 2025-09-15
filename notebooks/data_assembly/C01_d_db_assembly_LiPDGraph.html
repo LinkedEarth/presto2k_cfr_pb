@@ -1,0 +1,1984 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Assembling the proxy database from the LiPDGraph &#8212; Assimilating PAGES 2k records with LinkedEarth tools</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/data_assembly/C01_d_db_assembly_LiPDGraph';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Run Data Assimilation" href="../data_assimilation/C02_a_DA_with_class_based_seasonality.html" />
+    <link rel="prev" title="Database Assembly using cfr’s built in PAGES 2k database" href="C01_b_db_assembly_cfr_PAGES2k.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Assimilating PAGES 2k records with LinkedEarth tools</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Assimilating PAGES 2k records with LinkedEarth tools
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Assembly</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="C01_a_db_assembly_Tardif2019_pickle.html">Database Assembly using the LMRv2.1 pickle file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C01_b_db_assembly_cfr_PAGES2k.html">Database Assembly using cfr’s built in PAGES 2k database</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assembling the proxy database from the LiPDGraph</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Assimilation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data_assimilation/C02_a_DA_with_class_based_seasonality.html">Run Data Assimilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_assimilation/C02_b_DA_with_individual_seasonality.html">Run Data Assimilation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Validation and Comparison</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../validation/C03_a_validation.html">Validating a Reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation/C03_b_comparison.html">Proxy Database Forensics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation/C04_validating_PReSto2k.html">Validating PReSto2k</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tanaya-g/pages2k_cfr_pb" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tanaya-g/pages2k_cfr_pb/issues/new?title=Issue%20on%20page%20%2Fnotebooks/data_assembly/C01_d_db_assembly_LiPDGraph.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/data_assembly/C01_d_db_assembly_LiPDGraph.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Assembling the proxy database from the LiPDGraph</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auhtors">Auhtors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-requisite">Pre-requisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-time">Reading time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-description">Data Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-retrieval">Data Retrieval</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-the-pages2k-datasets">Querying the PAGES2k datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-the-iso2k-dataset">Querying the iso2k dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-the-coralhydro2k-database">Querying the CoralHydro2k database</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="assembling-the-proxy-database-from-the-lipdgraph">
+<h1>Assembling the proxy database from the LiPDGraph<a class="headerlink" href="#assembling-the-proxy-database-from-the-lipdgraph" title="Link to this heading">#</a></h1>
+<section id="auhtors">
+<h2>Auhtors<a class="headerlink" href="#auhtors" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://orcid.org/0000-0001-7501-8430">Deborah Khider</a> &amp;
+<a class="reference external" href="https://orcid.org/0000-0001-5920-4751">Julien Emile-Geay</a></p>
+</section>
+<section id="goal">
+<h2>Goal<a class="headerlink" href="#goal" title="Link to this heading">#</a></h2>
+<p>The goal of this notebook is to showcase data querying on the <a class="reference external" href="https://linkedearth.graphdb.mint.isi.edu">LiPDGraph</a> to create the proxy database used by cfr for the data assimilation.</p>
+</section>
+<section id="pre-requisite">
+<h2>Pre-requisite<a class="headerlink" href="#pre-requisite" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>An understanding of the workflow presented in <span class="xref myst">assembling the database from the LiPDverse</span> notebook.</p></li>
+<li><p>An understanding of the <a class="reference external" href="https://lipd.net">Linked Paleo Data format (LiPD)</a></p></li>
+<li><p>A basic understanding of <a class="reference external" href="https://en.wikipedia.org/wiki/Dynamic_time_warping">Dynamic Time Warping</a></p></li>
+</ul>
+</section>
+<section id="reading-time">
+<h2>Reading time<a class="headerlink" href="#reading-time" title="Link to this heading">#</a></h2>
+<p>10 min</p>
+</section>
+<section id="data-description">
+<h2>Data Description<a class="headerlink" href="#data-description" title="Link to this heading">#</a></h2>
+<p>This notebook makes use of the <a class="reference external" href="https://linkedearth.graphdb.mint.isi.edu"><code class="docutils literal notranslate"><span class="pre">LiPDGraph</span></code> database</a>, a graph database that contains datasets from various working groups. For a list of these compilations, see <a class="reference external" href="https://lipdverse.org/project/">this page</a>.</p>
+<p>This notebook makes use of the <a class="reference external" href="https://lipdverse.org"><code class="docutils literal notranslate"><span class="pre">LiPDVerse</span></code> database</a>, which contains datasets from various working groups. For a list of these compilations, see <a class="reference external" href="https://lipdverse.org/project/">this page</a>.</p>
+<p>In particular, we will be using <a class="reference external" href="https://lipdverse.org/project/pages2k/">PAGES2kTemperature</a>, <a class="reference external" href="https://lipdverse.org/project/iso2k/">iso-2k</a>, and <a class="reference external" href="https://lipdverse.org/project/coralhydro2k/">CoralHydro2k</a> compilations for this demonstration.</p>
+<ul class="simple">
+<li><p>PAGES2k: PAGES2k Consortium., Emile-Geay, J., McKay, N. et al. A global multiproxy database for temperature reconstructions of the Common Era. Sci Data 4, 170088 (2017). doi:10.1038/sdata.2017.88</p></li>
+<li><p>iso2k: Konecky, B. L., McKay, N. P., Churakova (Sidorova), O. V., Comas-Bru, L., Dassié, E. P., DeLong, K. L., Falster, G. M., Fischer, M. J., Jones, M. D., Jonkers, L., Kaufman, D. S., Leduc, G., Managave, S. R., Martrat, B., Opel, T., Orsi, A. J., Partin, J. W., Sayani, H. R., Thomas, E. K., Thompson, D. M., Tyler, J. J., Abram, N. J., Atwood, A. R., Cartapanis, O., Conroy, J. L., Curran, M. A., Dee, S. G., Deininger, M., Divine, D. V., Kern, Z., Porter, T. J., Stevenson, S. L., von Gunten, L., and Iso2k Project Members: The Iso2k database: a global compilation of paleo-δ18O and δ2H records to aid understanding of Common Era climate, Earth Syst. Sci. Data, 12, 2261–2288, <a class="reference external" href="https://doi.org/10.5194/essd-12-2261-2020">https://doi.org/10.5194/essd-12-2261-2020</a>, 2020.</p></li>
+<li><p>CoralHydro2k:  Walter, R. M., H. R. Sayani, T. Felis, K. M. Cobb, N. J. Abram, A. K. Arzey, A. R. Atwood, L. D.
+Brenner, E. P. Dassi ́e, K. L. DeLong, B. Ellis, J. Emile-Geay, M. J. Fischer, N. F. Goodkin, J. A.
+Hargreaves, K. H. Kilbourne, H. Krawczyk, N. P. McKay, A. L. Moore, S. A. Murty, M. R. Ong,
+R. D. Ramos, E. V. Reed, D. Samanta, S. C. Sanchez, J. Zinke, and the PAGES CoralHydro2k Project Members (2023), The CoralHydro2k database: a global, actively curated compilation of coral δ18O and Sr / Ca proxy records of tropical ocean hydrology and temperature for the Common Era, Earth System Science Data, 15(5), 2081–2116, doi:10.5194/essd-15-2081-2023.</p></li>
+</ul>
+<div style="
+    padding: 10px; 
+    background-color: #e7f3fe; 
+    border-left: 6px solid #2196F3; 
+    margin-bottom: 15px;">
+  <strong>Note:</strong> Once the database is queried, the workflow is similar to the one presented in the assembling from the LiPDverse notebook. Therefore, this notebook only contains the querying workflow to the assembly of the database (and before the addition of the Palmyra record). 
+</div>
+<p>Let’s import the needed packages:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># General data manipulation libraries</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># To query the graph</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-retrieval">
+<h2>Data Retrieval<a class="headerlink" href="#data-retrieval" title="Link to this heading">#</a></h2>
+<p>Following <a class="reference external" href="http://linked.earth/pylipdTutorials/notebooks/L2_using_graphdb.html">this tutorial</a>, we perform a <a class="reference external" href="http://linked.earth/pylipdTutorials/graph.html#what-is-sparql">SPARQL query</a> on the <a class="reference external" href="https://linkedearth.graphdb.mint.isi.edu">LiPDGraph</a> to assemble the most current dataset.</p>
+<p>We point towards the <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> version to get the most up-to-date files. For reproduction purposes, you can change the URL to one of the versioned graphs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://linkedearth.graphdb.mint.isi.edu/repositories/LiPDVerse-dynamic&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="querying-the-pages2k-datasets">
+<h3>Querying the PAGES2k datasets<a class="headerlink" href="#querying-the-pages2k-datasets" title="Link to this heading">#</a></h3>
+<p>In the first query, we retrieve all the data in the PAGES2k compilation that were tagged to be used in the temperature analysis for this compilations along with relevant metadata.</p>
+<p>We will return the following information if present:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">datSetName</span></code>: The name of the dataset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compilationName</span></code>: The name of the compilation. This will be used for filtering later on</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">archiveType</span></code>: The type of archive on which the measurements were made</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Latitude</span></code>, <code class="docutils literal notranslate"><span class="pre">Longitude</span></code>, and <code class="docutils literal notranslate"><span class="pre">Elevation</span></code>: the geographical coordinates for the site</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paleoData_variableName</span></code>: The name of the paleo variable as originally reported by the investigator</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paleoData_standardName</span></code>: The standard name for the paleo variable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paleoData_values</span></code>: The values for the paleo variable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paleoData_units</span></code>: The units associated with the paleo variable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paleoData_proxy</span></code>: The proxy used to infer paleoenvironmental conditions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paleoData_proxyGeneral</span></code>: Generalized grouping for proxy</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paleoData_interpName</span></code>: The interpretation for the proxy record</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paleoData_interpRank</span></code>: The rank for the interpretation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paleoData_Seasonality</span></code>: The seasonality for the proxy</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TSiD</span></code>: The unique ID for the timeseries</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_variableName</span></code>: The name for the time variable. Since we are dealing with the common era, should be all “year”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timevar_standardName</span></code>: The standard name for the time variable. Since we are dealing with the common era, should be all “year”. So let’s use this as a filter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_values</span></code>: The values for the time axis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_units</span></code>: the units for the time axis.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot; PREFIX le: &lt;http://linked.earth/ontology#&gt;</span>
+<span class="s2">PREFIX wgs84: &lt;http://www.w3.org/2003/01/geo/wgs84_pos#&gt;</span>
+<span class="s2">PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+
+<span class="s2">SELECT ?dataSetName ?compilationName ?archiveType ?geo_meanLat ?geo_meanLon ?geo_meanElev </span>
+<span class="s2">    ?paleoData_variableName ?paleoData_standardName ?paleoData_values ?paleoData_units </span>
+<span class="s2">    ?paleoData_proxy ?paleoData_proxyGeneral ?paleoData_seasonality ?paleoData_interpName ?paleoData_interpRank </span>
+<span class="s2">    ?TSID ?time_variableName ?time_standardName ?time_values</span>
+<span class="s2">	?time_units where{</span>
+<span class="s2">    </span>
+<span class="s2">    ?ds a le:Dataset .</span>
+<span class="s2">    ?ds le:hasName ?dataSetName .</span>
+
+<span class="s2">    # Get the archive</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">            ?ds le:hasArchiveType ?archiveTypeObj .</span>
+<span class="s2">            ?archiveTypeObj rdfs:label ?archiveType .</span>
+<span class="s2">        }</span>
+<span class="s2">    </span>
+<span class="s2">    # Geographical information    </span>
+<span class="s2">    </span>
+<span class="s2">    ?ds le:hasLocation ?loc .</span>
+<span class="s2">        OPTIONAL{?loc wgs84:lat ?geo_meanLat .}</span>
+<span class="s2">        OPTIONAL{?loc wgs84:long ?geo_meanLon .}      </span>
+<span class="s2">        OPTIONAL{?loc wgs84:alt ?geo_meanElev .}</span>
+<span class="s2">    </span>
+<span class="s2">    # PaleoData</span>
+
+<span class="s2">    ?ds le:hasPaleoData ?data .</span>
+<span class="s2">    ?data le:hasMeasurementTable ?table .</span>
+<span class="s2">    ?table le:hasVariable ?var .</span>
+
+<span class="s2">    # Name</span>
+<span class="s2">    ?var le:hasName ?paleoData_variableName .</span>
+<span class="s2">    ?var le:hasStandardVariable ?variable_obj .</span>
+<span class="s2">    ?variable_obj rdfs:label ?paleoData_standardName .</span>
+<span class="s2">    </span>
+<span class="s2">    #Values</span>
+<span class="s2">    ?var le:hasValues ?paleoData_values .</span>
+
+<span class="s2">    #Seasonality</span>
+<span class="s2">    OPTIONAL{?var le:seasonality ?paleoData_seasonality} .</span>
+
+<span class="s2">    #Units</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasUnits ?paleoData_unitsObj .</span>
+<span class="s2">        ?paleoData_unitsObj rdfs:label ?paleoData_units .</span>
+<span class="s2">    }</span>
+
+<span class="s2">    #Proxy information</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasProxy ?paleoData_proxyObj .</span>
+<span class="s2">        ?paleoData_proxyObj rdfs:label ?paleoData_proxy .</span>
+<span class="s2">    }</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasProxyGeneral ?paleoData_proxyGeneralObj .</span>
+<span class="s2">        ?paleoData_proxyGeneralObj rdfs:label ?paleoData_proxyGeneral .</span>
+<span class="s2">    }</span>
+
+<span class="s2">    # Compilation</span>
+<span class="s2">    ?var le:partOfCompilation ?compilation . </span>
+<span class="s2">    ?compilation le:hasName ?compilationName .</span>
+<span class="s2">    FILTER (?compilationName = &quot;Pages2kTemperature&quot;).</span>
+<span class="s2">    ?var le:useInGlobalTemperatureAnalysis True .</span>
+
+<span class="s2">    # TSiD (should all have them)</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasVariableId ?TSID</span>
+<span class="s2">    } .</span>
+
+<span class="s2">    # Interpretation (might be an optional field)</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasInterpretation ?interp .</span>
+
+<span class="s2">        ?interp le:hasVariable ?interpvar .</span>
+<span class="s2">        BIND(REPLACE(STR(?interpvar), &quot;http://linked.earth/ontology/interpretation#&quot;, &quot;&quot;) AS ?interpretedVariable_Fallback)</span>
+<span class="s2">        OPTIONAL { ?interpvar rdfs:label ?interpretedVariable_Label } # Use a temporary variable for the label</span>
+<span class="s2">        BIND(COALESCE(?interpretedVariable_Label, ?interpretedVariable_Fallback) AS ?paleoData_interpName) # COALESCE into the final variable</span>
+<span class="s2">        }</span>
+<span class="s2">    </span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasInterpretation ?interp .</span>
+<span class="s2">        ?interp le:hasRank ?paleoData_interpRank .}</span>
+<span class="s2">    </span>
+<span class="s2">    </span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasInterpretation ?interp .</span>
+<span class="s2">    </span>
+<span class="s2">        ?interp le:hasSeasonality ?seasonalityURI .</span>
+<span class="s2">        BIND(REPLACE(STR(?seasonalityURI), &quot;http://linked.earth/ontology/interpretation#&quot;, &quot;&quot;) AS ?seasonality_Fallback)</span>
+<span class="s2">        OPTIONAL { ?seasonalityURI rdfs:label ?seasonalityLabel }</span>
+<span class="s2">        BIND(COALESCE(?seasonalityLabel, ?seasonality_Fallback) AS ?paleoData_seasonality)</span>
+<span class="s2">    }</span>
+
+<span class="s2">    #Time information</span>
+<span class="s2">    ?table le:hasVariable ?timevar .</span>
+<span class="s2">    ?timevar le:hasName ?time_variableName .</span>
+<span class="s2">    ?timevar le:hasStandardVariable ?timevar_obj .</span>
+<span class="s2">    ?timevar_obj rdfs:label ?time_standardName .</span>
+<span class="s2">    VALUES ?time_standardName {&quot;year&quot;} .</span>
+<span class="s2">    ?timevar le:hasValues ?time_values .</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?timevar le:hasUnits ?time_unitsObj .</span>
+<span class="s2">        ?time_unitsObj rdfs:label ?time_units .</span>
+<span class="s2">    }  </span>
+<span class="s2">}&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This query should look familiar and there is a good reason for it: this is the same query as the one we performed on the downloaded LiPD files from the LiPDverse in the <a class="reference internal" href="#01_c_db_assembly_LiPDverse.ipynb"><span class="xref myst">previous notebook</span></a>.</p>
+<p>That is because <a class="reference external" href="https://pylipd.readthedocs.io/en/latest/">PyLiPD</a> creates an internal database on your machine that is similar in structure (i.e., the use the same mapping, the <a class="reference external" href="https://linked.earth/ontology/">LinkedEarth Ontology</a>) to describe datasets.</p>
+<p>Let’s run our query:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">query1</span><span class="p">})</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+<span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="n">df1</span><span class="p">[</span><span class="s1">&#39;paleoData_values&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;paleoData_values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span> <span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">row</span><span class="p">)</span>
+<span class="n">df1</span><span class="p">[</span><span class="s1">&#39;time_values&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;time_values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span> <span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">row</span><span class="p">)</span>
+
+<span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dataSetName</th>
+      <th>compilationName</th>
+      <th>archiveType</th>
+      <th>geo_meanLat</th>
+      <th>geo_meanLon</th>
+      <th>geo_meanElev</th>
+      <th>paleoData_variableName</th>
+      <th>paleoData_standardName</th>
+      <th>paleoData_values</th>
+      <th>paleoData_units</th>
+      <th>paleoData_proxy</th>
+      <th>paleoData_proxyGeneral</th>
+      <th>paleoData_seasonality</th>
+      <th>paleoData_interpName</th>
+      <th>paleoData_interpRank</th>
+      <th>TSID</th>
+      <th>time_variableName</th>
+      <th>time_standardName</th>
+      <th>time_values</th>
+      <th>time_units</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ant-WDC05A.Steig.2013</td>
+      <td>Pages2kTemperature</td>
+      <td>Glacier ice</td>
+      <td>-79.46</td>
+      <td>-112.09</td>
+      <td>1806.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-33.32873325, -35.6732, -33.1574, -34.2854, -...</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>Annual</td>
+      <td>temperature</td>
+      <td>NaN</td>
+      <td>Ant_030</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[2005, 2004, 2003, 2002, 2001, 2000, 1999, 199...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Arc-Arjeplog.Bjorklund.2014</td>
+      <td>Pages2kTemperature</td>
+      <td>Wood</td>
+      <td>66.30</td>
+      <td>18.20</td>
+      <td>800.0</td>
+      <td>density</td>
+      <td>density</td>
+      <td>[-0.829089212152348, -0.733882889924006, -0.89...</td>
+      <td>NaN</td>
+      <td>maximum latewood density</td>
+      <td>dendrophysical</td>
+      <td>Jun-Aug</td>
+      <td>temperature</td>
+      <td>NaN</td>
+      <td>Arc_060</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1200, 1201, 1202, 1203, 1204, 1205, 1206, 120...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>NAm-SmithersSkiArea.Schweingruber.1996</td>
+      <td>Pages2kTemperature</td>
+      <td>Wood</td>
+      <td>54.90</td>
+      <td>-127.30</td>
+      <td>1200.0</td>
+      <td>MXD</td>
+      <td>MXD</td>
+      <td>[1.041, 1.062, 1.051, 0.997, 0.993, 0.959, 0.9...</td>
+      <td>NaN</td>
+      <td>maximum latewood density</td>
+      <td>dendrophysical</td>
+      <td>Summer</td>
+      <td>temperature</td>
+      <td>NaN</td>
+      <td>NAm_1120</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1680, 1681, 1682, 1683, 1684, 1685, 1686, 168...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Ocn-Mayotte.Zinke.2008</td>
+      <td>Pages2kTemperature</td>
+      <td>Coral</td>
+      <td>-12.65</td>
+      <td>45.10</td>
+      <td>-3.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-4.72, -4.95, -5.45, -5.157, -5.05, -5.065, -...</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>subannual</td>
+      <td>temperature</td>
+      <td>NaN</td>
+      <td>Ocean2kHR_002</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1993.62, 1993.46, 1993.29, 1993.12, 1992.96, ...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Ocn-LosRoques.Hetzinger.2008</td>
+      <td>Pages2kTemperature</td>
+      <td>Coral</td>
+      <td>11.77</td>
+      <td>-66.75</td>
+      <td>-2.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-3.8123, -3.73082, -3.74912, -3.6656, -3.6995...</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>subannual</td>
+      <td>temperature</td>
+      <td>NaN</td>
+      <td>Ocean2kHR_096</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1917.79, 1917.87, 1917.96, 1918.04, 1918.12, ...</td>
+      <td>yr AD</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 690 entries, 0 to 15328
+Data columns (total 20 columns):
+ #   Column                  Non-Null Count  Dtype  
+---  ------                  --------------  -----  
+ 0   dataSetName             690 non-null    object 
+ 1   compilationName         690 non-null    object 
+ 2   archiveType             690 non-null    object 
+ 3   geo_meanLat             690 non-null    float64
+ 4   geo_meanLon             690 non-null    float64
+ 5   geo_meanElev            683 non-null    float64
+ 6   paleoData_variableName  690 non-null    object 
+ 7   paleoData_standardName  690 non-null    object 
+ 8   paleoData_values        690 non-null    object 
+ 9   paleoData_units         282 non-null    object 
+ 10  paleoData_proxy         690 non-null    object 
+ 11  paleoData_proxyGeneral  464 non-null    object 
+ 12  paleoData_seasonality   690 non-null    object 
+ 13  paleoData_interpName    690 non-null    object 
+ 14  paleoData_interpRank    1 non-null      float64
+ 15  TSID                    690 non-null    object 
+ 16  time_variableName       690 non-null    object 
+ 17  time_standardName       690 non-null    object 
+ 18  time_values             690 non-null    object 
+ 19  time_units              690 non-null    object 
+dtypes: float64(4), object(16)
+memory usage: 113.2+ KB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="querying-the-iso2k-dataset">
+<h3>Querying the iso2k dataset<a class="headerlink" href="#querying-the-iso2k-dataset" title="Link to this heading">#</a></h3>
+<p>Let’s repeat our query for the datasets in the iso2k compilation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot; PREFIX le: &lt;http://linked.earth/ontology#&gt;</span>
+<span class="s2">PREFIX wgs84: &lt;http://www.w3.org/2003/01/geo/wgs84_pos#&gt;</span>
+<span class="s2">PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+
+<span class="s2">SELECT ?dataSetName ?compilationName ?archiveType ?geo_meanLat ?geo_meanLon ?geo_meanElev </span>
+<span class="s2">    ?paleoData_variableName ?paleoData_standardName ?paleoData_values ?paleoData_units </span>
+<span class="s2">    ?paleoData_proxy ?paleoData_proxyGeneral ?paleoData_seasonality ?paleoData_interpName ?paleoData_interpRank </span>
+<span class="s2">    ?TSID ?time_variableName ?time_standardName ?time_values</span>
+<span class="s2">	?time_units where{</span>
+<span class="s2">    </span>
+<span class="s2">    ?ds a le:Dataset .</span>
+<span class="s2">    ?ds le:hasName ?dataSetName .</span>
+
+<span class="s2">    # Get the archive</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">            ?ds le:hasArchiveType ?archiveTypeObj .</span>
+<span class="s2">            ?archiveTypeObj rdfs:label ?archiveType .</span>
+<span class="s2">        }</span>
+<span class="s2">    </span>
+<span class="s2">    # Geographical information    </span>
+<span class="s2">    </span>
+<span class="s2">    ?ds le:hasLocation ?loc .</span>
+<span class="s2">        OPTIONAL{?loc wgs84:lat ?geo_meanLat .}</span>
+<span class="s2">        OPTIONAL{?loc wgs84:long ?geo_meanLon .}      </span>
+<span class="s2">        OPTIONAL{?loc wgs84:alt ?geo_meanElev .}</span>
+<span class="s2">    </span>
+<span class="s2">    # PaleoData</span>
+
+<span class="s2">    ?ds le:hasPaleoData ?data .</span>
+<span class="s2">    ?data le:hasMeasurementTable ?table .</span>
+<span class="s2">    ?table le:hasVariable ?var .</span>
+
+<span class="s2">    # Name</span>
+<span class="s2">    ?var le:hasName ?paleoData_variableName .</span>
+<span class="s2">    ?var le:hasStandardVariable ?variable_obj .</span>
+<span class="s2">    ?variable_obj rdfs:label ?paleoData_standardName .</span>
+<span class="s2">    </span>
+<span class="s2">    #Values</span>
+<span class="s2">    ?var le:hasValues ?paleoData_values .</span>
+
+<span class="s2">    #Seasonality</span>
+<span class="s2">    OPTIONAL{?var le:seasonality ?paleoData_seasonality} .</span>
+
+<span class="s2">    #Units</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasUnits ?paleoData_unitsObj .</span>
+<span class="s2">        ?paleoData_unitsObj rdfs:label ?paleoData_units .</span>
+<span class="s2">    }</span>
+
+<span class="s2">    #Proxy information</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasProxy ?paleoData_proxyObj .</span>
+<span class="s2">        ?paleoData_proxyObj rdfs:label ?paleoData_proxy .</span>
+<span class="s2">    }</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasProxyGeneral ?paleoData_proxyGeneralObj .</span>
+<span class="s2">        ?paleoData_proxyGeneralObj rdfs:label ?paleoData_proxyGeneral .</span>
+<span class="s2">    }</span>
+
+<span class="s2">    # Compilation</span>
+<span class="s2">    ?var le:partOfCompilation ?compilation . </span>
+<span class="s2">    ?compilation le:hasName ?compilationName .</span>
+<span class="s2">    FILTER (?compilationName = &quot;iso2k&quot;).</span>
+<span class="s2">    ?var le:useInGlobalTemperatureAnalysis True .</span>
+
+<span class="s2">    # TSiD (should all have them)</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasVariableId ?TSID</span>
+<span class="s2">    } .</span>
+
+<span class="s2">    # Interpretation (might be an optional field)</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasInterpretation ?interp .</span>
+
+<span class="s2">        ?interp le:hasVariable ?interpvar .</span>
+<span class="s2">        BIND(REPLACE(STR(?interpvar), &quot;http://linked.earth/ontology/interpretation#&quot;, &quot;&quot;) AS ?interpretedVariable_Fallback)</span>
+<span class="s2">        OPTIONAL { ?interpvar rdfs:label ?interpretedVariable_Label } # Use a temporary variable for the label</span>
+<span class="s2">        BIND(COALESCE(?interpretedVariable_Label, ?interpretedVariable_Fallback) AS ?paleoData_interpName) # COALESCE into the final variable</span>
+<span class="s2">        }</span>
+<span class="s2">    </span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasInterpretation ?interp .</span>
+<span class="s2">        ?interp le:hasRank ?paleoData_interpRank .}</span>
+<span class="s2">    </span>
+<span class="s2">    </span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasInterpretation ?interp .</span>
+<span class="s2">    </span>
+<span class="s2">        ?interp le:hasSeasonality ?seasonalityURI .</span>
+<span class="s2">        BIND(REPLACE(STR(?seasonalityURI), &quot;http://linked.earth/ontology/interpretation#&quot;, &quot;&quot;) AS ?seasonality_Fallback)</span>
+<span class="s2">        OPTIONAL { ?seasonalityURI rdfs:label ?seasonalityLabel }</span>
+<span class="s2">        BIND(COALESCE(?seasonalityLabel, ?seasonality_Fallback) AS ?paleoData_seasonality)</span>
+<span class="s2">    }</span>
+
+<span class="s2">    #Time information</span>
+<span class="s2">    ?table le:hasVariable ?timevar .</span>
+<span class="s2">    ?timevar le:hasName ?time_variableName .</span>
+<span class="s2">    ?timevar le:hasStandardVariable ?timevar_obj .</span>
+<span class="s2">    ?timevar_obj rdfs:label ?time_standardName .</span>
+<span class="s2">    VALUES ?time_standardName {&quot;year&quot;} .</span>
+<span class="s2">    ?timevar le:hasValues ?time_values .</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?timevar le:hasUnits ?time_unitsObj .</span>
+<span class="s2">        ?time_unitsObj rdfs:label ?time_units .</span>
+<span class="s2">    }  </span>
+<span class="s2">}&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">query2</span><span class="p">})</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+<span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="n">df2</span><span class="p">[</span><span class="s1">&#39;paleoData_values&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;paleoData_values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span> <span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">row</span><span class="p">)</span>
+<span class="n">df2</span><span class="p">[</span><span class="s1">&#39;time_values&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;time_values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span> <span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">row</span><span class="p">)</span>
+
+<span class="n">df2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dataSetName</th>
+      <th>compilationName</th>
+      <th>archiveType</th>
+      <th>geo_meanLat</th>
+      <th>geo_meanLon</th>
+      <th>geo_meanElev</th>
+      <th>paleoData_variableName</th>
+      <th>paleoData_standardName</th>
+      <th>paleoData_values</th>
+      <th>paleoData_units</th>
+      <th>paleoData_proxy</th>
+      <th>paleoData_proxyGeneral</th>
+      <th>paleoData_seasonality</th>
+      <th>paleoData_interpName</th>
+      <th>paleoData_interpRank</th>
+      <th>TSID</th>
+      <th>time_variableName</th>
+      <th>time_standardName</th>
+      <th>time_values</th>
+      <th>time_units</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>LS16STCL</td>
+      <td>iso2k</td>
+      <td>Lake sediment</td>
+      <td>50.83</td>
+      <td>-116.39</td>
+      <td>1126.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-7.81, -5.91, -9.03, -5.35, -5.61, -5.98, -5....</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>Winter</td>
+      <td>NaN</td>
+      <td>5.0</td>
+      <td>LPD7dc5b9ba-dup-dup</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[2009.0, 2008.3, 2007.8, 2007.4, 2007.0, 2006....</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>LS16STCL</td>
+      <td>iso2k</td>
+      <td>Lake sediment</td>
+      <td>50.83</td>
+      <td>-116.39</td>
+      <td>1126.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-7.81, -5.91, -9.03, -5.35, -5.61, -5.98, -5....</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>LPD7dc5b9ba-dup-dup</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[2009.0, 2008.3, 2007.8, 2007.4, 2007.0, 2006....</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>LS16STCL</td>
+      <td>iso2k</td>
+      <td>Lake sediment</td>
+      <td>50.83</td>
+      <td>-116.39</td>
+      <td>1126.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-7.81, -5.91, -9.03, -5.35, -5.61, -5.98, -5....</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4.0</td>
+      <td>LPD7dc5b9ba-dup-dup</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[2009.0, 2008.3, 2007.8, 2007.4, 2007.0, 2006....</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>LS16STCL</td>
+      <td>iso2k</td>
+      <td>Lake sediment</td>
+      <td>50.83</td>
+      <td>-116.39</td>
+      <td>1126.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-7.81, -5.91, -9.03, -5.35, -5.61, -5.98, -5....</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>LPD7dc5b9ba-dup-dup</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[2009.0, 2008.3, 2007.8, 2007.4, 2007.0, 2006....</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>LS16STCL</td>
+      <td>iso2k</td>
+      <td>Lake sediment</td>
+      <td>50.83</td>
+      <td>-116.39</td>
+      <td>1126.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-7.81, -5.91, -9.03, -5.35, -5.61, -5.98, -5....</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>LPD7dc5b9ba-dup-dup</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[2009.0, 2008.3, 2007.8, 2007.4, 2007.0, 2006....</td>
+      <td>yr AD</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s have a look at the interpretation field:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;paleoData_interpName&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([nan, &#39;temperature&#39;, &#39;seawaterIsotope&#39;, &#39;precipitationIsotope&#39;,
+       &#39;hydrologicBalance&#39;, &#39;salinity&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And let’s only keep interpretation as temperature:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2_filt</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;paleoData_interpName&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;TSID&#39;</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="n">df2_filt</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dataSetName</th>
+      <th>compilationName</th>
+      <th>archiveType</th>
+      <th>geo_meanLat</th>
+      <th>geo_meanLon</th>
+      <th>geo_meanElev</th>
+      <th>paleoData_variableName</th>
+      <th>paleoData_standardName</th>
+      <th>paleoData_values</th>
+      <th>paleoData_units</th>
+      <th>paleoData_proxy</th>
+      <th>paleoData_proxyGeneral</th>
+      <th>paleoData_seasonality</th>
+      <th>paleoData_interpName</th>
+      <th>paleoData_interpRank</th>
+      <th>TSID</th>
+      <th>time_variableName</th>
+      <th>time_standardName</th>
+      <th>time_values</th>
+      <th>time_units</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>48</th>
+      <td>CO00URMA</td>
+      <td>iso2k</td>
+      <td>Coral</td>
+      <td>0.9330</td>
+      <td>173.0000</td>
+      <td>6.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-4.8011, -4.725, -4.6994, -4.86, -5.0886, -5....</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>subannual</td>
+      <td>temperature</td>
+      <td>1.0</td>
+      <td>Ocean2kHR_177_iso2k</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1994.5, 1994.33, 1994.17, 1994.0, 1993.83, 19...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>108</th>
+      <td>CO05KUBE</td>
+      <td>iso2k</td>
+      <td>Coral</td>
+      <td>32.4670</td>
+      <td>-64.7000</td>
+      <td>-12.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-4.15, -3.66, -3.69, -4.07, -3.95, -4.12, -3....</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>subannual</td>
+      <td>temperature</td>
+      <td>1.0</td>
+      <td>Ocean2kHR_105_iso2k</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1983.21, 1983.13, 1983.04, 1982.96, 1982.88, ...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>IC13THQU</td>
+      <td>iso2k</td>
+      <td>Glacier ice</td>
+      <td>-13.9333</td>
+      <td>-70.8333</td>
+      <td>5670.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-18.5905, -16.3244, -16.2324, -17.0112, -18.6...</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>Winter</td>
+      <td>temperature</td>
+      <td>4.0</td>
+      <td>SAm_035_iso2k</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[2009, 2008, 2007, 2006, 2005, 2004, 2003, 200...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>144</th>
+      <td>CO01TUNG</td>
+      <td>iso2k</td>
+      <td>Coral</td>
+      <td>-5.2170</td>
+      <td>145.8170</td>
+      <td>-3.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-4.875, -4.981, -5.166, -5.06, -4.942, -4.919...</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>subannual</td>
+      <td>temperature</td>
+      <td>3.0</td>
+      <td>Ocean2kHR_141_iso2k</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1993.042, 1992.792, 1992.542, 1992.292, 1992....</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>166</th>
+      <td>CO01TUNG</td>
+      <td>iso2k</td>
+      <td>Coral</td>
+      <td>-5.2170</td>
+      <td>145.8170</td>
+      <td>-3.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-4.827, -4.786, -4.693, -4.852, -4.991, -4.90...</td>
+      <td>permil</td>
+      <td>d18O</td>
+      <td>NaN</td>
+      <td>subannual</td>
+      <td>temperature</td>
+      <td>2.0</td>
+      <td>Ocean2kHR_140_iso2k</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1993.042, 1992.792, 1992.542, 1992.292, 1992....</td>
+      <td>yr AD</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2_filt</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 49 entries, 48 to 1202
+Data columns (total 20 columns):
+ #   Column                  Non-Null Count  Dtype  
+---  ------                  --------------  -----  
+ 0   dataSetName             49 non-null     object 
+ 1   compilationName         49 non-null     object 
+ 2   archiveType             49 non-null     object 
+ 3   geo_meanLat             49 non-null     float64
+ 4   geo_meanLon             49 non-null     float64
+ 5   geo_meanElev            49 non-null     float64
+ 6   paleoData_variableName  49 non-null     object 
+ 7   paleoData_standardName  49 non-null     object 
+ 8   paleoData_values        49 non-null     object 
+ 9   paleoData_units         49 non-null     object 
+ 10  paleoData_proxy         49 non-null     object 
+ 11  paleoData_proxyGeneral  0 non-null      float64
+ 12  paleoData_seasonality   37 non-null     object 
+ 13  paleoData_interpName    49 non-null     object 
+ 14  paleoData_interpRank    47 non-null     float64
+ 15  TSID                    49 non-null     object 
+ 16  time_variableName       49 non-null     object 
+ 17  time_standardName       49 non-null     object 
+ 18  time_values             49 non-null     object 
+ 19  time_units              49 non-null     object 
+dtypes: float64(5), object(15)
+memory usage: 8.0+ KB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="querying-the-coralhydro2k-database">
+<h3>Querying the CoralHydro2k database<a class="headerlink" href="#querying-the-coralhydro2k-database" title="Link to this heading">#</a></h3>
+<p>Let’s do the same query with CoralHydro2k:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query3</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot; PREFIX le: &lt;http://linked.earth/ontology#&gt;</span>
+<span class="s2">PREFIX wgs84: &lt;http://www.w3.org/2003/01/geo/wgs84_pos#&gt;</span>
+<span class="s2">PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+
+<span class="s2">SELECT ?dataSetName ?compilationName ?archiveType ?geo_meanLat ?geo_meanLon ?geo_meanElev </span>
+<span class="s2">    ?paleoData_variableName ?paleoData_standardName ?paleoData_values ?paleoData_units </span>
+<span class="s2">    ?paleoData_proxy ?paleoData_proxyGeneral ?paleoData_seasonality ?paleoData_interpName ?paleoData_interpRank </span>
+<span class="s2">    ?TSID ?time_variableName ?time_standardName ?time_values</span>
+<span class="s2">	?time_units where{</span>
+<span class="s2">    </span>
+<span class="s2">    ?ds a le:Dataset .</span>
+<span class="s2">    ?ds le:hasName ?dataSetName .</span>
+
+<span class="s2">    # Get the archive</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">            ?ds le:hasArchiveType ?archiveTypeObj .</span>
+<span class="s2">            ?archiveTypeObj rdfs:label ?archiveType .</span>
+<span class="s2">        }</span>
+<span class="s2">    </span>
+<span class="s2">    # Geographical information    </span>
+<span class="s2">    </span>
+<span class="s2">    ?ds le:hasLocation ?loc .</span>
+<span class="s2">        OPTIONAL{?loc wgs84:lat ?geo_meanLat .}</span>
+<span class="s2">        OPTIONAL{?loc wgs84:long ?geo_meanLon .}      </span>
+<span class="s2">        OPTIONAL{?loc wgs84:alt ?geo_meanElev .}</span>
+<span class="s2">    </span>
+<span class="s2">    # PaleoData</span>
+
+<span class="s2">    ?ds le:hasPaleoData ?data .</span>
+<span class="s2">    ?data le:hasMeasurementTable ?table .</span>
+<span class="s2">    ?table le:hasVariable ?var .</span>
+
+<span class="s2">    # Name</span>
+<span class="s2">    ?var le:hasName ?paleoData_variableName .</span>
+<span class="s2">    ?var le:hasStandardVariable ?variable_obj .</span>
+<span class="s2">    ?variable_obj rdfs:label ?paleoData_standardName .</span>
+<span class="s2">    </span>
+<span class="s2">    #Values</span>
+<span class="s2">    ?var le:hasValues ?paleoData_values .</span>
+
+<span class="s2">    #Seasonality</span>
+<span class="s2">    OPTIONAL{?var le:seasonality ?paleoData_seasonality} .</span>
+
+<span class="s2">    #Units</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasUnits ?paleoData_unitsObj .</span>
+<span class="s2">        ?paleoData_unitsObj rdfs:label ?paleoData_units .</span>
+<span class="s2">    }</span>
+
+<span class="s2">    #Proxy information</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasProxy ?paleoData_proxyObj .</span>
+<span class="s2">        ?paleoData_proxyObj rdfs:label ?paleoData_proxy .</span>
+<span class="s2">    }</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasProxyGeneral ?paleoData_proxyGeneralObj .</span>
+<span class="s2">        ?paleoData_proxyGeneralObj rdfs:label ?paleoData_proxyGeneral .</span>
+<span class="s2">    }</span>
+
+<span class="s2">    # Compilation</span>
+<span class="s2">    ?var le:partOfCompilation ?compilation . </span>
+<span class="s2">    ?compilation le:hasName ?compilationName .</span>
+<span class="s2">    FILTER (?compilationName = &quot;CoralHydro2k&quot;).</span>
+
+
+<span class="s2">    # TSiD (should all have them)</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasVariableId ?TSID</span>
+<span class="s2">    } .</span>
+
+<span class="s2">    # Interpretation (might be an optional field)</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasInterpretation ?interp .</span>
+
+<span class="s2">        ?interp le:hasVariable ?interpvar .</span>
+<span class="s2">        BIND(REPLACE(STR(?interpvar), &quot;http://linked.earth/ontology/interpretation#&quot;, &quot;&quot;) AS ?interpretedVariable_Fallback)</span>
+<span class="s2">        OPTIONAL { ?interpvar rdfs:label ?interpretedVariable_Label } # Use a temporary variable for the label</span>
+<span class="s2">        BIND(COALESCE(?interpretedVariable_Label, ?interpretedVariable_Fallback) AS ?paleoData_interpName) # COALESCE into the final variable</span>
+<span class="s2">        }</span>
+<span class="s2">    </span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasInterpretation ?interp .</span>
+<span class="s2">        ?interp le:hasRank ?paleoData_interpRank .}</span>
+<span class="s2">    </span>
+<span class="s2">    </span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?var le:hasInterpretation ?interp .</span>
+<span class="s2">    </span>
+<span class="s2">        ?interp le:hasSeasonality ?seasonalityURI .</span>
+<span class="s2">        BIND(REPLACE(STR(?seasonalityURI), &quot;http://linked.earth/ontology/interpretation#&quot;, &quot;&quot;) AS ?seasonality_Fallback)</span>
+<span class="s2">        OPTIONAL { ?seasonalityURI rdfs:label ?seasonalityLabel }</span>
+<span class="s2">        BIND(COALESCE(?seasonalityLabel, ?seasonality_Fallback) AS ?paleoData_seasonality)</span>
+<span class="s2">    }</span>
+
+<span class="s2">    #Time information</span>
+<span class="s2">    ?table le:hasVariable ?timevar .</span>
+<span class="s2">    ?timevar le:hasName ?time_variableName .</span>
+<span class="s2">    ?timevar le:hasStandardVariable ?timevar_obj .</span>
+<span class="s2">    ?timevar_obj rdfs:label ?time_standardName .</span>
+<span class="s2">    VALUES ?time_standardName {&quot;year&quot;} .</span>
+<span class="s2">    ?timevar le:hasValues ?time_values .</span>
+<span class="s2">    OPTIONAL{</span>
+<span class="s2">        ?timevar le:hasUnits ?time_unitsObj .</span>
+<span class="s2">        ?time_unitsObj rdfs:label ?time_units .</span>
+<span class="s2">    }  </span>
+<span class="s2">}&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">query3</span><span class="p">})</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+<span class="n">df3</span> <span class="o">=</span> <span class="n">df3</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="n">df3</span><span class="p">[</span><span class="s1">&#39;paleoData_values&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;paleoData_values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span> <span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">row</span><span class="p">)</span>
+<span class="n">df3</span><span class="p">[</span><span class="s1">&#39;time_values&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;time_values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span> <span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">row</span><span class="p">)</span>
+
+<span class="n">df3</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dataSetName</th>
+      <th>compilationName</th>
+      <th>archiveType</th>
+      <th>geo_meanLat</th>
+      <th>geo_meanLon</th>
+      <th>geo_meanElev</th>
+      <th>paleoData_variableName</th>
+      <th>paleoData_standardName</th>
+      <th>paleoData_values</th>
+      <th>paleoData_units</th>
+      <th>paleoData_proxy</th>
+      <th>paleoData_proxyGeneral</th>
+      <th>paleoData_seasonality</th>
+      <th>paleoData_interpName</th>
+      <th>paleoData_interpRank</th>
+      <th>TSID</th>
+      <th>time_variableName</th>
+      <th>time_standardName</th>
+      <th>time_values</th>
+      <th>time_units</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>KA17RYU01</td>
+      <td>CoralHydro2k</td>
+      <td>Coral</td>
+      <td>28.300</td>
+      <td>130.000</td>
+      <td>-3.5</td>
+      <td>SrCa</td>
+      <td>Sr/Ca</td>
+      <td>[8.802, 9.472, 8.825, 9.355, 8.952, 9.297, 8.8...</td>
+      <td>mmol/mol</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>KA17RYU01_SrCa</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1578.58, 1579.08, 1579.58, 1580.08, 1580.58, ...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CH18YOA02</td>
+      <td>CoralHydro2k</td>
+      <td>Coral</td>
+      <td>16.448</td>
+      <td>111.605</td>
+      <td>NaN</td>
+      <td>SrCa</td>
+      <td>Sr/Ca</td>
+      <td>[8.58, 8.683, 8.609, 8.37, 8.38, 8.417, 8.584,...</td>
+      <td>mmol/mol</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>CH18YOA02_SrCa</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1987.92, 1988.085, 1988.25, 1988.42, 1988.585...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>FL17DTO02</td>
+      <td>CoralHydro2k</td>
+      <td>Coral</td>
+      <td>24.699</td>
+      <td>-82.799</td>
+      <td>-3.0</td>
+      <td>Sr/Ca</td>
+      <td>Sr/Ca</td>
+      <td>[9.159, 9.257, 9.245, 9.166, 9.045, 9.013, 8.9...</td>
+      <td>mmol/mol</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>FL17DTO02_SrCa</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1837.04, 1837.13, 1837.21, 1837.29, 1837.38, ...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>BO14HTI01</td>
+      <td>CoralHydro2k</td>
+      <td>Coral</td>
+      <td>12.210</td>
+      <td>109.310</td>
+      <td>-3.6</td>
+      <td>Sr/Ca</td>
+      <td>Sr/Ca</td>
+      <td>[9.2, 9.17, 9.11, 9.02, 8.95, 8.99, 9.06, 9.1,...</td>
+      <td>mmol/mol</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>BO14HTI01_SrCa</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1600.04, 1600.12, 1600.2, 1600.28, 1600.37, 1...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>BO14HTI01</td>
+      <td>CoralHydro2k</td>
+      <td>Coral</td>
+      <td>12.210</td>
+      <td>109.310</td>
+      <td>-3.6</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-5.4206, -5.3477, -5.1354, -5.7119, -5.9058, ...</td>
+      <td>permil</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>BO14HTI01_d18O</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1977.37, 1977.45, 1977.54, 1977.62, 1977.7, 1...</td>
+      <td>yr AD</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s filter for Sr/Ca and d18O records:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3_filt</span> <span class="o">=</span> <span class="n">df3</span><span class="p">[</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;paleoData_variableName&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;SrCa&#39;</span><span class="p">,</span> <span class="s1">&#39;d18O&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;TSID&#39;</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="n">df3_filt</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dataSetName</th>
+      <th>compilationName</th>
+      <th>archiveType</th>
+      <th>geo_meanLat</th>
+      <th>geo_meanLon</th>
+      <th>geo_meanElev</th>
+      <th>paleoData_variableName</th>
+      <th>paleoData_standardName</th>
+      <th>paleoData_values</th>
+      <th>paleoData_units</th>
+      <th>paleoData_proxy</th>
+      <th>paleoData_proxyGeneral</th>
+      <th>paleoData_seasonality</th>
+      <th>paleoData_interpName</th>
+      <th>paleoData_interpRank</th>
+      <th>TSID</th>
+      <th>time_variableName</th>
+      <th>time_standardName</th>
+      <th>time_values</th>
+      <th>time_units</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>KA17RYU01</td>
+      <td>CoralHydro2k</td>
+      <td>Coral</td>
+      <td>28.300</td>
+      <td>130.000</td>
+      <td>-3.5</td>
+      <td>SrCa</td>
+      <td>Sr/Ca</td>
+      <td>[8.802, 9.472, 8.825, 9.355, 8.952, 9.297, 8.8...</td>
+      <td>mmol/mol</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>KA17RYU01_SrCa</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1578.58, 1579.08, 1579.58, 1580.08, 1580.58, ...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CH18YOA02</td>
+      <td>CoralHydro2k</td>
+      <td>Coral</td>
+      <td>16.448</td>
+      <td>111.605</td>
+      <td>NaN</td>
+      <td>SrCa</td>
+      <td>Sr/Ca</td>
+      <td>[8.58, 8.683, 8.609, 8.37, 8.38, 8.417, 8.584,...</td>
+      <td>mmol/mol</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>CH18YOA02_SrCa</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1987.92, 1988.085, 1988.25, 1988.42, 1988.585...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>BO14HTI01</td>
+      <td>CoralHydro2k</td>
+      <td>Coral</td>
+      <td>12.210</td>
+      <td>109.310</td>
+      <td>-3.6</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-5.4206, -5.3477, -5.1354, -5.7119, -5.9058, ...</td>
+      <td>permil</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>BO14HTI01_d18O</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1977.37, 1977.45, 1977.54, 1977.62, 1977.7, 1...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>AB20MEN01</td>
+      <td>CoralHydro2k</td>
+      <td>Coral</td>
+      <td>-3.180</td>
+      <td>100.517</td>
+      <td>-0.7</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-5.7529527, -5.7139629, -5.6917258, -5.546536...</td>
+      <td>permil</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>AB20MEN01_d18O</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1936.375, 1936.45833, 1936.54167, 1936.625, 1...</td>
+      <td>yr AD</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>DR99ABR01</td>
+      <td>CoralHydro2k</td>
+      <td>Coral</td>
+      <td>-22.100</td>
+      <td>153.000</td>
+      <td>-10.0</td>
+      <td>d18O</td>
+      <td>d18O</td>
+      <td>[-4.008, -3.977, -3.853, -4.113, -3.913, -4.01...</td>
+      <td>permil</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>DR99ABR01_d18O</td>
+      <td>year</td>
+      <td>year</td>
+      <td>[1638.3, 1639.3, 1640.3, 1641.3, 1642.3, 1643....</td>
+      <td>yr AD</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3_filt</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 203 entries, 0 to 780
+Data columns (total 20 columns):
+ #   Column                  Non-Null Count  Dtype  
+---  ------                  --------------  -----  
+ 0   dataSetName             203 non-null    object 
+ 1   compilationName         203 non-null    object 
+ 2   archiveType             203 non-null    object 
+ 3   geo_meanLat             203 non-null    float64
+ 4   geo_meanLon             203 non-null    float64
+ 5   geo_meanElev            166 non-null    float64
+ 6   paleoData_variableName  203 non-null    object 
+ 7   paleoData_standardName  203 non-null    object 
+ 8   paleoData_values        203 non-null    object 
+ 9   paleoData_units         203 non-null    object 
+ 10  paleoData_proxy         0 non-null      float64
+ 11  paleoData_proxyGeneral  0 non-null      float64
+ 12  paleoData_seasonality   0 non-null      float64
+ 13  paleoData_interpName    0 non-null      float64
+ 14  paleoData_interpRank    0 non-null      float64
+ 15  TSID                    203 non-null    object 
+ 16  time_variableName       203 non-null    object 
+ 17  time_standardName       203 non-null    object 
+ 18  time_values             203 non-null    object 
+ 19  time_units              203 non-null    object 
+dtypes: float64(8), object(12)
+memory usage: 33.3+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<p>The rest of the workflow is the same as the one presented in the previous notebook.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/data_assembly"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="C01_b_db_assembly_cfr_PAGES2k.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Database Assembly using cfr’s built in PAGES 2k database</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../data_assimilation/C02_a_DA_with_class_based_seasonality.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Run Data Assimilation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auhtors">Auhtors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-requisite">Pre-requisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-time">Reading time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-description">Data Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-retrieval">Data Retrieval</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-the-pages2k-datasets">Querying the PAGES2k datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-the-iso2k-dataset">Querying the iso2k dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-the-coralhydro2k-database">Querying the CoralHydro2k database</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tanaya Gondhalekar, Deborah Khider, Julien Emile-Geay
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
