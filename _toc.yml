@@ -5,7 +5,7 @@ parts:
     chapters:
       - file: notebooks/data_assembly/C01_a_db_assembly_Tardif2019_pickle
       - file: notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k
-      - file: notebooks/data_assembly/C01_c_db_assembly_LiPDVerse
+      - file: notebooks/data_assembly/C01_c_db_assembly_LiPDverse
       - file: notebooks/data_assembly/C01_d_db_assembly_LiPDGraph
   - caption: Data Assimilation
     chapters:

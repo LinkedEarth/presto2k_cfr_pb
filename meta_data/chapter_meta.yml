@@ -20,8 +20,8 @@ parts:
             - data wrangling
           packages:
             - cfr
-      - shortname: ProxyDatabase from LiPDVerse
-        filename: C01_c_db_assembly_LiPDVerse
+      - shortname: ProxyDatabase from LiPDverse
+        filename: C01_c_db_assembly_LiPDverse
         thumbnail: presto.png
         tags:
           domains:
