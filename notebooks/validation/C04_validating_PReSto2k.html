@@ -386,8 +386,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-reconstructions">Load the Reconstructions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmst-plots">GMST plots</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-plots">Difference Plots</a></li>
@@ -429,12 +427,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="validating-presto2k">
 <h1>Validating PReSto2k<a class="headerlink" href="#validating-presto2k" title="Link to this heading">#</a></h1>
-<section id="author">
-<h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://orcid.org/0009-0004-2440-3266">Tanaya Gondhalekar</a></p>
-</section>
-<section id="background">
-<h2>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h2>
 <p>For this notebook, we will be following a similar formula as the general <em>Validating a Reconstruction</em> Notebook. The goal is to evaluate the skill of the “PReSto2k” reconstructions, produced by adding records from <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/projects/iso2k/intro">Iso2k</a>, and <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/projects/coral-hydro/intro">CoralHydro2k</a> to the <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/Phase_2_Databases/Global_Temp/V2.0.0_2017">PAGES2k</a> compilation. Our baseline for the various comparisons are to <a class="reference external" href="https://doi.org/10.5194/cp-15-1251-2019">LMRv2.1</a>, which used only PAGES 2k records, specifically those from wood, coral and glacier ice archives with annual or better resolution.  Specifically, we seek to quantify improvements/changes made as part of the <a class="reference external" href="https://paleopresto.com/#:~:text=Presto%20is%20the%20Paleoclimate%20Reconstruction,our%20understanding%20of%20past%20climate."><em>PReSto</em></a>  project.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -467,7 +459,6 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
 <section id="load-the-reconstructions">
 <h2>Load the Reconstructions<a class="headerlink" href="#load-the-reconstructions" title="Link to this heading">#</a></h2>
 <p>Within PReSto2k, we have three separate reconstructions:</p>
@@ -537,16 +528,16 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 
-<span class="n">lmr_ens</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
+<span class="n">lmr_ens</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;LMRv2.1 (Offline w/ class based seasonality)&#39;</span><span class="p">)</span>
 
-<span class="n">res_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
+<span class="n">res_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PReSto2k w/ class-based seasonality&#39;</span><span class="p">)</span>
 
-<span class="n">res1_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
+<span class="n">res1_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PReSto2k w/ meta-seasonality&#39;</span><span class="p">)</span>
 
-<span class="n">res2_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span> 
+<span class="n">res2_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span> 
 <span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PReSto2k w/ meta-seasonality + interpolation&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -555,7 +546,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7e4c77c48394eb8c997fd332121b9b2cd09f0d5b61743be5de3b5a7e5eb93e8a.png" src="../../_images/7e4c77c48394eb8c997fd332121b9b2cd09f0d5b61743be5de3b5a7e5eb93e8a.png" />
+<img alt="../../_images/7a8fa98a1e05ac694c60e94c6b2e6a204f53c7b641c98ac145b517c1b515c7e5.png" src="../../_images/7a8fa98a1e05ac694c60e94c6b2e6a204f53c7b641c98ac145b517c1b515c7e5.png" />
 </div>
 </div>
 <p>Upon first glance, all four reconstructions look very similar. Though you can notice that in LMRv2.1 and PReSto2k with class-based seasonality, there are more significant dips in temperature around 550 CE. In contrast, in the metadata-based reconstructions, there appears to be greater cooling around 1800 CE, which is not captured by the first two. We can examine this segment further to see if it coincides with the Tambora Eruption (1815).</p>
@@ -3019,8 +3010,6 @@ counts (&gt;= threshold): [107, 63, 65]  | threshold: 0.2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-reconstructions">Load the Reconstructions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmst-plots">GMST plots</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-plots">Difference Plots</a></li>
