@@ -1,4 +1,4 @@
-# Assimilating PAGES 2k records with LinkedEarth tools
+# Assimilating PReSto2k records with LinkedEarth tools
 
 ## Authors
 

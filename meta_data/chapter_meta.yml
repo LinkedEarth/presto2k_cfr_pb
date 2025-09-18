@@ -1,25 +1,9 @@
-shortname: Assimilating PAGES2k with CFR
+shortname: Assimilating PReSto2k with CFR
 type: Paleobook
 thumbnail: consensus.png
 parts:
   - caption: Data Assembly
     chapters: 
-      - shortname: ProxyDatabase from Pickle
-        filename: C01_a_db_assembly_Tardif2019_pickle
-        thumbnail: PAGES2k_logo.png
-        tags:
-          domains:
-            - data wrangling
-          packages:
-            - cfr
-      - shortname: ProxyDatabase from cfr
-        filename: C01_b_db_assembly_cfr_PAGES2k
-        thumbnail: PAGES2k_logo.png
-        tags:
-          domains:
-            - data wrangling
-          packages:
-            - cfr
       - shortname: ProxyDatabase from LiPDverse
         filename: C01_c_db_assembly_LiPDverse
         thumbnail: presto.png
@@ -60,30 +44,20 @@ parts:
             - cfr
   - caption: Validation and Comparison
     chapters:
-      - shortname: Reconstruction Validation
-        filename: C03_a_validation
-        thumbnail: pens.png
-        tags:
-          domains:
-            - data viz
-            - data analysis
-          packages:
-            - cfr
-            - xarray
-            - matplotlib
-            - pens
-      - shortname: Proxy Database Comparison
-        filename: C03_b_comparison
-        thumbnail: proxydb_compare.png
-        tags:
-          domains:
-            - data viz
-            - data analysis
-          packages:
-            - cfr
-            - matplotlib
       - shortname: PReSto2k Validation
-        filename: C04_validating_PReSto2k
+        filename: C03_a_validating_PReSto2k
+        thumbnail: histograms.png
+        tags:
+          domains:
+            - data viz
+            - data analysis
+          packages:
+            - cfr
+            - matplotlib
+            - cartopy
+            - pens
+      - shortname: PReSto2k Comparison
+        filename: C03_b_proxydb_compare
         thumbnail: histograms.png
         tags:
           domains:

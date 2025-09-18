@@ -3,8 +3,6 @@ root: README.md
 parts:
   - caption: Data Assembly
     chapters:
-      - file: notebooks/data_assembly/C01_a_db_assembly_Tardif2019_pickle
-      - file: notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k
       - file: notebooks/data_assembly/C01_c_db_assembly_LiPDverse
       - file: notebooks/data_assembly/C01_d_db_assembly_LiPDGraph
   - caption: Data Assimilation
@@ -13,6 +11,5 @@ parts:
       - file: notebooks/data_assimilation/C02_b_DA_with_individual_seasonality
   - caption: Validation and Comparison
     chapters:
-      - file: notebooks/validation/C03_a_validation
-      - file: notebooks/validation/C03_b_comparison
-      - file: notebooks/validation/C04_validating_PReSto2k
+      - file: notebooks/validation/C03_a_validating_PReSto2k
+      - file: notebooks/validation/C03_b_proxydb_compare
