@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Assimilating PAGES 2k records with LinkedEarth tools &#8212; Assimilating PAGES 2k records with LinkedEarth tools</title>
+    <title>Updating LMRv2.1 with PReSto2k and LinkedEarth Tools &#8212; Assimilating PAGES 2k records with LinkedEarth tools</title>
   
   
   
@@ -172,7 +172,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Assimilating PAGES 2k records with LinkedEarth tools
+                    Updating LMRv2.1 with PReSto2k and LinkedEarth Tools
                 </a>
             </li>
         </ul>
@@ -183,8 +183,12 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Assimilation</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/data_assimilation/C02_a_DA_with_class_based_seasonality.html">Run Data Assimilation (Class-Based Seasonality)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/data_assimilation/C02_b_DA_with_individual_seasonality.html">Run Data Assimilation (Individual Seasonality)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Validation and Comparison</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/validation/C03_a_validating_PReSto2k.html">Validating PReSto2k</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/validation/C03_b_proxydb_compare.html">Proxy Database Comparisons</a></li>
 </ul>
 
     </div>
@@ -370,7 +374,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Assimilating PAGES 2k records with LinkedEarth tools</h1>
+    <h1>Updating LMRv2.1 with PReSto2k and LinkedEarth Tools</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -394,8 +398,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="assimilating-pages-2k-records-with-linkedearth-tools">
-<h1>Assimilating PAGES 2k records with LinkedEarth tools<a class="headerlink" href="#assimilating-pages-2k-records-with-linkedearth-tools" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="updating-lmrv2-1-with-presto2k-and-linkedearth-tools">
+<h1>Updating LMRv2.1 with PReSto2k and LinkedEarth Tools<a class="headerlink" href="#updating-lmrv2-1-with-presto2k-and-linkedearth-tools" title="Link to this heading">#</a></h1>
 <section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Link to this heading">#</a></h2>
 <p>By <a class="reference external" href="https://orcid.org/0009-0004-2440-3266">Tanaya Gondhalekar</a>, <a class="reference external" href="https://orcid.org/0000-0001-7501-8430">Deborah Khider</a> &amp; <a class="reference external" href="https://orcid.org/0000-0001-5920-4751">Julien Emile-Geay</a></p>
@@ -403,7 +407,8 @@ document.write(`
 <section id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h2>
 <p>Climate field reconstruction is the task of estimating variations in one or more climate fields (e.g. surface temperature or precipitation) from a collection of paleoclimate observations (a.k.a “proxies”). Many statistical methods are available for doing so; a relatively new and impactful one has been offline data assimilation, as implemented in the Last Millennium Reanalysis <a class="reference external" href="http://dx.doi.org/10.1002/2016JD024751">(Hakim et al., 2016)</a>. Part of <a class="reference external" href="https://paleopresto.com">PReSto</a>’s mission is to democratize these tools and enable a wider variety of actors, from seasoned researchers to students or citizen scientists, to generate their own reconstructions based on available code and data.</p>
-<p>The purpose of this repository is to showcase how to use tools from the <a class="reference external" href="http://linked.earth">LinkedEarth</a> Python research ecosystem (and broader scientific Python stack) to emulate and expand on the Last Millennium Reanalysis, version 2.1 <a class="reference external" href="https://doi.org/10.5194/cp-15-1251-2019">(Tardif et al., 2019)</a>, which used the offline data assimilation method of <a class="reference external" href="http://dx.doi.org/10.1002/2016JD024751">Hakim et al. (2016)</a> together with the <a class="reference external" href="http://dx.doi.org/10.1038/sdata.2017.88">PAGES 2k</a> database, version 2.0.0.</p>
+<p>The purpose of this repository is to showcase how to use tools from the <a class="reference external" href="http://linked.earth">LinkedEarth</a> Python research ecosystem (and broader scientific Python stack) to expand on the Last Millennium Reanalysis, version 2.1 <a class="reference external" href="https://doi.org/10.5194/cp-15-1251-2019">(Tardif et al., 2019)</a>, which used the offline data assimilation method of <a class="reference external" href="http://dx.doi.org/10.1002/2016JD024751">Hakim et al. (2016)</a> together with the PReSto2k Database (<a class="reference external" href="http://dx.doi.org/10.1038/sdata.2017.88">PAGES 2kv2.0</a>, <a class="reference external" href="https://lipdverse.org/project/iso2k/">Iso2k</a>, and <a class="reference external" href="https://lipdverse.org/project/coralhydro2k/">CoralHydro2k</a>)</p>
+<p>This PaleoBook is an update and continuation on <a class="reference external" href="https://linked.earth/reproduce_lmr_pb/README.html">Assimilating PAGES2k Records with LinkedEarth Tools</a>, and it may be referenced in the subsequent chapters.</p>
 </section>
 <section id="structure">
 <h2>Structure<a class="headerlink" href="#structure" title="Link to this heading">#</a></h2>
@@ -413,19 +418,16 @@ document.write(`
 <li><p>Data assimilation, which blends proxy observations with calibration data and the model prior</p></li>
 <li><p>Validation and comparison to other relevant reconstructions</p></li>
 </ol>
-<p>Here we offer four different ways to carry out Step 1, all of which result in a netCDF file that can be used in Step 2:</p>
+<p>Here we offer two different ways to carry out Step 1, all of which result in a netCDF file that can be used in Step 2:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_a_db_assembly_Tardif2019_pickle.html">Step 1a</a> illustrates how to get a proxy database derived from the two pickle files (metadata and data) provided by <a class="reference external" href="https://doi.org/10.5194/cp-15-1251-2019">(Tardif et al., 2019)</a>.</p></li>
-<li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k.html">Step 1b</a> illustrates how to get the proxy database directly from what is built into the <code class="docutils literal notranslate"><span class="pre">cfr</span></code> codebase.</p></li>
-<li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_c_db_assembly_cfr_PAGES2k.html">Step 1c</a> illustrates how to get the proxy database from the <a class="reference external" href="https://lipdverse.org">LiPDVerse</a>.</p></li>
-<li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k.html">Step 1d</a> illustrates how to get the proxy database from the <a class="reference external" href="http://linkedearth.graphdb.mint.isi.edu">LiPD Graph</a>.</p></li>
+<li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_c_db_assembly_cfr_PAGES2k.html">Step 1a</a> illustrates how to get the proxy database from the <a class="reference external" href="https://lipdverse.org">LiPDVerse</a>.</p></li>
+<li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assembly/C01_b_db_assembly_cfr_PAGES2k.html">Step 1b</a> illustrates how to get the proxy database from the <a class="reference external" href="http://linkedearth.graphdb.mint.isi.edu">LiPD Graph</a>.</p></li>
 </ul>
-<p>Step 2 can be common to all workflows, depending on the provided metadata. Though in this case, we have split it into two ways.</p>
+<p>Step 2 can be common to all workflows, depending on the provided metadata. In this PaleoBook we showcase one way, but another (using class-based seasonality) can be found in <a class="reference external" href="https://linked.earth/reproduce_lmr_pb/notebooks/data_assimilation/C02_a_DA_with_class_based_seasonality.html">here</a></p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assimilation/C02_a_DA_with_class_based_seasonality.html">Step 2a</a>  runs the DA with class-based seasonality. Only one instance is illustrated here (results obviously vary as a function of how Step 1 is implemented).</p></li>
-<li><p><a class="reference external" href="https://tanaya-g.github.io/pages2k_cfr_pb/notebooks/data_assimilation/C02_b_DA_with_individual_seasonality.html">Step 2b</a>  runs the DA with metadata-based seasonality. Once again, only one instance is illustrated in this notebook.</p></li>
+<li><p><a class="reference external" href="https://linked.earth/presto2k_cfr_pb/README.html#./C02_b_DA_with_individual_seasonality.html">Step 2</a>  runs the DA with metadata-based seasonality. Once again, only one instance is illustrated in this notebook.</p></li>
 </ul>
-<p>Step 3 focuses here on emulating LMR v2.1, with validating both our results from Step 2, as well as comparing different proxy databases from Step 1 for forensics purposes. The last part is specific to PReSto2k, which are the newer reconstructions based on updates to PAGES2k, and validates the three reconstructions run with this proxy data, using very similar methodologies to earlier chapters.</p>
+<p>Step 3 focuses on validating both our results from Step 2, as well as comparing different proxy databases from Step 1 for forensics purposes. This is specific to PReSto2k, which are the newer reconstructions based on updates to PAGES2k, and validates the three reconstructions run with this proxy data, using very similar methodologies to earlier chapters. Further experiments on this data will be shown in future chapters.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
