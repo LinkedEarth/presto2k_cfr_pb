@@ -7,7 +7,6 @@ parts:
       - file: notebooks/data_assembly/C01_d_db_assembly_LiPDGraph
   - caption: Data Assimilation
     chapters:
-      - file: notebooks/data_assimilation/C02_a_DA_with_class_based_seasonality
       - file: notebooks/data_assimilation/C02_b_DA_with_individual_seasonality
   - caption: Validation and Comparison
     chapters:

@@ -24,15 +24,6 @@ parts:
             - pylipd
   - caption: Data Assimilation
     chapters:
-      - shortname: Data Assimilation Class
-        filename: C02_a_DA_with_class_based_seasonality
-        thumbnail: gmst_quick.png
-        tags:
-          domains:
-            - data assimilation
-            - data analysis
-          packages:
-            - cfr
       - shortname: Data Assimilation Meta
         filename: C02_b_DA_with_individual_seasonality
         thumbnail: gmst_quick.png
