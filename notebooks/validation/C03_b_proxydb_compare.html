@@ -380,6 +380,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-interpolated-vs-non-interpolated-presto2k-databases">Comparing Interpolated vs. Non-Interpolated PReSto2k databases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-original-pages2k-with-presto2k">Comparing Original PAGES2k with PReSto2k</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-meta-vs-class-based-seasonality">Comparing Meta vs. Class Based Seasonality</a></li>
@@ -396,6 +397,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="proxy-database-comparisons">
 <h1>Proxy Database Comparisons<a class="headerlink" href="#proxy-database-comparisons" title="Link to this heading">#</a></h1>
+<section id="author">
+<h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://orcid.org/0009-0004-2440-3266">Tanaya Gondhalekar</a></p>
 <p>We want to see what the difference is in the proxy databases for those that were included before interpolation vs. after. If the reconstructions are drastically different, it is important to note what those differences can be attributed to.</p>
 <p>A similar comparison is done in <a class="reference external" href="https://linked.earth/reproduce_lmr_pb/notebooks/validation/C03_b_comparison.html"><em>Proxy Database Forensics</em></a>, with other proxy databases used in this exercise, namely the records used LMRv2.1 and the LMRv2.1 reproduction.</p>
 <div class="cell docutils container">
@@ -409,6 +413,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="comparing-interpolated-vs-non-interpolated-presto2k-databases">
 <h2>Comparing Interpolated vs. Non-Interpolated PReSto2k databases<a class="headerlink" href="#comparing-interpolated-vs-non-interpolated-presto2k-databases" title="Link to this heading">#</a></h2>
 <p>This comparison is straightforward. Since The only difference here should be the 27 records that got added in during the interpolation step, we can easily use <code class="docutils literal notranslate"><span class="pre">cfr</span></code>’s diff operator to directly subtract one from the other to identify the additional records. By doing this, if one reconstruction is significantly better or worse, we can more easily pinpoint which records are the cause.</p>
@@ -1254,6 +1259,7 @@ There are 60 in PAGES2k but NOT in PReSto2k
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-interpolated-vs-non-interpolated-presto2k-databases">Comparing Interpolated vs. Non-Interpolated PReSto2k databases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-original-pages2k-with-presto2k">Comparing Original PAGES2k with PReSto2k</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-meta-vs-class-based-seasonality">Comparing Meta vs. Class Based Seasonality</a></li>
