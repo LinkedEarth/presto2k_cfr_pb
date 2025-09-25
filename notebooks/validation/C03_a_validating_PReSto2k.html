@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Validating PReSto2k &#8212; Assimilating PAGES 2k records with LinkedEarth tools</title>
+    <title>Validating PReSto2k &#8212; Updating LMRv2.1 with PReSto2k data and LinkedEarth Tools</title>
   
   
   
@@ -151,7 +151,7 @@
   
   
   
-    <p class="title logo__title">Assimilating PAGES 2k records with LinkedEarth tools</p>
+    <p class="title logo__title">Updating LMRv2.1 with PReSto2k data and LinkedEarth Tools</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -242,7 +242,7 @@
       
       
       
-      <li><a href="https://github.com/tanaya-g/pages2k_cfr_pb" target="_blank"
+      <li><a href="https://github.com/LinkedEarth/presto2k_cfr_pb" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -259,7 +259,7 @@
       
       
       
-      <li><a href="https://github.com/tanaya-g/pages2k_cfr_pb/issues/new?title=Issue%20on%20page%20%2Fnotebooks/validation/C03_a_validating_PReSto2k.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/LinkedEarth/presto2k_cfr_pb/issues/new?title=Issue%20on%20page%20%2Fnotebooks/validation/C03_a_validating_PReSto2k.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -383,6 +383,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-reconstructions">Load the Reconstructions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmst-plots">GMST plots</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-plots">Difference Plots</a></li>
@@ -424,6 +425,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="validating-presto2k">
 <h1>Validating PReSto2k<a class="headerlink" href="#validating-presto2k" title="Link to this heading">#</a></h1>
+<section id="author">
+<h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://orcid.org/0009-0004-2440-3266">Tanaya Gondhalekar</a></p>
 <p>For this notebook, we will be following a similar formula as the <a class="reference external" href="https://linked.earth/reproduce_lmr_pb/notebooks/validation/C03_a_validation.html"><em>Validating a Reconstruction</em></a> Notebook. The goal is to evaluate the skill of the “PReSto2k” reconstructions, produced by adding records from <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/projects/iso2k/intro">Iso2k</a>, and <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/projects/coral-hydro/intro">CoralHydro2k</a> to the <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/Phase_2_Databases/Global_Temp/V2.0.0_2017">PAGES2k</a> compilation. Our baseline for the various comparisons are to <a class="reference external" href="https://doi.org/10.5194/cp-15-1251-2019">LMRv2.1</a>, which used only PAGES 2k records, specifically those from wood, coral and glacier ice archives with annual or better resolution.  Specifically, we seek to quantify improvements/changes made as part of the <a class="reference external" href="https://paleopresto.com/#:~:text=Presto%20is%20the%20Paleoclimate%20Reconstruction,our%20understanding%20of%20past%20climate."><em>PReSto</em></a>  project.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -456,6 +460,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="load-the-reconstructions">
 <h2>Load the Reconstructions<a class="headerlink" href="#load-the-reconstructions" title="Link to this heading">#</a></h2>
 <p>Within PReSto2k, we have three separate reconstructions:</p>
@@ -2947,6 +2952,7 @@ counts (&gt;= threshold): [107, 63, 65]  | threshold: 0.2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-reconstructions">Load the Reconstructions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmst-plots">GMST plots</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-plots">Difference Plots</a></li>
