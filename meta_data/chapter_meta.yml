@@ -1,12 +1,12 @@
 shortname: Assimilating PReSto2k with CFR
 type: Paleobook
-thumbnail: consensus.png
+thumbnail: presto_compare.png
 parts:
   - caption: Data Assembly
     chapters: 
       - shortname: ProxyDatabase from LiPDverse
         filename: C01_c_db_assembly_LiPDverse
-        thumbnail: presto.png
+        thumbnail: lipdverse.png
         tags:
           domains:
             - data wrangling
@@ -37,7 +37,7 @@ parts:
     chapters:
       - shortname: PReSto2k Validation
         filename: C03_a_validating_PReSto2k
-        thumbnail: histograms.png
+        thumbnail: tambora.png
         tags:
           domains:
             - data viz
