@@ -21,11 +21,11 @@ The reconstruction workflow is broken down into 3 major steps, some of which hav
 
 Here we offer two different ways to carry out Step 1, all of which result in a netCDF file that can be used in Step 2:
 
-- [Step 1a](https://linked.earth/presto2k_cfr_pb/notebooks/data_assembly/C01_c_db_assembly_LiPDverse.html) illustrates how to get the proxy database from the [LiPDVerse](https://lipdverse.org). 
-- [Step 1b](https://linked.earth/presto2k_cfr_pb/notebooks/data_assembly/C01_d_db_assembly_LiPDGraph.html) illustrates how to get the proxy database from the [LiPD Graph](http://linkedearth.graphdb.mint.isi.edu).
+- [Step 1a](notebooks/data_assembly/C01_c_db_assembly_LiPDverse.ipynb) illustrates how to get the proxy database from the [LiPDVerse](https://lipdverse.org). 
+- [Step 1b](notebooks/data_assembly/C01_d_db_assembly_LiPDGraph.ipynb) illustrates how to get the proxy database from the [LiPD Graph](http://linkedearth.graphdb.mint.isi.edu).
 
 Step 2 can be common to all workflows, depending on the provided metadata. In this PaleoBook we showcase one way, but another (using class-based seasonality) can be found in [here](https://linked.earth/reproduce_lmr_pb/notebooks/data_assimilation/C02_a_DA_with_class_based_seasonality.html
 )
-- [Step 2](https://linked.earth/presto2k_cfr_pb/notebooks/data_assimilation/C02_b_DA_with_individual_seasonality.html)  runs the DA with metadata-based seasonality. Once again, only one instance is illustrated in this notebook. 
+- [Step 2](notebooks/data_assimilation/C02_b_DA_with_individual_seasonality.ipynb)  runs the DA with metadata-based seasonality. Once again, only one instance is illustrated in this notebook. 
 
-Step 3 focuses on validating both our results from Step 2, as well as comparing different proxy databases from Step 1 for forensics purposes. This is specific to PReSto2k, which are the newer reconstructions based on updates to PAGES2k, and validates the three reconstructions run with this proxy data, using very similar methodologies to earlier chapters. Further experiments on this data will be shown in future chapters. 
+[Step 3](notebooks/validation/C03_a_validating_PReSto2k.ipynb) focuses on validating both our results from Step 2, as well as comparing different proxy databases from Step 1 for forensics purposes. This is specific to PReSto2k, which are the newer reconstructions based on updates to PAGES2k, and validates the three reconstructions run with this proxy data, using very similar methodologies to earlier chapters. Further experiments on this data will be shown in future chapters. 
