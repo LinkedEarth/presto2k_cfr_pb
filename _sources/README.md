@@ -24,7 +24,7 @@ Here we offer two different ways to carry out Step 1, all of which result in a n
 - [Step 1a](notebooks/data_assembly/C01_c_db_assembly_LiPDverse.ipynb) illustrates how to get the proxy database from the [LiPDVerse](https://lipdverse.org). 
 - [Step 1b](notebooks/data_assembly/C01_d_db_assembly_LiPDGraph.ipynb) illustrates how to get the proxy database from the [LiPD Graph](http://linkedearth.graphdb.mint.isi.edu).
 
-Step 2 can be common to all workflows, depending on the provided metadata. In this PaleoBook we showcase one way, but another (using class-based seasonality) can be found in [here](notebooks/data_assimilation/C02_a_DA_with_class_based_seasonality.ipynb
+Step 2 can be common to all workflows, depending on the provided metadata. In this PaleoBook we showcase one way, but another (using class-based seasonality) can be found in [here](https://linked.earth/reproduce_lmr_pb/notebooks/data_assimilation/C02_a_DA_with_class_based_seasonality.html
 )
 - [Step 2](notebooks/data_assimilation/C02_b_DA_with_individual_seasonality.ipynb)  runs the DA with metadata-based seasonality. Once again, only one instance is illustrated in this notebook. 
 
