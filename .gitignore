@@ -642,3 +642,4 @@ cython_debug/
 /_build/
 notebooks/data_assembly/.jupyter/desktop-workspaces/default-37a8.jupyterlab-workspace
 notebooks/data_assembly/.virtual_documents/C01_c_db_assembly_LiPDverse.ipynb
+notebooks/data_assembly/.virtual_documents/C01_d_db_assembly_LiPDGraph.ipynb
