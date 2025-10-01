@@ -640,3 +640,5 @@ cython_debug/
 # Android studio 3.1+ serialized cache file
 
 /_build/
+notebooks/data_assembly/.jupyter/desktop-workspaces/default-37a8.jupyterlab-workspace
+notebooks/data_assembly/.virtual_documents/C01_c_db_assembly_LiPDverse.ipynb
