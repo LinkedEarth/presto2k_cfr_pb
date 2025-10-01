@@ -171,7 +171,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../README.html">
-                    Updating LMRv2.1 with PReSto2k and LinkedEarth Tools
+                    PReSto2k: updating LMRv2.1 with LinkedEarth Tools
                 </a>
             </li>
         </ul>
@@ -399,7 +399,8 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaways-from-the-results-table">Takeaways from the Results Table</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-on-climate-fields">Validation on Climate Fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-on-climate-fields">Validation on Climate Fields</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-proxydatabase-for-overlay">Load ProxyDatabase for Overlay</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#best">BEST</a></li>
 </ul>
 </li>
@@ -2170,6 +2171,20 @@ LMRv2.1                        CE          0.735
 <section id="validation-on-climate-fields">
 <h3>Validation on Climate Fields<a class="headerlink" href="#validation-on-climate-fields" title="Link to this heading">#</a></h3>
 <p>Load in both BEST climate field and the original LMR air (2m air temperature) climate field as <code class="docutils literal notranslate"><span class="pre">cfr.ClimateField</span></code> objects and modify the format so that we can more easily compare it with our validation datasets using <em>cfr</em>. In this step, we will plot both the correlation (corr) and the coefficient of efficiency (CE) of 2m air temperature against the Berkeley Earth Surface Temperature (BEST) climate field, since that was what Tardif et al. (2019) used to validate their field reconstructions.</p>
+</section>
+<section id="load-proxydatabase-for-overlay">
+<h3>Load ProxyDatabase for Overlay<a class="headerlink" href="#load-proxydatabase-for-overlay" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class_og</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">ProxyDatabase</span><span class="p">()</span><span class="o">.</span><span class="n">load_nc</span><span class="p">(</span><span class="s1">&#39;./prev_data/lipd_pdb_pids.nc&#39;</span><span class="p">)</span>
+<span class="n">class_og</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./prev_data/pdb_w_seasonality_annual.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">meta_og</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="best">
 <h4>BEST<a class="headerlink" href="#best" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
@@ -2255,6 +2270,8 @@ LMRv2.1                        CE          0.735
     <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;PReSto2k class - LMRv2.1 (v. BEST) corr(recon, obs), mean=</span><span class="si">{</span><span class="n">diff</span><span class="o">.</span><span class="n">geo_mean</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
     <span class="n">plot_cbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span>
+    <span class="n">plot_proxydb</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">proxydb</span><span class="o">=</span><span class="n">class_og</span><span class="p">,</span>
     <span class="n">clim</span><span class="o">=</span><span class="n">clim</span>   <span class="c1"># enforce centered colormap</span>
 <span class="p">)</span>
 
@@ -2264,7 +2281,7 @@ LMRv2.1                        CE          0.735
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/fc251679cc33c98063af5134f168facd23f1b939e06004916665221a2a8f1891.png" src="../../_images/fc251679cc33c98063af5134f168facd23f1b939e06004916665221a2a8f1891.png" />
+<img alt="../../_images/f1b227fd0baf4e4941ae6a260d65365e2389ed5bfe64fda8a4ca6b8b022394ee.png" src="../../_images/f1b227fd0baf4e4941ae6a260d65365e2389ed5bfe64fda8a4ca6b8b022394ee.png" />
 </div>
 </div>
 <blockquote>
@@ -2286,6 +2303,8 @@ LMRv2.1                        CE          0.735
     <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;PReSto2k meta - class (v. BEST) corr(recon, obs), mean=</span><span class="si">{</span><span class="n">diff</span><span class="o">.</span><span class="n">geo_mean</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
     <span class="n">plot_cbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span>
+    <span class="n">plot_proxydb</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">proxydb</span><span class="o">=</span><span class="n">meta_og</span><span class="p">,</span>
     <span class="n">clim</span><span class="o">=</span><span class="n">clim</span>   <span class="c1"># enforce centered colormap</span>
 <span class="p">)</span>
 
@@ -2295,7 +2314,7 @@ LMRv2.1                        CE          0.735
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b72e5112a9bcb30969b99e79ec8fa740468ec19e48138653130385d6999ad68b.png" src="../../_images/b72e5112a9bcb30969b99e79ec8fa740468ec19e48138653130385d6999ad68b.png" />
+<img alt="../../_images/a6bd380f3e6d8bb9cf93cacc54ae1848f475a6098d2804d637a7603c10b3d155.png" src="../../_images/a6bd380f3e6d8bb9cf93cacc54ae1848f475a6098d2804d637a7603c10b3d155.png" />
 </div>
 </div>
 <blockquote>
@@ -2317,6 +2336,8 @@ LMRv2.1                        CE          0.735
     <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;PReSto2k class - LMRv2.1 (v. BEST) CE(recon, obs), mean=</span><span class="si">{</span><span class="n">diff</span><span class="o">.</span><span class="n">geo_mean</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
     <span class="n">plot_cbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span>
+    <span class="n">plot_proxydb</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">proxydb</span><span class="o">=</span><span class="n">class_og</span><span class="p">,</span>
     <span class="n">clim</span><span class="o">=</span><span class="n">clim</span>   <span class="c1"># enforce centered colormap</span>
 <span class="p">)</span>
 
@@ -2326,7 +2347,7 @@ LMRv2.1                        CE          0.735
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/46434a4efbc31d7301dc2a4062cbe0cb75ca948ef389f04527b4865b49a57897.png" src="../../_images/46434a4efbc31d7301dc2a4062cbe0cb75ca948ef389f04527b4865b49a57897.png" />
+<img alt="../../_images/13d97f249a5da2b44c002ee47f59766cd1daaec5a91201ed9cbae82ccb468a3e.png" src="../../_images/13d97f249a5da2b44c002ee47f59766cd1daaec5a91201ed9cbae82ccb468a3e.png" />
 </div>
 </div>
 <blockquote>
@@ -2354,6 +2375,8 @@ LMRv2.1                        CE          0.735
     <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;PReSto2k meta - class (v. BEST) CE(recon, obs), mean=</span><span class="si">{</span><span class="n">diff2</span><span class="o">.</span><span class="n">geo_mean</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
     <span class="n">plot_cbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span>
+    <span class="n">plot_proxydb</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">proxydb</span><span class="o">=</span><span class="n">meta_og</span><span class="p">,</span>
     <span class="n">clim</span><span class="o">=</span><span class="n">clim</span>
 <span class="p">)</span>
 
@@ -2363,7 +2386,7 @@ LMRv2.1                        CE          0.735
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/04a498514e152c9eed74dfaaab979dfba0219bbb21f0335dfb63bb29d30f488d.png" src="../../_images/04a498514e152c9eed74dfaaab979dfba0219bbb21f0335dfb63bb29d30f488d.png" />
+<img alt="../../_images/dbbf3feebfc12b1731606ac66d74c9aeb47e2578673297b44a386bab0f3c3b5b.png" src="../../_images/dbbf3feebfc12b1731606ac66d74c9aeb47e2578673297b44a386bab0f3c3b5b.png" />
 </div>
 </div>
 <blockquote>
@@ -2968,7 +2991,8 @@ counts (&gt;= threshold): [107, 63, 65]  | threshold: 0.2
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaways-from-the-results-table">Takeaways from the Results Table</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-on-climate-fields">Validation on Climate Fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-on-climate-fields">Validation on Climate Fields</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-proxydatabase-for-overlay">Load ProxyDatabase for Overlay</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#best">BEST</a></li>
 </ul>
 </li>
