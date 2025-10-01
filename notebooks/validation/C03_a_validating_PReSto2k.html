@@ -535,12 +535,15 @@ document.write(`
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;LMRv2.1 (Offline w/ class based seasonality)&#39;</span><span class="p">)</span>
 
 <span class="n">res_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature Anomaly (°C)&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PReSto2k w/ class-based seasonality&#39;</span><span class="p">)</span>
 
 <span class="n">res1_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature Anomaly (°C)&#39;</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PReSto2k w/ meta-seasonality&#39;</span><span class="p">)</span>
 
 <span class="n">res2_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span> 
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature Anomaly (°C)&#39;</span><span class="p">)</span>
 <span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PReSto2k w/ meta-seasonality + interpolation&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -549,7 +552,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7a8fa98a1e05ac694c60e94c6b2e6a204f53c7b641c98ac145b517c1b515c7e5.png" src="../../_images/7a8fa98a1e05ac694c60e94c6b2e6a204f53c7b641c98ac145b517c1b515c7e5.png" />
+<img alt="../../_images/2b6ae05f2f7485f909c30fcd79068533e53d871270e770f5e0f3e43ebbcbc7c2.png" src="../../_images/2b6ae05f2f7485f909c30fcd79068533e53d871270e770f5e0f3e43ebbcbc7c2.png" />
 </div>
 </div>
 <p>Upon first glance, all four reconstructions look very similar. Though you can notice that in LMRv2.1 and PReSto2k with class-based seasonality, there are more significant dips in temperature around 550 CE. In contrast, in the metadata-based reconstructions, there appears to be greater cooling around 1800 CE, which is not captured by the first two. We can examine this segment further to see if it coincides with the Tambora Eruption (1815).</p>
@@ -558,11 +561,15 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="n">res2_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">1750</span><span class="p">,</span> <span class="mi">1850</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;PReSto2k meta season w/ interp (1750–1850)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature Anomaly (°C)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8744743bda59b386df99e280f15602512e3b7cbd8a436d2acb8e12286c206b61.png" src="../../_images/8744743bda59b386df99e280f15602512e3b7cbd8a436d2acb8e12286c206b61.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Temperature Anomaly (°C)&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/93380139dfd0c6dadc992b8346733e4e6721666437ea35fa71c1b9af5dfc70f3.png" src="../../_images/93380139dfd0c6dadc992b8346733e4e6721666437ea35fa71c1b9af5dfc70f3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -653,7 +660,7 @@ document.write(`
 <span class="c1"># Bottom plot: Meta-based difference</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lmr_ens</span><span class="o">.</span><span class="n">time</span><span class="p">[:</span><span class="n">min_len</span><span class="p">],</span> <span class="n">difference3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta T$ (°C)&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Difference (°C)&#39;</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PReSto2k (class-based) - PReSto2k (Meta-based)&#39;</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
@@ -666,7 +673,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cc03dd5625cad4950b66b7de03a60d98fd98989f4f639c03c5b33beaf8150f40.png" src="../../_images/cc03dd5625cad4950b66b7de03a60d98fd98989f4f639c03c5b33beaf8150f40.png" />
+<img alt="../../_images/93782f5f47c85cec306c833aa9a85751c59864d90186774510e31c11423915b8.png" src="../../_images/93782f5f47c85cec306c833aa9a85751c59864d90186774510e31c11423915b8.png" />
 </div>
 </div>
 <p>Using these difference plots, it is immediately more noticeable that there are some spots (notably around 850 CE) where LMRv2.1 does not capture as great a cooling as either PReSto 2k reconstruction. It is also apparent that the differences between class-based and expert seasonality appear to be much smaller than compared to LMRv2.1. It is also clear that class-based seasonality predicts cooler overall temperature anomalies than compilation metadata (expert-based) before 1000 CE.</p>
