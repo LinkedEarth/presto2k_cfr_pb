@@ -429,7 +429,7 @@ document.write(`
 <section id="author">
 <h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://orcid.org/0009-0004-2440-3266">Tanaya Gondhalekar</a></p>
-<p>For this notebook, we will be following a similar formula as the <a class="reference external" href="https://linked.earth/reproduce_lmr_pb/notebooks/validation/C03_a_validation.html"><em>Validating a Reconstruction</em></a> Notebook. The goal is to evaluate the skill of the “PReSto2k” reconstructions, produced by adding records from <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/projects/iso2k/intro">Iso2k</a>, and <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/projects/coral-hydro/intro">CoralHydro2k</a> to the <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/Phase_2_Databases/Global_Temp/V2.0.0_2017">PAGES2k</a> compilation. Our baseline for the various comparisons are to <a class="reference external" href="https://doi.org/10.5194/cp-15-1251-2019">LMRv2.1</a>, which used only PAGES 2k records, specifically those from wood, coral and glacier ice archives with annual or better resolution.  Specifically, we seek to quantify improvements/changes made as part of the <a class="reference external" href="https://paleopresto.com/#:~:text=Presto%20is%20the%20Paleoclimate%20Reconstruction,our%20understanding%20of%20past%20climate."><em>PReSto</em></a>  project.</p>
+<p>For this notebook, we will be following a similar formula as the <a class="reference external" href="https://linked.earth/reproduce_lmr_pb/notebooks/validation/C03_a_validation.html"><em>Validating a Reconstruction</em></a> Notebook. The goal is to evaluate the skill of the “PReSto2k” reconstructions, produced by adding records from <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/projects/iso2k/intro">Iso2k</a> and <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/projects/coral-hydro/intro">CoralHydro2k</a> to the <a class="reference external" href="https://pastglobalchanges.org/science/wg/2k-network/Phase_2_Databases/Global_Temp/V2.0.0_2017">PAGES 2k 2.0.0</a> compilation. Our baseline for the various comparisons are to <a class="reference external" href="https://doi.org/10.5194/cp-15-1251-2019">LMRv2.1</a>, which used only PAGES 2k records, specifically those from wood, coral and glacier ice archives with annual or better resolution.  Specifically, we seek to relate improvements/changes made as part of the <a class="reference external" href="https://paleopresto.com/#:~:text=Presto%20is%20the%20Paleoclimate%20Reconstruction,our%20understanding%20of%20past%20climate."><em>PReSto</em></a>  project to this benchmark.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
@@ -518,7 +518,7 @@ document.write(`
 <span class="n">ens_values</span> <span class="o">=</span> <span class="n">lmr_off</span><span class="o">.</span><span class="n">gmt</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">ensemble</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MCrun&#39;</span><span class="p">,</span> <span class="s1">&#39;members&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>  <span class="c1"># Shape: (time, MCrun*members)</span>
 <span class="n">time_values</span> <span class="o">=</span> <span class="n">lmr_off</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">values</span>
 <span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="n">year</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">time_values</span><span class="p">])</span>
-<span class="n">lmr_ens</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">EnsTS</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">years</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ens_values</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Temperature Anomaly (°C)&#39;</span><span class="p">)</span>
+<span class="n">lmr_ens</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">EnsTS</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">years</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ens_values</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;GMSTa (°C)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -535,15 +535,15 @@ document.write(`
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;LMRv2.1 (Offline w/ class based seasonality)&#39;</span><span class="p">)</span>
 
 <span class="n">res_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature Anomaly (°C)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;GMSTa (°C)&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PReSto2k w/ class-based seasonality&#39;</span><span class="p">)</span>
 
 <span class="n">res1_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature Anomaly (°C)&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;GMSTa (°C)&#39;</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PReSto2k w/ meta-seasonality&#39;</span><span class="p">)</span>
 
 <span class="n">res2_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span> 
-<span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature Anomaly (°C)&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;GMSTa (°C)&#39;</span><span class="p">)</span>
 <span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PReSto2k w/ meta-seasonality + interpolation&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -552,7 +552,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2b6ae05f2f7485f909c30fcd79068533e53d871270e770f5e0f3e43ebbcbc7c2.png" src="../../_images/2b6ae05f2f7485f909c30fcd79068533e53d871270e770f5e0f3e43ebbcbc7c2.png" />
+<img alt="../../_images/84393cbf10338f7b5f65b495b3c41ce92beed7242a8a8a06a503fed7cb79ee1e.png" src="../../_images/84393cbf10338f7b5f65b495b3c41ce92beed7242a8a8a06a503fed7cb79ee1e.png" />
 </div>
 </div>
 <p>Upon first glance, all four reconstructions look very similar. Though you can notice that in LMRv2.1 and PReSto2k with class-based seasonality, there are more significant dips in temperature around 550 CE. In contrast, in the metadata-based reconstructions, there appears to be greater cooling around 1800 CE, which is not captured by the first two. We can examine this segment further to see if it coincides with the Tambora Eruption (1815).</p>
@@ -561,7 +561,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="n">res2_ts</span><span class="o">.</span><span class="n">plot_qs</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">1750</span><span class="p">,</span> <span class="mi">1850</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;PReSto2k meta season w/ interp (1750–1850)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature Anomaly (°C)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;GMSTa (°C)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2294,7 +2294,7 @@ LMRv2.1                        CE          0.735
 <blockquote>
 <div><p>KEY: Red – PReSto2k class better than LMRv2.1, Blue – LMRv2.1 better than PReSto2k class</p>
 </div></blockquote>
-<p>Here we see that the correlation between LMRv2.1 v Best and PReSto2k v BEST averages out at about 0.0. The stark difference here is that it appears PReSto2k class-based performs much better over Scandinavia and slightly worse in Antarctica.</p>
+<p>Here we see that the correlation between LMRv2.1 v Best and PReSto2k v BEST averages out at about 0.0. The stark difference here is that it appears PReSto2k class-based performs much better over Scandinavia and slightly worse in Antarctica and a large swath of the South Atlantic.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p2kclassvbest</span> <span class="o">=</span> <span class="n">get_cf_stat</span><span class="p">(</span><span class="n">target_wrapped</span><span class="p">,</span> <span class="s1">&#39;BEST&#39;</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">recons</span><span class="p">[</span><span class="s1">&#39;tas&#39;</span><span class="p">],</span> <span class="s1">&#39;PReSto2k class based&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;corr&#39;</span><span class="p">)</span>
@@ -2327,7 +2327,7 @@ LMRv2.1                        CE          0.735
 <blockquote>
 <div><p>KEY: Red – meta better than class, Blue – class better than meta</p>
 </div></blockquote>
-<p>While global average skill is similar, class-based seasonality outperforms meta-based across much of the Indian, Pacific and Southern Hemisphere oceans, whereas meta shows slight advantages in regions like the North Atlantic, Pacific Cold Tongue, and Antarctica. Overall  this analysis suggests that little is gained by using expert seasonality, as far as PReSto2k reconstructions go.</p>
+<p>While global average skill is similar, class-based seasonality outperforms metadata-based seasonality across much of the Indian, Pacific and Southern Hemisphere oceans, whereas expert-assessed seasonality shows slight advantages in regions like the North Atlantic, the Pacific Cold Tongue, and Antarctica. Overall  this analysis suggests that little is gained by using expert seasonality, as far as PReSto2k reconstructions go.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lmrvbest</span> <span class="o">=</span> <span class="n">get_cf_stat</span><span class="p">(</span><span class="n">target_wrapped</span><span class="p">,</span> <span class="s1">&#39;BEST&#39;</span><span class="p">,</span> <span class="n">target_lmr_mean</span><span class="p">,</span> <span class="s1">&#39;LMRv2.1&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;CE&#39;</span><span class="p">)</span>

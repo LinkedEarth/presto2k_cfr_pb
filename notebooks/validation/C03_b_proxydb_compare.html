@@ -383,7 +383,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-interpolated-vs-non-interpolated-presto2k-databases">Comparing Interpolated vs. Non-Interpolated PReSto2k databases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-original-pages2k-with-presto2k">Comparing Original PAGES2k with PReSto2k</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-meta-vs-class-based-seasonality">Comparing Meta vs. Class Based Seasonality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-metadata-vs-class-based-seasonality">Comparing Metadata vs. Class-Based Seasonality</a></li>
 </ul>
             </nav>
         </div>
@@ -401,7 +401,7 @@ document.write(`
 <h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://orcid.org/0009-0004-2440-3266">Tanaya Gondhalekar</a></p>
 <p>We want to see what the difference is in the proxy databases for those that were included before interpolation vs. after. If the reconstructions are drastically different, it is important to note what those differences can be attributed to.</p>
-<p>A similar comparison is done in <a class="reference external" href="https://linked.earth/reproduce_lmr_pb/notebooks/validation/C03_b_comparison.html"><em>Proxy Database Forensics</em></a>, with other proxy databases used in this exercise, namely the records used LMRv2.1 and the LMRv2.1 reproduction.</p>
+<p>This is similar to the analysis performed in <a class="reference external" href="https://linked.earth/reproduce_lmr_pb/notebooks/validation/C03_b_comparison.html"><em>Proxy Database Forensics</em></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cfr</span>
@@ -811,7 +811,7 @@ Missing from PReSto2k: 53
 </div>
 </div>
 </div>
-<p>Now that we have renamed the matching pids, we can use the Proxy Database subtraction that is built into <em>cfr</em>. This will give us two maps of which records are missing from both the PReSto2k database and the original PAGES2k database used to reproduce LMRv2.1.</p>
+<p>Now that we have renamed the matching pids, we can use the Proxy Database subtraction that is built into <em>cfr</em>. This will give us two maps of which records are missing from both the PReSto2k database and the original PAGES2k database used for LMRv2.1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the map of records not in PAGES2k </span>
@@ -975,6 +975,7 @@ Missing from PReSto2k: 53
 <img alt="../../_images/567533e23253d6e6e81a131884bc7ee32f98278033abf09d513f0aade80a8923.png" src="../../_images/567533e23253d6e6e81a131884bc7ee32f98278033abf09d513f0aade80a8923.png" />
 </div>
 </div>
+<p>We see that the PReSto 2k criteria dropped a number of records, notably 6 coral calcification records from Western Australia. Multiple coral sites also appear to have been common to both PAGES 2k and CoralHydro2k, and might simply have been swapped from PAGES 2k to PReSto 2k.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="o">.</span><span class="n">records</span><span class="p">)</span><span class="si">}</span><span class="s1"> in PReSto2k but NOT in PAGES2k&#39;</span><span class="p">)</span>
@@ -990,9 +991,10 @@ There are 60 in PAGES2k but NOT in PReSto2k
 </div>
 </div>
 </section>
-<section id="comparing-meta-vs-class-based-seasonality">
-<h2>Comparing Meta vs. Class Based Seasonality<a class="headerlink" href="#comparing-meta-vs-class-based-seasonality" title="Link to this heading">#</a></h2>
-<p>We will now run the same renaming/matching test on metadata based Proxy Database and class-based. One important difference of note is that we are doing this comparison before calibration. The calibration step automatically filters out a number of records that do not meet certain requirements (See: <em>Run Data Assimilation</em>). Due to this, the <code class="docutils literal notranslate"><span class="pre">class_og</span></code> proxy database is unfiltered from the get-go (initial LiPD dataframe) and not filtered by resolution unlike the metadata ones (both with and without interpolation). During calibration, ~120 records get removed and hence this current proxy database appears significantly larger than what is actually assimilated in the DA step.</p>
+<section id="comparing-metadata-vs-class-based-seasonality">
+<h2>Comparing Metadata vs. Class-Based Seasonality<a class="headerlink" href="#comparing-metadata-vs-class-based-seasonality" title="Link to this heading">#</a></h2>
+<p>We will now run the same renaming/matching test on metadata-based and class-based seasonality. The two differ because not every record in these databases contains seasonality metadata. In this analysis, we chose to drop the records that do not contain this information. A more permissive approach would be to assign class-based seasonality to those records instead of dropping them altogether.</p>
+<p>One important difference of note is that we are doing this comparison before calibration. The calibration step automatically filters out a number of records that do not meet certain requirements (See: <em>Run Data Assimilation</em>). Due to this, the <code class="docutils literal notranslate"><span class="pre">class_og</span></code> proxy database is unfiltered from the get-go (initial LiPD dataframe) and not filtered by resolution unlike the metadata ones (both with and without interpolation). During calibration, ~120 records get removed and hence this current proxy database appears significantly larger than what is actually assimilated in the DA step.</p>
 <p>In a further experiment, it will be helpful to compare just the records that were used post-calibration between the two Proxy Databases to get a full breakdown for why one reconstruction outperforms the other.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1175,30 +1177,30 @@ There are 60 in PAGES2k but NOT in PReSto2k
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;in PReSto2k class not meta&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;in PReSto2k class not metadata&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 1000x1000 with 1 Axes&gt;,
- {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;in PReSto2k class not meta&#39;}&gt;})
+ {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;in PReSto2k class not metadata&#39;}&gt;})
 </pre></div>
 </div>
-<img alt="../../_images/afdec196eb8b191f01af704f7c31e5e2653623418ac7a402989bd4cd8de5ac58.png" src="../../_images/afdec196eb8b191f01af704f7c31e5e2653623418ac7a402989bd4cd8de5ac58.png" />
+<img alt="../../_images/42e21943f2bb784d01967187d2b0b926ce63140dc16ec52c68db237e9cf7ee37.png" src="../../_images/42e21943f2bb784d01967187d2b0b926ce63140dc16ec52c68db237e9cf7ee37.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffo2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;in PReSto2k meta not class&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffo2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;in PReSto2k metadata, not class&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 1000x1000 with 1 Axes&gt;,
- {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;in PReSto2k meta not class&#39;}&gt;})
+ {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;in PReSto2k metadata, not class&#39;}&gt;})
 </pre></div>
 </div>
-<img alt="../../_images/3c9344fb14dfea469dccd0091c36b81c97c0644c5527b355973ca0b8d28cb6c8.png" src="../../_images/3c9344fb14dfea469dccd0091c36b81c97c0644c5527b355973ca0b8d28cb6c8.png" />
+<img alt="../../_images/ae5712b7e182931a814a2283d18c890f9bc1adcb657c9417f9ee1a32db16cb6c.png" src="../../_images/ae5712b7e182931a814a2283d18c890f9bc1adcb657c9417f9ee1a32db16cb6c.png" />
 </div>
 </div>
 </section>
@@ -1262,7 +1264,7 @@ There are 60 in PAGES2k but NOT in PReSto2k
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-interpolated-vs-non-interpolated-presto2k-databases">Comparing Interpolated vs. Non-Interpolated PReSto2k databases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-original-pages2k-with-presto2k">Comparing Original PAGES2k with PReSto2k</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-meta-vs-class-based-seasonality">Comparing Meta vs. Class Based Seasonality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-metadata-vs-class-based-seasonality">Comparing Metadata vs. Class-Based Seasonality</a></li>
 </ul>
   </nav></div>
 
