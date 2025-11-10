@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1013365075.svg)](https://doi.org/10.5281/zenodo.17575117)
+
 #  PReSto2k: updating LMRv2.1 with LinkedEarth Tools
 
 ## Authors
