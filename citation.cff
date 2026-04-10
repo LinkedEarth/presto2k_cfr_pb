@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "PReSto2k: updating LMRv2.1 with LinkedEarth Tools"
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Gondhalekar
+    given-names: Tanaya
+    orcid: https://orcid.org/0009-0004-2440-3266
+  - family-names: Khider
+    given-names: Deborah
+    orcid: https://orcid.org/0000-0001-7501-8430
+  - family-names: Emile-Geay
+    given-names: Julien
+    orcid: https://orcid.org/0000-0001-5920-4751
+date-released: 2025-10-10
+DOI: 10.5281/zenodo.17575117
+url: https://linked.earth/presto2k_cfr_pb/README.html 
