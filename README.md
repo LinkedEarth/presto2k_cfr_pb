@@ -1,4 +1,5 @@
-[![DOI](https://zenodo.org/badge/1013365075.svg)](https://doi.org/10.5281/zenodo.17575117)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19503008.svg)](https://doi.org/10.5281/zenodo.17575117)
+
 
 #  PReSto2k: updating LMRv2.1 with LinkedEarth Tools
 
