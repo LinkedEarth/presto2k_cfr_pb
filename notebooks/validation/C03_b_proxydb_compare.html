@@ -401,7 +401,7 @@ document.write(`
 <h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://orcid.org/0009-0004-2440-3266">Tanaya Gondhalekar</a></p>
 <p>We want to see what the difference is in the proxy databases for those that were included before interpolation vs. after. If the reconstructions are drastically different, it is important to note what those differences can be attributed to.</p>
-<p>This is similar to the analysis performed in <a class="reference external" href="https://linked.earth/reproduce_lmr_pb/notebooks/validation/C03_b_comparison.html"><em>Proxy Database Forensics</em></a>.</p>
+<p>This is similar to the analysis performed in <a class="reference external" href="https://linked.earth/reproduce_lmr_pb/notebooks/validation/C03_b_comparison.html"><em>Proxy Database Forensics</em></a>. The main difference will be that we focus on looking only at the records that were calibrated, or actually used within the reconstruction, and not the full unfiltered proxy database.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cfr</span>
@@ -416,17 +416,17 @@ document.write(`
 </section>
 <section id="comparing-interpolated-vs-non-interpolated-presto2k-databases">
 <h2>Comparing Interpolated vs. Non-Interpolated PReSto2k databases<a class="headerlink" href="#comparing-interpolated-vs-non-interpolated-presto2k-databases" title="Link to this heading">#</a></h2>
-<p>This comparison is straightforward. Since The only difference here should be the 27 records that got added in during the interpolation step, we can easily use <code class="docutils literal notranslate"><span class="pre">cfr</span></code>’s diff operator to directly subtract one from the other to identify the additional records. By doing this, if one reconstruction is significantly better or worse, we can more easily pinpoint which records are the cause.</p>
+<p>This comparison is straightforward. Since both the starting databases are the same, with the only difference being the 27 records that got added in during the interpolation step, we can easily use <code class="docutils literal notranslate"><span class="pre">cfr</span></code>’s diff operator to directly subtract one from the other to identify the additional records. By doing this, if one reconstruction is significantly better or worse, we can more easily pinpoint which records are the cause. Below we will perform this subtraction on the <em>calibrated</em> proxy databases, so the difference rather than 27 will be slightly less.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading from pickle...&quot;</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./prev_data/pdb_w_seasonality_annual.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../prev_data/calibrated/calibrated_pdb_w_seasonality_annual.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">no_interp</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="n">no_interp</span><span class="o">.</span><span class="n">nrec</span><span class="si">}</span><span class="s2"> records from pickle&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading from pickle...&quot;</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./prev_data/pdb_w_seasonality_annual_interp.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../prev_data/calibrated/calibrated_pdb_w_seasonality_annual_interp.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">with_interp</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="n">with_interp</span><span class="o">.</span><span class="n">nrec</span><span class="si">}</span><span class="s2"> records from pickle&quot;</span><span class="p">)</span>
@@ -435,9 +435,9 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading from pickle...
-Loaded 559 records from pickle
+Loaded 501 records from pickle
 Loading from pickle...
-Loaded 586 records from pickle
+Loaded 522 records from pickle
 </pre></div>
 </div>
 </div>
@@ -454,16 +454,16 @@ Loaded 586 records from pickle
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Interpolated Records&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Calibrated Interpolated Records&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 1000x1000 with 1 Axes&gt;,
- {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;Interpolated Records&#39;}&gt;})
+ {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;Calibrated Interpolated Records&#39;}&gt;})
 </pre></div>
 </div>
-<img alt="../../_images/7e9e7510aa615050ec5887274d141eb2f2ba52f4587816ec1e15fe4f7cd065ea.png" src="../../_images/7e9e7510aa615050ec5887274d141eb2f2ba52f4587816ec1e15fe4f7cd065ea.png" />
+<img alt="../../_images/305045d7a1f5abe88209a6c354a33c12e3b6035a91bd13dbedc84eee1f2c1e98.png" src="../../_images/305045d7a1f5abe88209a6c354a33c12e3b6035a91bd13dbedc84eee1f2c1e98.png" />
 </div>
 </div>
 </section>
@@ -471,17 +471,21 @@ Loaded 586 records from pickle
 <h2>Comparing Original PAGES2k with PReSto2k<a class="headerlink" href="#comparing-original-pages2k-with-presto2k" title="Link to this heading">#</a></h2>
 <p>This second comparison proves to be much more difficult. Here we compare the ProxyDatabase used in our reproduction of LMRv2.1.
 Because the PID naming convention between PAGES2k in <em>cfr</em> and those pulled from the LiPDGraph are slightly different, despite possibly containing a majority of the same actual records, we have to create additional filters to catch all the similarities and differences. To bypass this without overcomplicating the names, we will use the following function <code class="docutils literal notranslate"><span class="pre">match_pid_name</span></code> to check each record between two proxy databases and make sure their lat, lon, and values match without regarding the PID.</p>
+<p>Similarly to above, we will run the comparison on only the calibrated records, and instead of running this comparison on the meta-based seasonality proxy databases like before, we will do this comparison on class-based PReSto2k.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load original used in LMRv2.1 reproduction</span>
 
-<span class="n">pdb_og</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">ProxyDatabase</span><span class="p">()</span><span class="o">.</span><span class="n">load_nc</span><span class="p">(</span><span class="s1">&#39;./prev_data/pdb/filtered_ptype_res_cfr_pages2kv2.nc&#39;</span><span class="p">)</span>
+<span class="n">pdb_og</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">ProxyDatabase</span><span class="p">()</span><span class="o">.</span><span class="n">load_nc</span><span class="p">(</span><span class="s1">&#39;../prev_data/calibrated/calibrated_pages2k_pdb.nc&#39;</span><span class="p">)</span>
 <span class="n">pdb_og</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+<span class="n">pdb_presto</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">ProxyDatabase</span><span class="p">()</span><span class="o">.</span><span class="n">load_nc</span><span class="p">(</span><span class="s1">&#39;../prev_data/calibrated/presto_pdb_calib.nc&#39;</span><span class="p">)</span>
+<span class="n">pdb_presto</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>We want the preferred pid map to be the pdb1 in the function, so when we use <code class="docutils literal notranslate"><span class="pre">rename_pids</span></code>, the <code class="docutils literal notranslate"><span class="pre">no_interp_pdb</span></code> names will change to the ones in <code class="docutils literal notranslate"><span class="pre">pdb_og</span></code>, which match the orignal naming convention used by <em>cfr</em>.</p>
+<p>We want the preferred pid map to be the pdb1 in the function, so when we use <code class="docutils literal notranslate"><span class="pre">rename_pids</span></code>, the <code class="docutils literal notranslate"><span class="pre">pdb_presto</span></code> names will change to the ones in <code class="docutils literal notranslate"><span class="pre">pdb_og</span></code>, which match the orignal naming convention used by <em>cfr</em>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">rename_pids</span></code> matches proxy records between two proxy databases using a multi-pass strategy that becomes progressively more flexible. It starts with manual overrides for known pairs, then tries exact location + proxy type + value matches, followed by value-only matches, location-only matches with value prioritization, and finally pure value-based matches with stricter overlap requirements. The goal is to identify corresponding records across databases that may have different naming conventions but represent the same paleoclimate data, through as many steps as can filter out incorrect matches or duplicate matches.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -785,7 +789,7 @@ Because the PID naming convention between PAGES2k in <em>cfr</em> and those pull
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now test the  matching</span>
-<span class="n">matches</span><span class="p">,</span> <span class="n">conflicts</span><span class="p">,</span> <span class="n">missing</span> <span class="o">=</span> <span class="n">match_proxy_records</span><span class="p">(</span><span class="n">pdb_og</span><span class="p">,</span> <span class="n">no_interp_pdb</span><span class="p">)</span>
+<span class="n">matches</span><span class="p">,</span> <span class="n">conflicts</span><span class="p">,</span> <span class="n">missing</span> <span class="o">=</span> <span class="n">match_proxy_records</span><span class="p">(</span><span class="n">pdb_og</span><span class="p">,</span> <span class="n">pdb_presto</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== MATCHING RESULTS ===&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matches found: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -796,9 +800,9 @@ Because the PID naming convention between PAGES2k in <em>cfr</em> and those pull
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== MATCHING RESULTS ===
-Matches found: 505
+Matches found: 496
 Conflicts: 0
-Missing from PReSto2k: 53
+Missing from PReSto2k: 48
 </pre></div>
 </div>
 </div>
@@ -806,7 +810,7 @@ Missing from PReSto2k: 53
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Re-run the renaming with all matches</span>
-<span class="n">no_interp_fully_renamed</span> <span class="o">=</span> <span class="n">rename_pids</span><span class="p">(</span><span class="n">no_interp_pdb</span><span class="p">,</span> <span class="n">matches</span><span class="p">,</span> <span class="n">in_place</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">presto2k_fully_renamed</span> <span class="o">=</span> <span class="n">rename_pids</span><span class="p">(</span><span class="n">pdb_presto</span><span class="p">,</span> <span class="n">matches</span><span class="p">,</span> <span class="n">in_place</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -816,7 +820,7 @@ Missing from PReSto2k: 53
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the map of records not in PAGES2k </span>
 
-<span class="n">diff</span> <span class="o">=</span> <span class="n">no_interp_fully_renamed</span> <span class="o">-</span> <span class="n">pdb_og</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">presto2k_fully_renamed</span> <span class="o">-</span> <span class="n">pdb_og</span>
 
 <span class="n">diff</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;In PReSto2k not PAGES2k&#39;</span><span class="p">)</span>
 </pre></div>
@@ -824,17 +828,14 @@ Missing from PReSto2k: 53
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_167 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_024 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_086 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_076 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_099 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_158 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_035 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_177 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_080 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_171 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_069 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_170 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_088 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_116 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_130 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_131 failed.</span>
@@ -842,29 +843,21 @@ Missing from PReSto2k: 53
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_174 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_160 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_172 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_066 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_166 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_140 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_141 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_179 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_007 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_028 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_005 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_168 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_142 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_143 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_129 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_120 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_121 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_127 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_008 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_128 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_173 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_118 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_139 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_061 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_062 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_079 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_156 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_131 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_107 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_157 failed.</span>
@@ -879,7 +872,6 @@ Missing from PReSto2k: 53
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_119 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_097 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_159 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_024 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_169 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_071 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_072 failed.</span>
@@ -890,81 +882,79 @@ Missing from PReSto2k: 53
  {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;In PReSto2k not PAGES2k&#39;}&gt;})
 </pre></div>
 </div>
-<img alt="../../_images/5d48b3fbaba45a6d586e849e2e86857903ac5ac30caa834cbc0c24323c0f0682.png" src="../../_images/5d48b3fbaba45a6d586e849e2e86857903ac5ac30caa834cbc0c24323c0f0682.png" />
+<img alt="../../_images/16f7ab830252eccebf6bc51685a7613c0bbea7d60f61834d3acd1876facf7030.png" src="../../_images/16f7ab830252eccebf6bc51685a7613c0bbea7d60f61834d3acd1876facf7030.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the map of records not in PReSto2k</span>
 
-<span class="n">diff_other</span> <span class="o">=</span> <span class="n">pdb_og</span> <span class="o">-</span> <span class="n">no_interp_fully_renamed</span>
+<span class="n">diff_other</span> <span class="o">=</span> <span class="n">pdb_og</span> <span class="o">-</span> <span class="n">presto2k_fully_renamed</span>
 
 <span class="n">diff_other</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;In PAGES2k not PReSto2k&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SAm_020 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LPDb9285123 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_026 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SAm_0243 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_022 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_037 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3100 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SAm_032 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_002 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_031 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_017 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_016 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_058 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_031dD failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_031 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_018 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting O2kLR_183 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_050 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asia_235 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_014 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_023 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Africa_001 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocean2kHR_011_iso2k failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting KA17RYU01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting FL17DTO02_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting BO14HTI01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SA16CLA01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN03_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN02_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN06_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN07_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting ZI16ROD01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN05_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting HE13MIS01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting HE13MIS01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN04_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting RA20TAI01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting RA20TAI01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting TA18TAS01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI04FIJ01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI04FIJ01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting WU13TON01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting CH97BVB01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting HE18COC01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting HE18COC01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting MU18NPI01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting MU18NPI01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting ZI15IMP02_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting KI14PAR01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting KI14PAR01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting ZI15IMP01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting GO08BER01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting GO08BER01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting KI08PAR01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN09_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN08_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting XI17HAI01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting XI17HAI01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting DE14DTO01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting DE14DTO02_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI06FIJ01_d18O failed.</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SAm-LagunaChepical.deJong.2013_SAm_025 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SavusavuBayAB.Linsley.2006_Ocean2kHR_156 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-NorthIceland.Sicre.2011_O2kLR_045 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-RedSea.Felis.2000_Ocean2kHR_019 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant-WAIS-Divide.Severinghaus.2012_LPDb9285123 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur-Tallinn.Tarand.2001_Eur_026 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SAm-LagunaAculeo.vonGunten.2009_SAm_0243 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur-CentralEurope.Dobrovolny.2009_Eur_022 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur-SpannagelCave.Mangini.2005_Eur_001 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-AbrahamReef.Druffel.1999_Ocean2kHR_167 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SAm-LagunaEscondida.Elbert.2013_SAm_032 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur-LakeSilvaplana.Trachsel.2010_Eur_002 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc-HalletLake.McKay.2008_Arc_073 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Aus-DuckholeLake.Saunders.2013_LPD335d863f failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-Ifaty4.Zinke.2004_Ocean2kHR_020 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-TagusMudPatch.Abrantes.2005_LPDb7ba9166 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-PedroBankJamaica.Haase-Schramm.2003_Ocean2kHR_128 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SantaBarbaraBasin.Zhao.2000_O2kLR_183 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur-NorthernSpain.Martin-Chivelet.2011_Eur_008 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur-LakeSilvaplana.Larocque-Tobler.2010_Eur_003 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-EasternTropicalNorthAtlantic.Kuhnert.2011_LPD13a78f9b failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-MakassarStrait.Oppo.2009_O2kLR_148 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc-VoeringPlateau.Berner.2011_Arc_037 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-CariacoBasin.Black.2007_LPDe51d17e8 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi-KunashirIsland.Demezhko.2009_Asia_235 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SavusavuBay1F.Linsley.2006_Ocean2kHR_157 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SavusavuBay1F.Linsley.2006_Ocean2kHR_158 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-CapeGhir.McGregor.2007_LPD84ab67b9 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc-StoreggaSlide.Sejrup.2011_Arc_053 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur-Seebergsee.Larocque-Tobler.2012_Eur_007 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Afr-ColdAirCave.Sundqvist.2013_Africa_001 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SS03HAJA_Ocean2kHR_128_iso2k failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting CO97CHSY_Ocean2kHR_011_iso2k failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting KA17RYU01_KA17RYU01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting FL17DTO02_FL17DTO02_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting BO14HTI01_BO14HTI01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting ZI04IFR01_ZI04IFR01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SA16CLA01_SA16CLA01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting ZI16ROD01_ZI16ROD01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting RA20TAI01_RA20TAI01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting RA20TAI01_RA20TAI01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting TA18TAS01_TA18TAS01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI04FIJ01_LI04FIJ01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI04FIJ01_LI04FIJ01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting WU13TON01_WU13TON01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting CH97BVB01_CH97BVB01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting HE18COC01_HE18COC01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting HE18COC01_HE18COC01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting MU18NPI01_MU18NPI01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting MU18NPI01_MU18NPI01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting ZI15IMP02_ZI15IMP02_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting ZI15IMP01_ZI15IMP01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting GO08BER01_GO08BER01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting GO08BER01_GO08BER01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting KI08PAR01_KI08PAR01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting DE14DTO01_DE14DTO01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting FE18RUS01_FE18RUS01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting DE14DTO02_DE14DTO02_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI06FIJ01_LI06FIJ01_d18O failed.</span>
 
 </pre></div>
 </div>
@@ -972,10 +962,10 @@ Missing from PReSto2k: 53
  {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;In PAGES2k not PReSto2k&#39;}&gt;})
 </pre></div>
 </div>
-<img alt="../../_images/567533e23253d6e6e81a131884bc7ee32f98278033abf09d513f0aade80a8923.png" src="../../_images/567533e23253d6e6e81a131884bc7ee32f98278033abf09d513f0aade80a8923.png" />
+<img alt="../../_images/411c77e94ea0c93429afdb1e32b10fc43586269c251585456be10f70b088257d.png" src="../../_images/411c77e94ea0c93429afdb1e32b10fc43586269c251585456be10f70b088257d.png" />
 </div>
 </div>
-<p>We see that the PReSto 2k criteria dropped a number of records, notably 6 coral calcification records from Western Australia. Multiple coral sites also appear to have been common to both PAGES 2k and CoralHydro2k, and might simply have been swapped from PAGES 2k to PReSto 2k.</p>
+<p>We see that the PReSto 2k criteria dropped a number of records, notably 6 coral calcification records from Western Australia. Multiple coral sites also appear to have been common to both PAGES 2k and CoralHydro2k, and might simply have been swapped from PAGES 2k to PReSto 2k. In a later experiment, we plan to do a deep dive into the specific records that differ between the two reconstructions, as the 59 records in PReSto2k that are not present in the original PAGES2k show greater skill when used in the reconstruction when compard to instrumental datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="o">.</span><span class="n">records</span><span class="p">)</span><span class="si">}</span><span class="s1"> in PReSto2k but NOT in PAGES2k&#39;</span><span class="p">)</span>
@@ -984,8 +974,8 @@ Missing from PReSto2k: 53
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 61 in PReSto2k but NOT in PAGES2k
-There are 60 in PAGES2k but NOT in PReSto2k
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 59 in PReSto2k but NOT in PAGES2k
+There are 48 in PAGES2k but NOT in PReSto2k
 </pre></div>
 </div>
 </div>
@@ -994,19 +984,9 @@ There are 60 in PAGES2k but NOT in PReSto2k
 <section id="comparing-metadata-vs-class-based-seasonality">
 <h2>Comparing Metadata vs. Class-Based Seasonality<a class="headerlink" href="#comparing-metadata-vs-class-based-seasonality" title="Link to this heading">#</a></h2>
 <p>We will now run the same renaming/matching test on metadata-based and class-based seasonality. The two differ because not every record in these databases contains seasonality metadata. In this analysis, we chose to drop the records that do not contain this information. A more permissive approach would be to assign class-based seasonality to those records instead of dropping them altogether.</p>
-<p>One important difference of note is that we are doing this comparison before calibration. The calibration step automatically filters out a number of records that do not meet certain requirements (See: <em>Run Data Assimilation</em>). Due to this, the <code class="docutils literal notranslate"><span class="pre">class_og</span></code> proxy database is unfiltered from the get-go (initial LiPD dataframe) and not filtered by resolution unlike the metadata ones (both with and without interpolation). During calibration, ~120 records get removed and hence this current proxy database appears significantly larger than what is actually assimilated in the DA step.</p>
-<p>In a further experiment, it will be helpful to compare just the records that were used post-calibration between the two Proxy Databases to get a full breakdown for why one reconstruction outperforms the other.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class_og</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">ProxyDatabase</span><span class="p">()</span><span class="o">.</span><span class="n">load_nc</span><span class="p">(</span><span class="s1">&#39;./prev_data/lipd_pdb_pids.nc&#39;</span><span class="p">)</span>
-<span class="n">class_og</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matches_2</span><span class="p">,</span> <span class="n">conflicts_2</span><span class="p">,</span> <span class="n">missing_2</span> <span class="o">=</span> <span class="n">match_proxy_records</span><span class="p">(</span><span class="n">class_og</span><span class="p">,</span> <span class="n">no_interp_pdb</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matches_2</span><span class="p">,</span> <span class="n">conflicts_2</span><span class="p">,</span> <span class="n">missing_2</span> <span class="o">=</span> <span class="n">match_proxy_records</span><span class="p">(</span><span class="n">pdb_presto</span><span class="p">,</span> <span class="n">no_interp_pdb</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1021,155 +1001,70 @@ There are 60 in PAGES2k but NOT in PReSto2k
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffo</span> <span class="o">=</span> <span class="n">class_og</span> <span class="o">-</span> <span class="n">no_interp_fully_renamed_2</span>
-<span class="n">diffo2</span> <span class="o">=</span> <span class="n">no_interp_fully_renamed_2</span><span class="o">-</span><span class="n">class_og</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffo</span> <span class="o">=</span> <span class="n">pdb_presto</span> <span class="o">-</span> <span class="n">no_interp_fully_renamed_2</span>
+<span class="n">diffo2</span> <span class="o">=</span> <span class="n">no_interp_fully_renamed_2</span><span class="o">-</span><span class="n">pdb_presto</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocean2kHR_095 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_031dD failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocean2kHR_157 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocean2kHR_158 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting FL17DTO02_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN03_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN07_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI04FIJ01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI06FIJ01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_066 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_324 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_156 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_010 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_051 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_045 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_040 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-EmeraldBasin.Keigwin.2007_LPD68872399 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant-DSS.DahlJensen.1999_LPD7abab671 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3810 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_194 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_193 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-MD98-2160.Newton.2010_LPD7e8e8eaa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-WestSpitzberg.Bonnet.2010_LPD995c6f3c failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_074 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3804 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-FiskBasin.Richey.2009_LPD57d40973 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_024 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_230 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_044 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-AlboranSea436B.Nieto-Moreno.2013_LPD0e0867fe failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_187 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_317 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_001 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_305 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-CH07-98-MC-22.Saenger.2011_LPDa03ec713 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3816 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-FeniDrift.Richter.2009_LPD47182517 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-WesternSvalbard.Spielhagen.2011_O2kLR_007 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3851 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_009 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-MD98-2177.Newton.2010_LPD30c5b95c failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-ODP984.Came.2007_LPDbd07f717 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_247 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_009 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_321 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_025 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-GulfofGuinea.Weldeab.2007_LPD9cc3baf6-dup failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_030 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_073 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SouthChinaSea.Zhao.2006_LPD44b374e7 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_082 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_328 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-JacafFjord.Sepulveda.2009_LPD6315f935 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_320 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_114 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3801 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi-SihailongwaLake.Chu.2011_LPDdc74a376 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3870 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_013 failed.</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_031dD failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_031 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-NorthIceland.Sicre.2011_O2kLR_045 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-Rarotonga_d18O2R.Linsley.2006_Ocean2kHR_147 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SavusavuBayFiji.Bagnato.2005_Ocean2kHR_142 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-RedSea.Felis.2000_Ocean2kHR_019 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-DoubleReef.Asami.2005_Ocean2kHR_166 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant-MES.Rhodes.2012_Ant_033 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-HoutmanAbrolhosHAB10A.Zinke.2014_Ocean2kHR_026 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant-US-ITASE-2000-1.Steig.2013_Ant_037 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur-SpannagelCave.Mangini.2005_Eur_001 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-AbrahamReef.Druffel.1999_Ocean2kHR_167 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-Mafia.Damassa.2006_Ocean2kHR_007 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc-HalletLake.McKay.2008_Arc_073 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Aus-DuckholeLake.Saunders.2013_LPD335d863f failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_039 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_150 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_042 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-PigmyBasin.Richey.2015_LPD572f7cc3 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-MD95-2011.Grimalt.2002_O2kLR_105 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_125 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Afr-LakeMalawi.Powers.2011_Malawi05 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-MinorcaContourite.Moreno.2012_LPD10e9f8f7 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Afr_004 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3853 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_327 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-CariacoBasin.Lea.2003_LPDcda1c277 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_047 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_326 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Afr-P178-15P.Tierney.2015_LPD53e179ad failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Afr-P178-15P.Tierney.2015_LPD81e53153 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_101 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-WesternAntarcticPeninsula.Shevenell.2011_LPD2a3997a7 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3798 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_329 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-RarotongaSrCa2r.Linsley.2006_Ocean2kHR_149 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-Ifaty4.Zinke.2004_Ocean2kHR_020 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-AmedeeIsland.DeLong.2012_Ocean2kHR_134 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-DryTortugas.DeLong.2014_Ocean2kHR_123 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-Mahe.Charles.1997_Ocean2kHR_011 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-TagusMudPatch.Abrantes.2005_LPDb7ba9166 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant-WDC06A.Steig.2013_Ant_031dD failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_319 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3807 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_165 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_056 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_129 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_128 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SouthAtlanticWestAfrica.Leduc.2010_LPDa77273bb failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-DryTortugas.Lund.2006_LPDf7bace53 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_325 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_036 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-GreatBahamaBank.Lund.2006_LPD7c7e19c5 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_008 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3867 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3868 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-WEqPacific.Stott.2007_O2kLR_131 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SWCoastOfIndia.Saraswat.2013_O2kLR_118 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_052 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant-WDC06A.Steig.2013_Ant_031 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-PedroBankJamaica.Haase-Schramm.2003_Ocean2kHR_128 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SantaBarbaraBasin.Zhao.2000_O2kLR_183 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur-NorthernSpain.Martin-Chivelet.2011_Eur_008 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-EasternTropicalNorthAtlantic.Kuhnert.2011_LPD13a78f9b failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_126 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_127 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_175 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_146 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_195 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-Philippines.Stott.2007_LPD1a0245b7 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_148 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_012 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_037 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-GreatBahamaBank.Richter.2006_LPDefb3d2b0 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_041 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_078 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-RAPiD-12-1K.Thornalley.2009_LPDb17a5e9e-dup failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_043 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Eur_010 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_049 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting NAm_3819 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_335 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant-US-ITASE-2002-4.Steig.2013_Ant_050 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-MakassarStrait.Oppo.2009_O2kLR_148 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc-VoeringPlateau.Berner.2011_Arc_037 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-CariacoBasin.Black.2007_LPDe51d17e8 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-AlboranSea384B.Nieto-Moreno.2013_LPDasan2012 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ant_035 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_157 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_158 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SavusavuBay1F.Linsley.2006_Ocean2kHR_157 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SavusavuBay1F.Linsley.2006_Ocean2kHR_158 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-Vanuatu.Gorman.2012_Ocean2kHR_154 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-CapeGhir.McGregor.2007_LPD84ab67b9 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_079 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_053 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_017 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_048 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc_045 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn_135 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Asi_318 failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting CO00DRBE_Ocean2kHR_125_iso2k failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Arc-StoreggaSlide.Sejrup.2011_Arc_053 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-SecasIslandPanama.Linsley.1994_Ocean2kHR_138 failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Ocn-NorthEastBreakers_Bermuda.Kuhnert.2005_Ocean2kHR_105 failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SS03HAJA_Ocean2kHR_128_iso2k failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting CO97CHSY_Ocean2kHR_011_iso2k failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting KA17RYU01_KA17RYU01_SrCa failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting FL17DTO02_FL17DTO02_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN03_AB20MEN03_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting AB20MEN07_AB20MEN07_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting DR00NBB01_DR00NBB01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting BO14HTI01_BO14HTI01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting ZI04IFR01_ZI04IFR01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting SA16CLA01_SA16CLA01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting ZI16ROD01_ZI16ROD01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting RA20TAI01_RA20TAI01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting RA20TAI01_RA20TAI01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting TA18TAS01_TA18TAS01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI04FIJ01_LI04FIJ01_d18O failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI04FIJ01_LI04FIJ01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting RO19PAR01_RO19PAR01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting HE02GBR01_HE02GBR01_d18O failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting HE02GBR01_HE02GBR01_SrCa failed.</span>
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting KI08PAR01_KI08PAR01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting WU13TON01_WU13TON01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting CH97BVB01_CH97BVB01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting DE14DTO01_DE14DTO01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting FE18RUS01_FE18RUS01_SrCa failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting DE14DTO02_DE14DTO02_SrCa failed.</span>
 <span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting LI06FIJ01_LI06FIJ01_d18O failed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Subtracting Palmyra.Dee.2020_PCU-1cce3af5639a4ec failed.</span>
 
 </pre></div>
 </div>
@@ -1177,32 +1072,33 @@ There are 60 in PAGES2k but NOT in PReSto2k
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;in PReSto2k class not metadata&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;in PReSto2k class not metadata (n=</span><span class="si">{</span><span class="n">diffo</span><span class="o">.</span><span class="n">nrec</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 1000x1000 with 1 Axes&gt;,
- {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;in PReSto2k class not metadata&#39;}&gt;})
+ {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;in PReSto2k class not metadata (n=56)&#39;}&gt;})
 </pre></div>
 </div>
-<img alt="../../_images/42e21943f2bb784d01967187d2b0b926ce63140dc16ec52c68db237e9cf7ee37.png" src="../../_images/42e21943f2bb784d01967187d2b0b926ce63140dc16ec52c68db237e9cf7ee37.png" />
+<img alt="../../_images/dd0cb71b9bae10ef9fea1bf9676815f58389e83ec071e3ef85f861df10ee4a18.png" src="../../_images/dd0cb71b9bae10ef9fea1bf9676815f58389e83ec071e3ef85f861df10ee4a18.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffo2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;in PReSto2k metadata, not class&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffo2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;in PReSto2k metadata, not class (n=</span><span class="si">{</span><span class="n">diffo2</span><span class="o">.</span><span class="n">nrec</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 1000x1000 with 1 Axes&gt;,
- {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;in PReSto2k metadata, not class&#39;}&gt;})
+ {&#39;map&#39;: &lt;GeoAxes: title={&#39;center&#39;: &#39;in PReSto2k metadata, not class (n=2)&#39;}&gt;})
 </pre></div>
 </div>
-<img alt="../../_images/ae5712b7e182931a814a2283d18c890f9bc1adcb657c9417f9ee1a32db16cb6c.png" src="../../_images/ae5712b7e182931a814a2283d18c890f9bc1adcb657c9417f9ee1a32db16cb6c.png" />
+<img alt="../../_images/0fdbd66f4526a9bace0235cffe0ee9fd1b211b52e44460554e0bb522e3d2b986.png" src="../../_images/0fdbd66f4526a9bace0235cffe0ee9fd1b211b52e44460554e0bb522e3d2b986.png" />
 </div>
 </div>
+<p>As you can see here, there are simply two records in the metadata-based seasonality that are not included in the class-based seasonality database post-calibration, which may appear to be an inconsequential difference. Though, when comparing the reconstructions develeoped from these two proxy databases, the differences are not negligible as shown in <a class="reference external" href="https://linked.earth/presto2k_cfr_pb/notebooks/validation/C03_a_validating_PReSto2k.html">Validating PReSto2k</a>. This brings us to the point that while the proxy database is a largely important part of an offline DA-based reconstruction, there are still numerous other factors that can lead to minor differences, especially regionally.</p>
 </section>
 </section>
 
