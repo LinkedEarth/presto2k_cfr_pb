@@ -1,5 +1,5 @@
 {
   "build": {
-    "base_image": "quay.io/linkedearth/presto2k_cfr_pb:update_C03_b"
+    "base_image": "quay.io/tanaya_g/presto2k_cfr_pb:update_C03_b"
   }
 }

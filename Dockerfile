@@ -1,5 +1,5 @@
 # Environment image for the PReSto2k PaleoBook, built by quay.io from GitHub
-# (quay.io/linkedearth/presto2k_cfr_pb). The environment itself lives in
+# (quay.io/tanaya_g/presto2k_cfr_pb). The environment itself lives in
 # docker/environment.yml and docker/postBuild. Notebooks are NOT baked in:
 # binder/Dockerfile starts FROM this image and copies the repo content.
 FROM quay.io/jupyter/minimal-notebook:python-3.12.11

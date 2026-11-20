@@ -1,4 +1,4 @@
-FROM quay.io/linkedearth/presto2k_cfr_pb:update_C03_b
+FROM quay.io/tanaya_g/presto2k_cfr_pb:update_C03_b
 
 # Set working directory
 WORKDIR /home/jovyan
