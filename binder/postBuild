@@ -1,0 +1,19 @@
+#!/bin/bash
+# Runs once at image build time (repo2docker).
+set -euo pipefail
+
+# cfr's ClimateField.annualize() uses the pandas frequency alias "A-<MON>",
+# which pandas 3 removed. "YE-<MON>" is the same anchored year-end frequency.
+python - <<'EOF'
+import pathlib, cfr.utils as u
+p = pathlib.Path(u.__file__)
+src = p.read_text()
+old, new = "resample(time=f'A-{anchor[idx]}')", "resample(time=f'YE-{anchor[idx]}')"
+if old in src:
+    p.write_text(src.replace(old, new))
+    print(f"patched {p}")
+elif new in src:
+    print(f"already patched: {p}")
+else:
+    raise SystemExit(f"cfr annualize line not found in {p}; check whether the patch is still needed")
+EOF

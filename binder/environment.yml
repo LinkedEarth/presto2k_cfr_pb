@@ -1,0 +1,53 @@
+# Container environment for the PReSto2k PaleoBook.
+# Mirrors the local `cfr-env-lipd` env the notebooks were tested with.
+# repo2docker (and the build-image GitHub Action) reads this file; the
+# top-level env.yml is left as-is for local setup.
+name: presto2k
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  # numerical core
+  - numpy=1.26.4
+  - pandas=3.0.2
+  - scipy=1.17.1
+  - xarray=2026.2.0
+  - dask=2026.3.0
+  - netcdf4=1.7.4
+  - cftime=1.6.5
+  - nc-time-axis=1.4.1
+  - numba=0.65.0
+  - scikit-learn=1.9.0
+  - statsmodels=0.14.6
+  - patsy=1.0.2
+  - joblib=1.5.3
+  # geo / regridding (conda-forge pykdtree shares one OpenMP runtime;
+  # the pip wheel bundles its own and can deadlock)
+  - cartopy=0.25.0
+  - pyproj=3.7.2
+  - shapely=2.1.2
+  - pykdtree=1.4.3
+  - pyresample=1.35.0
+  - eofs=2.0.0
+  # plotting
+  - matplotlib=3.10.8
+  - seaborn=0.13.2
+  - plotly=6.6.0
+  # notebook tooling
+  - jupyterlab=4.5
+  - notebook=7.5
+  - ipykernel
+  - ipywidgets=8.1.8
+  - tqdm=4.67.3
+  - requests=2.33.1
+  - rdflib=7.6.0
+  - pip
+  - pip:
+    # same cfr commit as cfr-env-lipd (cfr 2026.1.31, flat `cfr.proxy` layout)
+    - cfr @ git+https://github.com/fzhu2e/cfr.git@6e353e854b48537c3a57736e4854306fba001f05
+    - pens==2024.9.19
+    - pylipd==1.5.3
+    - pyleoclim==1.3.1
+    - dtaidistance==2.5.1
+    - properscoring==0.1
