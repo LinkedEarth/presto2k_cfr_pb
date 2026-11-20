@@ -23,9 +23,8 @@ latex:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/LinkedEarth/presto2k_cfr_pb #LinkedEarth/citrace_paleobook  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: main  # Which branch of the repository should be used when creating links (optional)
+  url: https://github.com/LinkedEarth/presto2k_cfr_pb  # Online location of your book
+  branch: update_C03_b  # Branch with binder/ (Binder launches from this branch)
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
@@ -36,5 +35,5 @@ html:
 
 launch_buttons:
   notebook_interface: "jupyterlab"
-  binderhub_url: ""
+  binderhub_url: "https://mybinder.org"
 #  jupyterhub_url: ""
