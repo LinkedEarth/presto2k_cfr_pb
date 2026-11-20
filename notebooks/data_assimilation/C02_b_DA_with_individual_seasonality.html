@@ -449,7 +449,7 @@ python<span class="w"> </span>lmr_reproduce.py
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025.7.28
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026.1.31
 </pre></div>
 </div>
 </div>
@@ -492,7 +492,7 @@ b. Required:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading from pickle...&quot;</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./prev_data/pdb_w_seasonality_annual.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../prev_data/past2k_pdbs/pdb_w_seasonality_annual.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">pickle_db</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="n">pickle_db</span><span class="o">.</span><span class="n">nrec</span><span class="si">}</span><span class="s2"> records from pickle&quot;</span><span class="p">)</span>
@@ -513,12 +513,23 @@ Loaded 559 records from pickle
 <span class="n">job</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">ReconJob</span><span class="p">()</span>
 <span class="n">job</span><span class="o">.</span><span class="n">proxydb</span> <span class="o">=</span> <span class="n">pickle_db</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">proxydb</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">all_proxy_years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">pickle_db</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="p">])</span>
+<span class="n">count_year</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">all_proxy_years</span><span class="p">))),</span> <span class="mi">2001</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">pickle_db</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">plot_count</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="n">count_year</span><span class="p">,</span>
+    <span class="n">plot_timespan</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">],</span>
+    <span class="n">title</span><span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;PReSto2k Proxy Database (n=</span><span class="si">{</span><span class="n">pickle_db</span><span class="o">.</span><span class="n">nrec</span><span class="si">}</span><span class="s1">)&#39;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a40d7e0084b5a2b550c4074ea18f2f8499b8ab586f4d4f03077de17f5265bb4c.png" src="../../_images/a40d7e0084b5a2b550c4074ea18f2f8499b8ab586f4d4f03077de17f5265bb4c.png" />
+<img alt="../../_images/9c4379ef10ae510a29c2daff5b234805cf79730ac507f565b399b65b3bb29b91.png" src="../../_images/9c4379ef10ae510a29c2daff5b234805cf79730ac507f565b399b65b3bb29b91.png" />
 </div>
 </div>
 </section>
@@ -535,8 +546,8 @@ Loaded 559 records from pickle
     <span class="n">tag</span><span class="o">=</span><span class="s1">&#39;prior&#39;</span><span class="p">,</span>
     
     <span class="n">path_dict</span><span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;tas&#39;</span><span class="p">:</span> <span class="s1">&#39;./prev_data/ccsm4_last_millenium/tas_sfc_Amon_CCSM4_past1000_085001-185012.nc&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;pr&#39;</span><span class="p">:</span> <span class="s1">&#39;./prev_data/ccsm4_last_millenium/pr_sfc_Amon_CCSM4_past1000_085001-185012.nc&#39;</span>
+    <span class="s1">&#39;tas&#39;</span><span class="p">:</span> <span class="s1">&#39;../prev_data/ccsm4_last_millenium/tas_sfc_Amon_CCSM4_past1000_085001-185012.nc&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pr&#39;</span><span class="p">:</span> <span class="s1">&#39;../prev_data/ccsm4_last_millenium/pr_sfc_Amon_CCSM4_past1000_085001-185012.nc&#39;</span>
     <span class="p">},</span>
     <span class="n">anom_period</span><span class="o">=</span><span class="p">[</span><span class="mi">850</span><span class="p">,</span><span class="mi">1850</span><span class="p">],</span>  <span class="c1"># Tardif 2019 uses entire interval</span>
     <span class="n">load</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
@@ -546,7 +557,7 @@ Loaded 559 records from pickle
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;prior_path&quot;] = {&#39;tas&#39;: &#39;./prev_data/ccsm4_last_millenium/tas_sfc_Amon_CCSM4_past1000_085001-185012.nc&#39;, &#39;pr&#39;: &#39;./prev_data/ccsm4_last_millenium/pr_sfc_Amon_CCSM4_past1000_085001-185012.nc&#39;}</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;prior_path&quot;] = {&#39;tas&#39;: &#39;../prev_data/ccsm4_last_millenium/tas_sfc_Amon_CCSM4_past1000_085001-185012.nc&#39;, &#39;pr&#39;: &#39;../prev_data/ccsm4_last_millenium/pr_sfc_Amon_CCSM4_past1000_085001-185012.nc&#39;}</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;prior_anom_period&quot;] = [850, 1850]</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;prior_lat_name&quot;] = lat</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;prior_lon_name&quot;] = lon</span>
@@ -604,7 +615,7 @@ Sample values from first timestep:
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">load_clim</span><span class="p">(</span>
     <span class="n">tag</span><span class="o">=</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span>
     <span class="n">path_dict</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;pr&#39;</span><span class="p">:</span> <span class="s1">&#39;./prev_data/GPCC_precip.mon.flux.1x1.v6.nc&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pr&#39;</span><span class="p">:</span> <span class="s1">&#39;../prev_data/GPCC_precip.mon.flux.1x1.v6.nc&#39;</span><span class="p">,</span>
         <span class="s1">&#39;tas&#39;</span><span class="p">:</span> <span class="s1">&#39;gistemp1200_ERSSTv4&#39;</span>
     <span class="p">},</span>
     <span class="n">rename_dict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pr&#39;</span><span class="p">:</span> <span class="s1">&#39;precip&#39;</span><span class="p">,</span><span class="s1">&#39;tas&#39;</span><span class="p">:</span> <span class="s1">&#39;tempanomaly&#39;</span><span class="p">},</span>
@@ -616,13 +627,23 @@ Sample values from first timestep:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;obs_path&quot;] = {&#39;pr&#39;: &#39;./prev_data/GPCC_precip.mon.flux.1x1.v6.nc&#39;, &#39;tas&#39;: &#39;gistemp1200_ERSSTv4&#39;}</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;obs_path&quot;] = {&#39;pr&#39;: &#39;../prev_data/GPCC_precip.mon.flux.1x1.v6.nc&#39;, &#39;tas&#39;: &#39;gistemp1200_ERSSTv4&#39;}</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;obs_rename_dict&quot;] = {&#39;pr&#39;: &#39;precip&#39;, &#39;tas&#39;: &#39;tempanomaly&#39;}</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;obs_anom_period&quot;] = [1951, 1980]</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;obs_lat_name&quot;] = lat</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;obs_lon_name&quot;] = lon</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;obs_time_name&quot;] = time</span>
-<span class=" -Color -Color-Bold">&gt;&gt;&gt; The target file seems existed at: ./data/gistemp1200_ERSSTv4.nc.gz . Loading from it instead of downloading ...</span>
+
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host &#39;github.com&#39;. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host &#39;raw.githubusercontent.com&#39;. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+Fetching data: 100%|██████████| 22.6M/22.6M [00:00&lt;00:00, 26.0MiB/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; Downloaded file saved at: ./data/gistemp1200_ERSSTv4.nc.gz</span>
 <span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; obs variables [&#39;pr&#39;, &#39;tas&#39;] loaded</span>
 <span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; job.obs created</span>
 
@@ -652,41 +673,40 @@ After calibration, each successfully calibrated record is tagged as ‘calibrate
 
 <span class="k">def</span><span class="w"> </span><span class="nf">calib_psms_seasonality</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">ptype_psm_dict</span><span class="p">,</span> <span class="n">ptype_clim_dict</span><span class="p">,</span> 
                                         <span class="n">calib_period</span><span class="o">=</span><span class="p">[</span><span class="mi">1850</span><span class="p">,</span> <span class="mi">2015</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">   </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">   Calibrate proxy system models (PSMs) using individual proxy seasonality metadata.</span>
-<span class="sd">   </span>
-<span class="sd">   This function calibrates PSMs for each proxy record in the database using the </span>
-<span class="sd">   seasonality information stored in each proxy&#39;s metadata, rather than applying</span>
-<span class="sd">   uniform seasonality across proxy types. This approach allows for more accurate</span>
-<span class="sd">   proxy modeling by respecting the individual seasonal response characteristics</span>
-<span class="sd">   of each proxy record.</span>
-<span class="sd">   </span>
-<span class="sd">   Parameters</span>
-<span class="sd">   ----------</span>
-<span class="sd">   job : cfr.ReconJob</span>
-<span class="sd">       A ReconJob object containing the proxy database and observational climate data.</span>
-<span class="sd">       Must have job.proxydb (ProxyDatabase) and job.obs (dict of ClimateField objects).</span>
-<span class="sd">   ptype_psm_dict : dict</span>
-<span class="sd">       Dictionary mapping proxy types to PSM class names. </span>
-<span class="sd">       Example: {&#39;coral.d18O&#39;: &#39;Linear&#39;, &#39;tree.TRW&#39;: &#39;Bilinear&#39;}</span>
-<span class="sd">   ptype_clim_dict : dict  </span>
-<span class="sd">       Dictionary mapping proxy types to lists of required climate variables.</span>
-<span class="sd">       Example: {&#39;coral.d18O&#39;: [&#39;tas&#39;], &#39;tree.TRW&#39;: [&#39;tas&#39;, &#39;pr&#39;]}</span>
-<span class="sd">   calib_period : list of int, optional</span>
-<span class="sd">       Two-element list specifying the calibration period [start_year, end_year].</span>
-<span class="sd">       Default is [1850, 2015].</span>
-<span class="sd">   verbose : bool, optional</span>
-<span class="sd">       If True, print calibration progress and summary statistics. Default is True.</span>
-<span class="sd">       </span>
-<span class="sd">   Returns</span>
-<span class="sd">   -------</span>
-<span class="sd">   None</span>
-<span class="sd">       Modifies the job.proxydb in place by adding calibrated PSM objects to each</span>
-<span class="sd">       proxy record and tagging successfully calibrated records.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calibrate proxy system models (PSMs) using individual proxy seasonality metadata.</span>
+<span class="sd">    </span>
+<span class="sd">    This function calibrates PSMs for each proxy record in the database using the </span>
+<span class="sd">    seasonality information stored in each proxy&#39;s metadata, rather than applying</span>
+<span class="sd">    uniform seasonality across proxy types. This approach allows for more accurate</span>
+<span class="sd">    proxy modeling by respecting the individual seasonal response characteristics</span>
+<span class="sd">    of each proxy record.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    job : cfr.ReconJob</span>
+<span class="sd">        A ReconJob object containing the proxy database and observational climate data.</span>
+<span class="sd">        Must have job.proxydb (ProxyDatabase) and job.obs (dict of ClimateField objects).</span>
+<span class="sd">    ptype_psm_dict : dict</span>
+<span class="sd">        Dictionary mapping proxy types to PSM class names. </span>
+<span class="sd">        Example: {&#39;coral.d18O&#39;: &#39;Linear&#39;, &#39;tree.TRW&#39;: &#39;Bilinear&#39;}</span>
+<span class="sd">    ptype_clim_dict : dict  </span>
+<span class="sd">        Dictionary mapping proxy types to lists of required climate variables.</span>
+<span class="sd">        Example: {&#39;coral.d18O&#39;: [&#39;tas&#39;], &#39;tree.TRW&#39;: [&#39;tas&#39;, &#39;pr&#39;]}</span>
+<span class="sd">    calib_period : list of int, optional</span>
+<span class="sd">        Two-element list specifying the calibration period [start_year, end_year].</span>
+<span class="sd">        Default is [1850, 2015].</span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        If True, print calibration progress and summary statistics. Default is True.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">        Modifies the job.proxydb in place by adding calibrated PSM objects to each</span>
+<span class="sd">        proxy record and tagging successfully calibrated records.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">for</span> <span class="n">pid</span><span class="p">,</span> <span class="n">pobj</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">proxydb</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">total</span><span class="o">=</span><span class="n">job</span><span class="o">.</span><span class="n">proxydb</span><span class="o">.</span><span class="n">nrec</span><span class="p">,</span> 
-                         <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Calibrating PSMs with metadata seasonality&#39;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">pid</span><span class="p">,</span> <span class="n">pobj</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">proxydb</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">total</span><span class="o">=</span><span class="n">job</span><span class="o">.</span><span class="n">proxydb</span><span class="o">.</span><span class="n">nrec</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Calibrating PSMs with metadata seasonality&#39;</span><span class="p">):</span>
         
         <span class="n">psm_name</span> <span class="o">=</span> <span class="n">ptype_psm_dict</span><span class="p">[</span><span class="n">pobj</span><span class="o">.</span><span class="n">ptype</span><span class="p">]</span>
         
@@ -801,151 +821,195 @@ After calibration, each successfully calibrated record is tagged as ‘calibrate
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:   3%|▎         | 19/559 [00:01&lt;00:37, 14.51it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:   3%|▎         | 19/559 [00:01&lt;00:41, 12.90it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">Asia_117 &gt;&gt;&gt; Nearest climate is NaN. Searching around within distance of 1 deg ...</span>
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:   4%|▍         | 21/559 [00:03&lt;02:53,  3.10it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:   4%|▍         | 21/559 [00:03&lt;03:15,  2.76it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Asia_117 &gt;&gt;&gt; Found nearest climate within distance of 1 deg.</span>
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:   5%|▌         | 29/559 [00:03&lt;01:07,  7.84it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:   5%|▍         | 27/559 [00:03&lt;01:32,  5.76it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:   5%|▌         | 29/559 [00:04&lt;01:15,  7.02it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:   6%|▋         | 35/559 [00:04&lt;00:46, 11.18it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:   6%|▌         | 31/559 [00:04&lt;01:03,  8.33it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:   6%|▋         | 35/559 [00:04&lt;00:51, 10.19it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:   7%|▋         | 37/559 [00:04&lt;00:42, 12.38it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:   7%|▋         | 37/559 [00:04&lt;00:45, 11.39it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:   7%|▋         | 39/559 [00:04&lt;00:39, 13.04it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:   8%|▊         | 42/559 [00:04&lt;00:37, 13.91it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:   8%|▊         | 43/559 [00:05&lt;00:39, 13.06it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  11%|█▏        | 64/559 [00:05&lt;00:29, 16.96it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  11%|█         | 59/559 [00:06&lt;00:58,  8.58it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  11%|█▏        | 63/559 [00:06&lt;00:44, 11.06it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  13%|█▎        | 75/559 [00:06&lt;00:29, 16.28it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  12%|█▏        | 65/559 [00:07&lt;00:41, 12.01it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  13%|█▎        | 73/559 [00:07&lt;00:38, 12.73it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  13%|█▎        | 75/559 [00:07&lt;00:35, 13.47it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  14%|█▍        | 81/559 [00:06&lt;00:29, 16.24it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  14%|█▍        | 79/559 [00:08&lt;00:35, 13.62it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  14%|█▍        | 81/559 [00:08&lt;00:34, 14.05it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 2 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  18%|█▊        | 100/559 [00:08&lt;00:28, 15.86it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  18%|█▊        | 98/559 [00:09&lt;00:34, 13.56it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  18%|█▊        | 100/559 [00:09&lt;00:32, 14.08it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  20%|██        | 114/559 [00:09&lt;00:32, 13.65it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  20%|██        | 113/559 [00:10&lt;00:30, 14.54it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">Asia_118 &gt;&gt;&gt; Nearest climate is NaN. Searching around within distance of 1 deg ...</span>
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  21%|██        | 116/559 [00:11&lt;02:18,  3.21it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  21%|██        | 115/559 [00:12&lt;02:08,  3.45it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Asia_118 &gt;&gt;&gt; Found nearest climate within distance of 1 deg.</span>
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  26%|██▌       | 144/559 [00:13&lt;00:27, 15.16it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  25%|██▍       | 139/559 [00:14&lt;00:34, 12.18it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  26%|██▌       | 143/559 [00:14&lt;00:30, 13.73it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  30%|███       | 168/559 [00:14&lt;00:24, 16.23it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  30%|██▉       | 166/559 [00:15&lt;00:26, 14.75it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  30%|███       | 168/559 [00:15&lt;00:25, 15.14it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  37%|███▋      | 206/559 [00:16&lt;00:22, 15.81it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  34%|███▎      | 188/559 [00:17&lt;00:24, 15.39it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  37%|███▋      | 206/559 [00:18&lt;00:24, 14.27it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">Asia_111 &gt;&gt;&gt; Nearest climate is NaN. Searching around within distance of 1 deg ...</span>
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  37%|███▋      | 208/559 [00:18&lt;01:51,  3.14it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  37%|███▋      | 208/559 [00:20&lt;01:34,  3.72it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Asia_111 &gt;&gt;&gt; Found nearest climate within distance of 1 deg.</span>
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  43%|████▎     | 243/559 [00:21&lt;00:20, 15.43it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  43%|████▎     | 243/559 [00:22&lt;00:22, 13.88it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  47%|████▋     | 263/559 [00:22&lt;00:18, 15.93it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  47%|████▋     | 261/559 [00:24&lt;00:22, 13.25it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  47%|████▋     | 263/559 [00:24&lt;00:21, 13.83it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  48%|████▊     | 267/559 [00:22&lt;00:18, 16.06it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  47%|████▋     | 265/559 [00:24&lt;00:22, 13.34it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  48%|████▊     | 267/559 [00:24&lt;00:22, 13.23it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  50%|████▉     | 279/559 [00:23&lt;00:16, 17.30it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  49%|████▉     | 275/559 [00:25&lt;00:20, 14.07it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  50%|████▉     | 277/559 [00:25&lt;00:19, 14.59it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  52%|█████▏    | 292/559 [00:24&lt;00:15, 17.60it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  52%|█████▏    | 288/559 [00:25&lt;00:18, 14.89it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  52%|█████▏    | 292/559 [00:26&lt;00:17, 15.44it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  57%|█████▋    | 318/559 [00:25&lt;00:15, 16.02it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  56%|█████▌    | 314/559 [00:27&lt;00:18, 13.51it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  57%|█████▋    | 316/559 [00:27&lt;00:17, 14.19it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  65%|██████▌   | 365/559 [00:28&lt;00:11, 16.48it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  59%|█████▉    | 332/559 [00:29&lt;00:17, 13.05it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  63%|██████▎   | 350/559 [00:30&lt;00:15, 13.29it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  64%|██████▍   | 360/559 [00:31&lt;00:13, 14.83it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  65%|██████▍   | 363/559 [00:31&lt;00:12, 15.85it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 12 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  68%|██████▊   | 381/559 [00:29&lt;00:10, 16.60it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  68%|██████▊   | 381/559 [00:32&lt;00:16, 10.64it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">Asia_119 &gt;&gt;&gt; Nearest climate is NaN. Searching around within distance of 1 deg ...</span>
@@ -953,26 +1017,36 @@ After calibration, each successfully calibrated record is tagged as ‘calibrate
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  69%|██████▉   | 385/559 [00:33&lt;01:07,  2.57it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  69%|██████▊   | 383/559 [00:35&lt;01:28,  1.99it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Asia_119 &gt;&gt;&gt; Found nearest climate within distance of 2 deg.</span>
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  72%|███████▏  | 403/559 [00:34&lt;00:12, 12.64it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  72%|███████▏  | 401/559 [00:37&lt;00:15, 10.19it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  72%|███████▏  | 403/559 [00:37&lt;00:13, 11.27it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  75%|███████▍  | 418/559 [00:35&lt;00:08, 16.73it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  74%|███████▍  | 415/559 [00:38&lt;00:10, 14.04it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  75%|███████▍  | 418/559 [00:38&lt;00:09, 15.13it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  80%|███████▉  | 445/559 [00:36&lt;00:06, 16.96it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  79%|███████▉  | 442/559 [00:39&lt;00:08, 13.19it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  80%|███████▉  | 445/559 [00:40&lt;00:07, 15.95it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
@@ -980,25 +1054,38 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  89%|████████▉ | 497/559 [00:40&lt;00:03, 15.76it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  88%|████████▊ | 493/559 [00:43&lt;00:04, 15.00it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  89%|████████▉ | 497/559 [00:43&lt;00:04, 13.56it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 17 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  90%|████████▉ | 501/559 [00:40&lt;00:03, 16.68it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  90%|████████▉ | 501/559 [00:44&lt;00:03, 14.75it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 13 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  92%|█████████▏| 512/559 [00:41&lt;00:02, 17.56it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  91%|█████████ | 507/559 [00:44&lt;00:03, 13.73it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  92%|█████████▏| 512/559 [00:44&lt;00:02, 16.03it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  93%|█████████▎| 521/559 [00:41&lt;00:02, 18.12it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  92%|█████████▏| 516/559 [00:45&lt;00:03, 13.65it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  93%|█████████▎| 518/559 [00:45&lt;00:02, 14.24it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  93%|█████████▎| 521/559 [00:45&lt;00:02, 16.57it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
@@ -1008,7 +1095,58 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  94%|█████████▍| 527/559 [00:42&lt;00:01, 21.41it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  94%|█████████▎| 524/559 [00:45&lt;00:01, 18.36it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  94%|█████████▍| 526/559 [00:45&lt;00:01, 18.48it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
+The number of overlapped data points is 0 &lt; 25. Skipping ...
+The number of overlapped data points is 0 &lt; 25. Skipping ...
+The number of overlapped data points is 0 &lt; 25. Skipping ...
+The number of overlapped data points is 0 &lt; 25. Skipping ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  95%|█████████▍| 529/559 [00:45&lt;00:01, 19.80it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  95%|█████████▌| 532/559 [00:45&lt;00:01, 20.90it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
+The number of overlapped data points is 0 &lt; 25. Skipping ...
+The number of overlapped data points is 0 &lt; 25. Skipping ...
+The number of overlapped data points is 0 &lt; 25. Skipping ...
+The number of overlapped data points is 0 &lt; 25. Skipping ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  96%|█████████▌| 535/559 [00:46&lt;00:01, 21.53it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  96%|█████████▌| 538/559 [00:46&lt;00:00, 22.11it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
@@ -1019,7 +1157,37 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  95%|█████████▌| 533/559 [00:42&lt;00:01, 22.85it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  97%|█████████▋| 541/559 [00:46&lt;00:00, 21.61it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  98%|█████████▊| 547/559 [00:46&lt;00:00, 21.55it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
+The number of overlapped data points is 0 &lt; 25. Skipping ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  98%|█████████▊| 550/559 [00:46&lt;00:00, 21.19it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  99%|█████████▉| 553/559 [00:46&lt;00:00, 21.03it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
@@ -1029,40 +1197,15 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 The number of overlapped data points is 0 &lt; 25. Skipping ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  96%|█████████▌| 536/559 [00:42&lt;00:01, 22.24it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
-The number of overlapped data points is 0 &lt; 25. Skipping ...
-The number of overlapped data points is 0 &lt; 25. Skipping ...
-The number of overlapped data points is 0 &lt; 25. Skipping ...
-The number of overlapped data points is 0 &lt; 25. Skipping ...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  97%|█████████▋| 542/559 [00:42&lt;00:00, 22.74it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  98%|█████████▊| 548/559 [00:43&lt;00:00, 23.02it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
-The number of overlapped data points is 0 &lt; 25. Skipping ...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality:  99%|█████████▉| 554/559 [00:43&lt;00:00, 23.15it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
-The number of overlapped data points is 0 &lt; 25. Skipping ...
-The number of overlapped data points is 0 &lt; 25. Skipping ...
-The number of overlapped data points is 0 &lt; 25. Skipping ...
-The number of overlapped data points is 0 &lt; 25. Skipping ...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibrating PSMs with metadata seasonality: 100%|██████████| 559/559 [00:43&lt;00:00, 12.81it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality:  99%|█████████▉| 556/559 [00:47&lt;00:00, 21.68it/s]/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+/Users/tanaya/miniconda3/envs/cfr-env-lipd/lib/python3.12/site-packages/cfr/psm.py:116: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df = df_proxy.dropna().merge(df_exog.dropna(), how=&#39;inner&#39;, on=&#39;time&#39;)
+Calibrating PSMs with metadata seasonality: 100%|██████████| 559/559 [00:47&lt;00:00, 11.86it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of overlapped data points is 0 &lt; 25. Skipping ...
@@ -1149,7 +1292,7 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forwarding the PSMs: 100%|██████████| 501/501 [03:12&lt;00:00,  2.60it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forwarding the PSMs: 100%|██████████| 501/501 [03:21&lt;00:00,  2.49it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; ProxyRecord.pseudo created for 501 records</span>
@@ -1190,7 +1333,18 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 <h3>(Optional) Save the job object for later reload<a class="headerlink" href="#optional-save-the-job-object-for-later-reload" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;./cases/lipd_seasonality_pda&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;./cases/presto2k_seasonality_pda&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;save_dirpath&quot;] = ./cases/presto2k_seasonality_pda</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; prior_tas saved to: ./cases/presto2k_seasonality_pda/prior_tas.nc</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; prior_pr saved to: ./cases/presto2k_seasonality_pda/prior_pr.nc</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; obs_pr saved to: ./cases/presto2k_seasonality_pda/obs_pr.nc</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; obs_tas saved to: ./cases/presto2k_seasonality_pda/obs_tas.nc</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; job saved to: ./cases/presto2k_seasonality_pda/job.pkl</span>
+
 </pre></div>
 </div>
 </div>
@@ -1204,7 +1358,7 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">run_da_mc</span><span class="p">(</span>
-    <span class="n">save_dirpath</span><span class="o">=</span><span class="s1">&#39;./recons/lipd_seasonality_pda&#39;</span><span class="p">,</span>
+    <span class="n">save_dirpath</span><span class="o">=</span><span class="s1">&#39;./recons/presto2k_seasonality_pda&#39;</span><span class="p">,</span>
     <span class="n">recon_seeds</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>  <span class="c1"># as an example here</span>
     <span class="n">recon_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tas&#39;</span><span class="p">,</span><span class="s1">&#39;pr&#39;</span><span class="p">],</span>  <span class="c1"># running tas and pr even though paper mainly focuses on tas</span>
     <span class="n">recon_period</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2000</span><span class="p">],</span>
@@ -1221,7 +1375,7 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;nens&quot;] = 100</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;recon_seeds&quot;] = [1]</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;assim_frac&quot;] = 0.75</span>
-<span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;save_dirpath&quot;] = ./recons/lipd_seasonality_pda</span>
+<span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;save_dirpath&quot;] = ./recons/presto2k_seasonality_pda</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;compress_params&quot;] = {&#39;zlib&#39;: True}</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;output_full_ens&quot;] = False</span>
 <span class=" -Color -Color-Bold -Color-Bold-Cyan">&gt;&gt;&gt; job.configs[&quot;recon_sampling_mode&quot;] = fixed</span>
@@ -1231,11 +1385,11 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KF updating: 100%|██████████| 2000/2000 [21:11&lt;00:00,  1.57it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KF updating: 100%|██████████| 2000/2000 [20:49&lt;00:00,  1.60it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; Reconstructed fields saved to: ./recons/lipd_seasonality_pda/job_r01_recon.nc</span>
-<span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; DONE! Total time spent: 24.43 mins.</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; Reconstructed fields saved to: ./recons/presto2k_seasonality_pda/job_r01_recon.nc</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">&gt;&gt;&gt; DONE! Total time spent: 23.82 mins.</span>
 
 </pre></div>
 </div>
@@ -1243,7 +1397,7 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">ReconRes</span><span class="p">(</span><span class="s1">&#39;./recons/lipd_seasonality_pda/&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">cfr</span><span class="o">.</span><span class="n">ReconRes</span><span class="p">(</span><span class="s1">&#39;./recons/presto2k_seasonality_pda/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1263,7 +1417,7 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6c4c0810ac8e70b490be2d321921f6ea3245984c3d381fcfdb3dacb76e80265d.png" src="../../_images/6c4c0810ac8e70b490be2d321921f6ea3245984c3d381fcfdb3dacb76e80265d.png" />
+<img alt="../../_images/60e76ee8f099eba50775c553b5eb26b6b525415ffbad35179065b8710b44696e.png" src="../../_images/60e76ee8f099eba50775c553b5eb26b6b525415ffbad35179065b8710b44696e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1274,7 +1428,7 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bb2753876b54c5f9b53433f40800604681745e265d0c3cc8e72ec6d630bd2c30.png" src="../../_images/bb2753876b54c5f9b53433f40800604681745e265d0c3cc8e72ec6d630bd2c30.png" />
+<img alt="../../_images/e40f62ac3f5bc07fb7285acfa882a827c641be7b3b99715a8e432ec3f5c32319.png" src="../../_images/e40f62ac3f5bc07fb7285acfa882a827c641be7b3b99715a8e432ec3f5c32319.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1284,7 +1438,7 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6189b1c0e31a5058699d682b3baa45b993e5906192bc1df4cb7efee3e56efbef.png" src="../../_images/6189b1c0e31a5058699d682b3baa45b993e5906192bc1df4cb7efee3e56efbef.png" />
+<img alt="../../_images/ab5f9b11f0ef3369a4f23a442e108cfc77f8bc4ce4d1d3d6d08a7f826253e12a.png" src="../../_images/ab5f9b11f0ef3369a4f23a442e108cfc77f8bc4ce4d1d3d6d08a7f826253e12a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1294,7 +1448,7 @@ The number of overlapped data points is 0 &lt; 25. Skipping ...
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9248c306873980cdaa45d31f62e2f1387a6c23724cfd6263e14363ad44d242ca.png" src="../../_images/9248c306873980cdaa45d31f62e2f1387a6c23724cfd6263e14363ad44d242ca.png" />
+<img alt="../../_images/6a9a51b1f7cec6a98d239c00d19be36281c7541f14025018cf9984ec2177438b.png" src="../../_images/6a9a51b1f7cec6a98d239c00d19be36281c7541f14025018cf9984ec2177438b.png" />
 </div>
 </div>
 </section>

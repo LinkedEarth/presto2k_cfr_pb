@@ -5164,7 +5164,7 @@ memory usage: 122.1+ KB
 <p>Reopen the file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;./data/cleaned_timeseries.pkl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;../prev_data/cleaned_timeseries.pkl&quot;</span><span class="p">)</span>
 <span class="n">df_cleaned</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -5776,7 +5776,7 @@ Sample CFR ProxyRecord:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save as NetCDF (without seasonality preserved)</span>
 
-<span class="n">filtered_pdb_1</span><span class="o">.</span><span class="n">to_nc</span><span class="p">(</span><span class="s1">&#39;./prev_data/pdb_w_seasonality_annual.nc&#39;</span><span class="p">)</span>
+<span class="n">filtered_pdb_1</span><span class="o">.</span><span class="n">to_nc</span><span class="p">(</span><span class="s1">&#39;../prev_data/past2k_pdbs/pdb_w_seasonality_annual.nc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -5786,11 +5786,11 @@ Sample CFR ProxyRecord:
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 559/559 [00:20&lt;00:00, 27.57it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 559/559 [00:29&lt;00:00, 19.10it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Data before 1 CE is dropped for records: [&#39;Arc_032&#39;, &#39;SAm_025&#39;, &#39;Arc_025&#39;, &#39;Arc_002&#39;, &#39;Aus_041&#39;, &#39;Arc_031&#39;, &#39;Eur_017&#39;, &#39;Arc_021&#39;, &#39;NAm_880&#39;, &#39;Ant_031dD&#39;, &#39;Ant_031&#39;, &#39;NAm_664&#39;, &#39;Ant_022&#39;, &#39;Arc_020&#39;, &#39;Eur_014&#39;, &#39;Arc_004&#39;].</span>
-<span class=" -Color -Color-Bold -Color-Bold-Green">ProxyDatabase saved to: ./prev_data/pdb_w_seasonality_annual.nc</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">ProxyDatabase saved to: ../prev_data/past2k_pdbs/pdb_w_seasonality_annual.nc</span>
 
 </pre></div>
 </div>
@@ -5798,7 +5798,7 @@ Sample CFR ProxyRecord:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pickle_path</span> <span class="o">=</span> <span class="s1">&#39;./prev_data/pdb_w_seasonality_annual.pkl&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pickle_path</span> <span class="o">=</span> <span class="s1">&#39;../prev_data/past2k_pdbs/pdb_w_seasonality_annual.pkl&#39;</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pickle_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">filtered_pdb_1</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
@@ -5872,7 +5872,7 @@ Sample CFR ProxyRecord:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving with seasonality preservation using pickle...
-✓ Saved to pickle: ./prev_data/pdb_w_seasonality_annual.pkl
+✓ Saved to pickle: ../prev_data/past2k_pdbs/pdb_w_seasonality_annual.pkl
 ✓ Loaded from pickle: 559 records
 
 Seasonality distribution in pickle-loaded database:
@@ -5903,12 +5903,10 @@ Pickle verification:
   Records with custom seasonality: 346
   Records with None seasonality: 0
   Records with annual seasonality: 213
-
-✅ SUCCESS: Seasonality preserved in pickle format!
-   Use pickle format for now until CFR NetCDF seasonality support is fixed.
+SUCCESS: Seasonality preserved in pickle format!
 
 ============================================================
-File: ./prev_data/pdb_w_seasonality_annual.pkl
+File: ../prev_data/past2k_pdbs/pdb_w_seasonality_annual.pkl
 </pre></div>
 </div>
 </div>
@@ -6331,7 +6329,7 @@ Sample CFR ProxyRecord:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_pdb_2</span><span class="o">.</span><span class="n">to_nc</span><span class="p">(</span><span class="s1">&#39;./prev_data/pdb_w_seasonality_annual_interp.nc&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_pdb_2</span><span class="o">.</span><span class="n">to_nc</span><span class="p">(</span><span class="s1">&#39;../prev_data/past2k_pdbs/pdb_w_seasonality_annual_interp.nc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -6341,11 +6339,11 @@ Sample CFR ProxyRecord:
 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 586/586 [00:21&lt;00:00, 26.66it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 586/586 [00:31&lt;00:00, 18.62it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">&gt;&gt;&gt; Data before 1 CE is dropped for records: [&#39;Arc_032&#39;, &#39;SAm_025&#39;, &#39;Arc_025&#39;, &#39;Arc_002&#39;, &#39;Aus_041&#39;, &#39;Arc_031&#39;, &#39;Eur_017&#39;, &#39;Arc_021&#39;, &#39;NAm_880&#39;, &#39;Ant_031dD&#39;, &#39;Ant_031&#39;, &#39;NAm_664&#39;, &#39;Ant_022&#39;, &#39;Arc_020&#39;, &#39;Eur_014&#39;, &#39;Arc_004&#39;, &#39;Eur_001_interp&#39;, &#39;NAm_3870_interp&#39;, &#39;Eur_008_interp&#39;, &#39;Ant_035_interp&#39;].</span>
-<span class=" -Color -Color-Bold -Color-Bold-Green">ProxyDatabase saved to: ./prev_data/pdb_w_seasonality_annual_interp.nc</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">ProxyDatabase saved to: ../prev_data/past2k_pdbs/pdb_w_seasonality_annual_interp.nc</span>
 
 </pre></div>
 </div>
@@ -6353,7 +6351,7 @@ Sample CFR ProxyRecord:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pickle_path</span> <span class="o">=</span> <span class="s1">&#39;./prev_data/pdb_w_seasonality_annual_interp.pkl&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pickle_path</span> <span class="o">=</span> <span class="s1">&#39;../prev_data/past2k_pdbs/pdb_w_seasonality_annual_interp.pkl&#39;</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pickle_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">filtered_pdb_2</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
@@ -6426,7 +6424,7 @@ Sample CFR ProxyRecord:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving with seasonality preservation using pickle...
-✓ Saved to pickle: ./prev_data/pdb_w_seasonality_annual_interp.pkl
+✓ Saved to pickle: ../prev_data/past2k_pdbs/pdb_w_seasonality_annual_interp.pkl
 ✓ Loaded from pickle: 586 records
 
 Seasonality distribution in pickle-loaded database:
@@ -6462,7 +6460,7 @@ Pickle verification:
    Use pickle format for now until CFR NetCDF seasonality support is fixed.
 
 ============================================================
-File: ./prev_data/pdb_w_seasonality_annual_interp.pkl
+File: ../prev_data/past2k_pdbs/pdb_w_seasonality_annual_interp.pkl
 </pre></div>
 </div>
 </div>
