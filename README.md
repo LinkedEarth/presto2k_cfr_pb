@@ -32,3 +32,9 @@ Step 2 can be common to all workflows, depending on the provided metadata. In th
 - [Step 2](notebooks/data_assimilation/C02_b_DA_with_individual_seasonality.ipynb)  uns the DA with metadata-based seasonality. Once again, only one instance is illustrated in this notebook. 
 
 [Step 3](notebooks/validation/C03_a_validating_PReSto2k.ipynb) focuses on validating both our results from Step 2, as well as comparing different proxy databases from Step 1 for forensics purposes. This is specific to PReSto2k, which are the newer reconstructions based on updates to PAGES 2k, and validates the three reconstructions run with this proxy data, using very similar methodologies to earlier chapters.
+
+## Running the notebooks
+
+> **Note:** The notebooks are published with their outputs so the full workflow can be read end to end, but they are not meant to be re-run as-is in Binder. The data assimilation and validation steps rely on several gigabytes of model output and instrumental datasets (e.g. the CCSM4 last-millennium simulation, GPCC precipitation, Berkeley Earth, GISTEMP and the LMRv2.1 ensembles), which are too large to ship with this repository or the container.
+
+The Binder button on each notebook page launches the full software environment ([`quay.io/tanaya_g/presto2k_cfr_pb`](https://quay.io/repository/tanaya_g/presto2k_cfr_pb)), so the code can be explored and adapted. The data assembly notebooks pull their proxy records directly from the [LiPDVerse](https://lipdverse.org) and the [LiPD Graph](http://linkedearth.graphdb.mint.isi.edu), so they are the closest to running out of the box. To reproduce the later steps, download the datasets listed in each notebook from their original sources and update the file paths accordingly.
